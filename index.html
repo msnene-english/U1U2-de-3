@@ -1,968 +1,1001 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>U1-U2 Đề 3</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --color-primary: #4F46E5;
-    --color-secondary: #06B6D4;
-    --color-accent: #F59E0B;
-    --color-bg: #F8FAFC;
-    --color-card: #FFFFFF;
-    --color-correct: #22C55E;
-    --color-wrong: #EF4444;
-    --color-selecting: #2563EB;
-    --color-pending: #FEF3C7;
-    --color-pending-text: #92400E;
-  }
-  body {
-    font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
-    background-color: var(--color-bg);
-    margin: 0;
-    padding: 20px;
-    color: #1E293B;
-  }
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  h1 {
-    font-size: 22px;
-    font-weight: 700;
-    text-align: center;
-    color: var(--color-primary);
-  }
-  .user-info {
-    background: var(--color-card);
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    margin-bottom: 20px;
-  }
-  .user-info label {
-    font-weight: 600;
-    display: block;
-    margin-bottom: 8px;
-  }
-  .user-info input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #CBD5E1;
-    border-radius: 8px;
-    font-size: 16px;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-  }
-  .card {
-    background: var(--color-card);
-    border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    padding: 20px;
-    margin-bottom: 24px;
-    position: relative;
-  }
-  .question-text {
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-  .options-container {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .option-btn {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    min-height: 52px;
-    padding: 14px 20px;
-    background: #F1F5F9;
-    border: 2px solid transparent;
-    border-radius: 12px;
-    font-family: 'Inter', -apple-system, sans-serif;
-    font-size: 19px;
-    font-weight: 500;
-    line-height: 1.6;
-    color: #334155;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    overflow-wrap: break-word;
-    box-sizing: border-box;
-  }
-  .option-btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    border-color: var(--color-selecting);
-  }
-  .option-btn.pending {
-    background: var(--color-pending);
-    color: var(--color-pending-text);
-    border-color: var(--color-pending);
-    transform: scale(1.02);
-  }
-  .option-btn.correct {
-    background: var(--color-correct);
-    color: #FFF;
-    border-color: var(--color-correct);
-  }
-  .option-btn.wrong {
-    background: var(--color-wrong);
-    color: #FFF;
-    border-color: var(--color-wrong);
-    animation: shake 0.1s ease-in-out 2;
-  }
-  .option-label {
-    font-weight: 700;
-    margin-right: 12px;
-    flex-shrink: 0;
-  }
-  .action-btn {
-    margin-top: 16px;
-    padding: 12px 24px;
-    background: var(--color-primary);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 17px;
-    font-weight: 600;
-    cursor: pointer;
-    float: right;
-    font-family: 'Inter', sans-serif;
-    transition: opacity 0.2s;
-  }
-  .action-btn:disabled {
-    background: #94A3B8;
-    cursor: not-allowed;
-    opacity: 0.7;
-  }
-  .explanation {
-    display: none;
-    margin-top: 60px;
-    padding: 16px;
-    background: #F8FAFC;
-    border-left: 4px solid var(--color-primary);
-    border-radius: 0 8px 8px 0;
-    font-size: 18px;
-    line-height: 1.8;
-  }
-  .explanation-step {
-    margin-bottom: 12px;
-  }
-  .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-  #submit-btn {
-    width: 100%;
-    padding: 16px;
-    font-size: 18px;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    border-radius: 12px;
-    background: var(--color-accent);
-  }
-  table.summary-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background: var(--color-card);
-  }
-  table.summary-table th, table.summary-table td {
-    border: 1px solid #E2E8F0;
-    text-align: center;
-    padding: 8px;
-    font-size: 14px;
-  }
-  .cell-correct { background-color: var(--color-correct); color: #fff; }
-  .cell-wrong { background-color: var(--color-wrong); color: #fff; }
-  .cell-empty { background-color: var(--color-wrong); color: #fff; }
-  .cell-neutral { background-color: #F1F5F9; color: #64748B; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U1 U2 Đề 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #4F46E5;
+            --color-secondary: #06B6D4;
+            --color-accent: #F59E0B;
+            --color-bg: #F8FAFC;
+            --color-card: #FFFFFF;
+            --color-correct: #22C55E;
+            --color-wrong: #EF4444;
+            --color-selecting: #2563EB;
+            --color-pending: #FEF3C7;
+            --color-pending-text: #92400E;
+        }
 
-  @keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-4px); }
-    50% { transform: translateX(4px); }
-    75% { transform: translateX(-4px); }
-    100% { transform: translateX(0); }
-  }
-  @media (max-width: 600px) {
-    h1 { font-size: 20px; }
-    .question-text { font-size: 20px; }
-    .option-btn { font-size: 17px; }
-    .action-btn { font-size: 16px; }
-    .explanation { font-size: 16px; }
-  }
-</style>
-<style>
+        body {
+            font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+            background-color: var(--color-bg);
+            background-image: url('data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%234f46e5" fill-opacity="0.03" fill-rule="evenodd"%3E%3Ccircle cx="3" cy="3" r="3"/%3E%3Ccircle cx="13" cy="13" r="3"/%3E%3C/g%3E%3C/svg%3E');
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
 
-/* UNIFIED BUTTON STYLES */
-.submit-btn {
-  width: 100% !important;
-  max-width: 400px !important;
-  margin: 30px auto !important;
-  display: block !important;
-  padding: 15px 40px !important;
-  font-size: 20px !important;
-  font-weight: 700 !important;
-  background-color: #22C55E !important; 
-  color: white !important;
-  border: none !important;
-  border-radius: 12px !important;
-  cursor: pointer !important;
-  box-shadow: 0 4px 12px rgba(34,197,94,0.3) !important;
-  font-family: inherit !important;
-}
-.submit-btn:disabled {
-  background-color: #CBD5E1 !important;
-  cursor: not-allowed !important;
-  box-shadow: none !important;
-}
-.check-btn {
-  margin-top: 15px !important;
-  padding: 10px 24px !important;
-  font-size: 16px !important;
-  font-weight: 600 !important;
-  background-color: #4F46E5 !important;
-  color: white !important;
-  border: none !important;
-  border-radius: 8px !important;
-  cursor: pointer !important;
-  display: block !important;
-  margin-left: auto !important;
-  margin-right: 0 !important;
-  float: none !important; 
-  font-family: inherit !important;
-}
-.check-btn:disabled {
-  background-color: #CBD5E1 !important;
-  cursor: not-allowed !important;
-}
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-</style>
-<style>
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-/* PROGRESS BAR CSS */
-.progress-container {
-  max-width: 800px;
-  margin: 0 auto 20px;
-  background: #E2E8F0;
-  border-radius: 10px;
-  height: 10px;
-  overflow: hidden;
-}
-.progress-bar-inner {
-  height: 100%;
-  background: #4F46E5;
-  width: 0%;
-  transition: width 0.3s;
-}
-.progress-text-container {
-  text-align: center;
-  font-size: 15px;
-  margin-bottom: 10px;
-  font-weight: 600;
-  color: #475569;
-}
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
 
-</style>
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e2e8f0;
+            border-radius: 8px;
+            height: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--color-primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 15px;
+            font-weight: 500;
+            color: #64748b;
+        }
+
+        .card {
+            background: var(--color-card);
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            overflow-wrap: break-word;
+        }
+
+        .question {
+            font-size: 21px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .answer-area {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .input-box {
+            font-family: inherit;
+            font-size: 18px;
+            padding: 8px 12px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.2s;
+            min-width: 200px;
+        }
+        
+        .textarea-box {
+            font-family: inherit;
+            font-size: 18px;
+            padding: 12px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.2s;
+            width: 100%;
+            box-sizing: border-box;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .input-box:focus, .textarea-box:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+
+        .input-box.pending, .textarea-box.pending {
+            background-color: var(--color-pending);
+            color: var(--color-pending-text);
+            border-color: var(--color-pending-text);
+            transform: scale(1.02);
+        }
+
+        .input-box.correct {
+            background-color: var(--color-correct);
+            color: white;
+            border-color: var(--color-correct);
+        }
+
+        .input-box.wrong {
+            background-color: var(--color-wrong);
+            color: white;
+            border-color: var(--color-wrong);
+            animation: shake 0.15s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .btn-check {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 14px 20px;
+            font-size: 17px;
+            font-weight: 600;
+            color: white;
+            background-color: var(--color-primary);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            min-height: 52px;
+            transition: background-color 0.2s, opacity 0.2s;
+        }
+
+        .btn-check:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .btn-check:not(:disabled):hover {
+            background-color: #4338ca;
+        }
+
+        .explanation {
+            margin-top: 20px;
+            padding: 16px;
+            background-color: #f1f5f9;
+            border-left: 4px solid var(--color-primary);
+            border-radius: 4px 8px 8px 4px;
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 1.8;
+            display: none;
+        }
+
+        .submit-area {
+            text-align: center;
+            margin: 40px 0;
+            padding: 20px;
+            background: var(--color-card);
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+        }
+
+        .btn-submit {
+            padding: 16px 32px;
+            font-size: 19px;
+            font-weight: 700;
+            color: white;
+            background-color: var(--color-selecting);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-submit:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .student-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+            max-width: 400px;
+            margin: 0 auto 20px auto;
+        }
+        
+        .student-info input {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+        }
+
+        .wrong-list-section {
+            margin-top: 40px;
+            display: none;
+        }
+
+        .wrong-list-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-wrong);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .essay-list-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-secondary);
+            margin-bottom: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .correct-answer-text {
+            color: var(--color-correct);
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .user-wrong-text {
+            color: var(--color-wrong);
+            text-decoration: line-through;
+            margin-left: 8px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .popup h2 {
+            margin-top: 0;
+            color: var(--color-primary);
+        }
+
+        .popup button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 20px; }
+            .question { font-size: 20px; }
+            .answer-area { font-size: 17px; }
+            .btn-check { font-size: 16px; padding: 12px 16px; }
+            .explanation { font-size: 16px; }
+            .input-box { width: 100%; box-sizing: border-box; margin-top: 8px; }
+        }
+    </style>
 </head>
 <body>
-<div style="text-align: left; margin-bottom: 20px; font-weight: 600; color: #64748B; font-size: 15px;">GV biên soạn: Ms Chí Nên - 0852639652</div>
-
-<div class="progress-text-container"><span id="top-progress-text">0</span> / <span id="top-total-text">0</span> answered</div>
-<div class="progress-container"><div class="progress-bar-inner" id="top-progress-bar"></div></div>
 
 <div class="container">
-  <h1>U1-U2 Đề 3</h1>
-  <div class="user-info">
-    <label for="studentName">Họ và tên học sinh:</label>
-    <input type="text" id="studentName" placeholder="Nhập tên của bạn...">
-  </div>
-  
-  <div id="quiz-container"></div>
-  
-  <button id="submit-btn" class="action-btn">Nộp bài</button>
-  
-  <div id="result-section" style="display: none;">
-    <h2 id="score-text" style="text-align:center; color: var(--color-primary);"></h2>
-    <div id="summary-container"></div>
-  </div>
+    <header>
+        <h1>U1 U2 Đề 3</h1>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="progress-text" id="progress-text">Đã làm: 0/0</div>
+    </header>
+
+    <div id="quiz-container"></div>
+
+    <div class="submit-area">
+        <div class="student-info">
+            <input type="text" id="student-name" placeholder="Nhập tên của bạn (Bắt buộc)" required>
+        </div>
+        <button class="btn-submit" id="btn-submit" disabled>Nộp bài</button>
+    </div>
+
+    <div class="wrong-list-section" id="wrong-list-section">
+        <h2 class="wrong-list-title" id="wrong-list-title">DANH SÁCH CÁC CÂU LÀM SAI</h2>
+        <div id="wrong-list-container"></div>
+        
+        <h2 class="essay-list-title" id="essay-list-title">Các câu tự luận — hãy tự đối chiếu đáp án mẫu</h2>
+        <div id="essay-list-container"></div>
+    </div>
+</div>
+
+<div class="overlay" id="popup-overlay">
+    <div class="popup">
+        <h2 id="popup-title">Kết quả</h2>
+        <p id="popup-message"></p>
+        <button id="popup-close">Đóng & Xem chi tiết</button>
+    </div>
 </div>
 
 <script>
-  const quizData = [
-    {
-      "id": 33,
-      "type": "vocab",
-      "questionHTML": "<strong>III. WORD FORM</strong><br>We need to make an ____________ with the hotel about our late arrival. (ARRANGE)",
-      "options": [
-        {"label": "A", "html": "arrangement", "isCorrect": true},
-        {"label": "B", "html": "arrange", "isCorrect": false},
-        {"label": "C", "html": "arranging", "isCorrect": false},
-        {"label": "D", "html": "arranged", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>arrangement (n): Sự sắp xếp. <br>arrange (v): Sắp xếp. <br>arranging (v-ing). <br>arranged (v-ed).</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Chúng ta cần sắp xếp với khách sạn về việc đến muộn.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Sau mạo từ 'an' cần một danh từ.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai từ loại.</div>"
-    },
-    {
-      "id": 34,
-      "type": "vocab",
-      "questionHTML": "<strong>III. WORD FORM</strong><br>The travel agency offers a wide ____________ of holiday destinations. (CHOOSE)",
-      "options": [
-        {"label": "A", "html": "choice", "isCorrect": true},
-        {"label": "B", "html": "choose", "isCorrect": false},
-        {"label": "C", "html": "choosing", "isCorrect": false},
-        {"label": "D", "html": "chosen", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>choice (n): Sự lựa chọn. <br>choose (v): Lựa chọn. <br>choosing (v-ing). <br>chosen (v-ed/P2).</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Đại lý du lịch cung cấp nhiều sự lựa chọn về các điểm đến nghỉ dưỡng.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Sau mạo từ 'a' và tính từ 'wide' cần một danh từ.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai từ loại.</div>"
-    },
-    {
-      "id": 35,
-      "type": "vocab",
-      "questionHTML": "<strong>III. WORD FORM</strong><br>The local ____________ welcomed visitors warmly. (INHABIT)",
-      "options": [
-        {"label": "A", "html": "inhabitants", "isCorrect": true},
-        {"label": "B", "html": "inhabit", "isCorrect": false},
-        {"label": "C", "html": "inhabitation", "isCorrect": false},
-        {"label": "D", "html": "inhabitant", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>inhabitants (n): Cư dân (số nhiều). <br>inhabit (v): Cư trú. <br>inhabitation (n): Sự cư trú. <br>inhabitant (n): Cư dân (số ít).</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Người dân địa phương chào đón du khách một cách nồng nhiệt.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Làm chủ ngữ, chỉ người số nhiều (chào đón nồng nhiệt thường ám chỉ tập thể người dân).</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai từ loại hoặc số ít/nhiều không phù hợp ngữ cảnh.</div>"
-    },
-    {
-      "id": 36,
-      "type": "vocab",
-      "questionHTML": "<strong>III. WORD FORM</strong><br>She is a professional ____________ who specialises in travel photography. (PHOTOGRAPH)",
-      "options": [
-        {"label": "A", "html": "photographer", "isCorrect": true},
-        {"label": "B", "html": "photography", "isCorrect": false},
-        {"label": "C", "html": "photograph", "isCorrect": false},
-        {"label": "D", "html": "photographic", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>photographer (n): Nhiếp ảnh gia. <br>photography (n): Nhiếp ảnh. <br>photograph (n/v): Bức ảnh/Chụp ảnh. <br>photographic (adj): Thuộc về nhiếp ảnh.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Cô ấy là một nhiếp ảnh gia chuyên nghiệp chuyên về nhiếp ảnh du lịch.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Sau mạo từ 'a' và tính từ 'professional' cần danh từ chỉ người.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai nghĩa hoặc từ loại.</div>"
-    },
-    {
-      "id": 37,
-      "type": "vocab",
-      "questionHTML": "<strong>III. WORD FORM</strong><br>The two transport systems are completely ____________. (DIFFER)",
-      "options": [
-        {"label": "A", "html": "different", "isCorrect": true},
-        {"label": "B", "html": "difference", "isCorrect": false},
-        {"label": "C", "html": "differ", "isCorrect": false},
-        {"label": "D", "html": "differently", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>different (adj): Khác biệt. <br>difference (n): Sự khác biệt. <br>differ (v): Khác nhau. <br>differently (adv): Một cách khác biệt.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Hai hệ thống giao thông hoàn toàn khác nhau.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Sau động từ to be 'are' và trạng từ 'completely' cần một tính từ.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai từ loại.</div>"
-    },
-    {
-      "id": 38,
-      "type": "vocab",
-      "questionHTML": "<strong>III. WORD FORM</strong><br>Travel can ____________ your mind and broaden your horizons. (BROAD)",
-      "options": [
-        {"label": "A", "html": "broaden", "isCorrect": true},
-        {"label": "B", "html": "broad", "isCorrect": false},
-        {"label": "C", "html": "broadly", "isCorrect": false},
-        {"label": "D", "html": "broadness", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>broaden (v): Mở rộng. <br>broad (adj): Rộng. <br>broadly (adv): Rộng rãi. <br>broadness (n): Bề rộng.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Du lịch có thể mở mang tâm trí và mở rộng tầm nhìn của bạn.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Sau động từ khuyết thiếu 'can' cần một động từ nguyên thể.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai từ loại.</div>"
-    },
-    {
-      "id": 39,
-      "type": "vocab",
-      "questionHTML": "<strong>III. WORD FORM</strong><br>Is there a ____________ flight to Madrid, or do we have to change planes? (DIRECT)",
-      "options": [
-        {"label": "A", "html": "direct", "isCorrect": true},
-        {"label": "B", "html": "directly", "isCorrect": false},
-        {"label": "C", "html": "direction", "isCorrect": false},
-        {"label": "D", "html": "director", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>direct (adj): Trực tiếp, bay thẳng. <br>directly (adv): Một cách trực tiếp. <br>direction (n): Hướng. <br>director (n): Giám đốc.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Có chuyến bay thẳng nào đến Madrid không, hay chúng ta phải chuyển máy bay?</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Trước danh từ 'flight' cần tính từ để bổ nghĩa.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai từ loại hoặc nghĩa.</div>"
-    },
-    {
-      "id": 40,
-      "type": "vocab",
-      "questionHTML": "<strong>III. WORD FORM</strong><br>We were surprised by the ____________ diversity of the city. (CULTURE)",
-      "options": [
-        {"label": "A", "html": "cultural", "isCorrect": true},
-        {"label": "B", "html": "culture", "isCorrect": false},
-        {"label": "C", "html": "culturally", "isCorrect": false},
-        {"label": "D", "html": "cultured", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>cultural (adj): Thuộc về văn hóa. <br>culture (n): Văn hóa. <br>culturally (adv): Về mặt văn hóa. <br>cultured (adj): Có giáo dục, có văn hóa.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Chúng tôi ngạc nhiên bởi sự đa dạng văn hóa của thành phố.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Trước danh từ 'diversity' cần tính từ để tạo thành cụm danh từ 'cultural diversity' (đa dạng văn hóa).</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai từ loại hoặc collocation.</div>"
-    },
-    {
-      "id": 41,
-      "type": "vocab",
-      "questionHTML": "<strong>III. WORD FORM</strong><br>Our guide was extremely ____________ about the history of the castle. (KNOW)",
-      "options": [
-        {"label": "A", "html": "knowledgeable", "isCorrect": true},
-        {"label": "B", "html": "knowledge", "isCorrect": false},
-        {"label": "C", "html": "knowing", "isCorrect": false},
-        {"label": "D", "html": "known", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>knowledgeable (adj): Am hiểu, có kiến thức rộng. <br>knowledge (n): Kiến thức. <br>knowing (adj): Hiểu biết, cố ý. <br>known (adj): Được biết đến.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Hướng dẫn viên của chúng tôi cực kỳ am hiểu về lịch sử của lâu đài.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Sau động từ to be 'was' và trạng từ 'extremely' cần tính từ. 'knowledgeable about' là cấu trúc đúng.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai từ loại hoặc nghĩa.</div>"
-    },
-    {
-      "id": 42,
-      "type": "vocab",
-      "questionHTML": "<strong>III. WORD FORM</strong><br>The new railway is of great ____________ to local residents. (IMPORTANT)",
-      "options": [
-        {"label": "A", "html": "importance", "isCorrect": true},
-        {"label": "B", "html": "important", "isCorrect": false},
-        {"label": "C", "html": "importantly", "isCorrect": false},
-        {"label": "D", "html": "import", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>importance (n): Tầm quan trọng. <br>important (adj): Quan trọng. <br>importantly (adv): Một cách quan trọng. <br>import (v/n): Nhập khẩu.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Tuyến đường sắt mới có tầm quan trọng lớn đối với cư dân địa phương.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Cấu trúc 'be of + (adj) + noun' = 'be + adj'. Ở đây cần danh từ sau tính từ 'great'.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai từ loại.</div>"
-    },
-    {
-      "id": 43,
-      "type": "vocab",
-      "questionHTML": "<strong>III. WORD FORM</strong><br>The main ____________ to the park is on the east side. (ENTER)",
-      "options": [
-        {"label": "A", "html": "entrance", "isCorrect": true},
-        {"label": "B", "html": "entering", "isCorrect": false},
-        {"label": "C", "html": "enter", "isCorrect": false},
-        {"label": "D", "html": "entered", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>entrance (n): Lối vào. <br>entering (v-ing). <br>enter (v): Đi vào. <br>entered (v-ed).</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Lối vào chính của công viên nằm ở phía đông.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Sau mạo từ 'The' và tính từ 'main' cần một danh từ.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai từ loại.</div>"
-    },
-    {
-      "id": 44,
-      "type": "vocab",
-      "questionHTML": "<strong>III. WORD FORM</strong><br>After the renovation, the old station was almost ____________. (RECOGNISE)",
-      "options": [
-        {"label": "A", "html": "unrecognisable", "isCorrect": true},
-        {"label": "B", "html": "recognisable", "isCorrect": false},
-        {"label": "C", "html": "recognition", "isCorrect": false},
-        {"label": "D", "html": "recognised", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>unrecognisable (adj): Không thể nhận ra. <br>recognisable (adj): Có thể nhận ra. <br>recognition (n): Sự công nhận. <br>recognised (v-ed): Được công nhận.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Sau khi cải tạo, nhà ga cũ gần như không thể nhận ra.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Cần một tính từ mang nghĩa phù hợp với ngữ cảnh 'sau khi cải tạo' (thường là thay đổi hoàn toàn).</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai từ loại hoặc ngược nghĩa so với ngữ cảnh hợp lý.</div>"
-    },
-    {
-      "id": 45,
-      "type": "vocab",
-      "questionHTML": "<strong>III. WORD FORM</strong><br>The ____________ gives details of all train departures. (TIME)",
-      "options": [
-        {"label": "A", "html": "timetable", "isCorrect": true},
-        {"label": "B", "html": "time", "isCorrect": false},
-        {"label": "C", "html": "timing", "isCorrect": false},
-        {"label": "D", "html": "timer", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>timetable (n): Thời gian biểu, lịch trình. <br>time (n): Thời gian. <br>timing (n): Sự tính toán thời gian. <br>timer (n): Đồng hồ bấm giờ.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Lịch trình cung cấp chi tiết về tất cả các chuyến tàu khởi hành.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Cần danh từ chỉ lịch trình tàu chạy.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai nghĩa trong ngữ cảnh giao thông.</div>"
-    },
-    {
-      "id": 46,
-      "type": "vocab",
-      "questionHTML": "<strong>III. WORD FORM</strong><br>The airline is ____________ improving its safety procedures. (CONTINUE)",
-      "options": [
-        {"label": "A", "html": "continually", "isCorrect": true},
-        {"label": "B", "html": "continue", "isCorrect": false},
-        {"label": "C", "html": "continuous", "isCorrect": false},
-        {"label": "D", "html": "continuation", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>continually (adv): Liên tục (có tính lặp lại). <br>continue (v): Tiếp tục. <br>continuous (adj): Liên tục (không ngừng nghỉ). <br>continuation (n): Sự tiếp tục.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Hãng hàng không liên tục cải thiện các quy trình an toàn của mình.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Cần trạng từ bổ nghĩa cho động từ V-ing 'improving'.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai từ loại.</div>"
-    },
-    {
-      "id": 47,
-      "type": "vocab",
-      "questionHTML": "<strong>III. WORD FORM</strong><br>The trip was so special that it became a very ____________ experience. (MEMORY)",
-      "options": [
-        {"label": "A", "html": "memorable", "isCorrect": true},
-        {"label": "B", "html": "memory", "isCorrect": false},
-        {"label": "C", "html": "memorise", "isCorrect": false},
-        {"label": "D", "html": "memorial", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>memorable (adj): Đáng nhớ. <br>memory (n): Trí nhớ, kỷ niệm. <br>memorise (v): Ghi nhớ. <br>memorial (n/adj): Đài tưởng niệm / Để tưởng nhớ.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Chuyến đi quá đặc biệt đến mức nó trở thành một trải nghiệm rất đáng nhớ.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Trước danh từ 'experience' cần một tính từ bổ nghĩa.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai từ loại hoặc nghĩa.</div>"
-    },
-    {
-      "id": 48,
-      "type": "vocab",
-      "questionHTML": "<strong>III. WORD FORM</strong><br>The insurance policy provides worldwide travel ____________. (COVER)",
-      "options": [
-        {"label": "A", "html": "coverage", "isCorrect": true},
-        {"label": "B", "html": "cover", "isCorrect": false},
-        {"label": "C", "html": "covering", "isCorrect": false},
-        {"label": "D", "html": "covered", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>coverage (n): Sự bao hiểm, phạm vi bảo hiểm. <br>cover (v/n): Bao bọc, chỗ núp. <br>covering (n/adj). <br>covered (adj).</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Chính sách bảo hiểm cung cấp phạm vi bảo hiểm du lịch trên toàn thế giới.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Cần danh từ để tạo thành cụm 'travel coverage' (phạm vi bảo hiểm du lịch).</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai từ loại hoặc cách kết hợp từ.</div>"
-    },
-    {
-      "id": 49,
-      "type": "grammar",
-      "questionHTML": "<strong>IV. VOCABULARY REWRITE</strong><br>We started our journey very early in the morning. (SET)<br>→ We _______________ very early in the morning.",
-      "options": [
-        {"label": "A", "html": "set off", "isCorrect": true},
-        {"label": "B", "html": "set up", "isCorrect": false},
-        {"label": "C", "html": "set in", "isCorrect": false},
-        {"label": "D", "html": "set on", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>set off (phrasal verb): Khởi hành. <br>set up (phrasal verb): Thành lập, thiết lập. <br>set in (phrasal verb): Bắt đầu (thời tiết, hiện tượng tiêu cực). <br>set on (phrasal verb): Tấn công.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Chúng tôi bắt đầu hành trình từ rất sớm vào buổi sáng.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Từ 'started our journey' đồng nghĩa với 'set off'.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các cụm động từ khác sai nghĩa so với câu gốc.</div>"
-    },
-    {
-      "id": 50,
-      "type": "grammar",
-      "questionHTML": "<strong>IV. VOCABULARY REWRITE</strong><br>Could you collect me at the airport at 8 p.m.? (PICK)<br>→ Could you _______________ at the airport at 8 p.m.?",
-      "options": [
-        {"label": "A", "html": "pick me up", "isCorrect": true},
-        {"label": "B", "html": "pick up me", "isCorrect": false},
-        {"label": "C", "html": "pick me out", "isCorrect": false},
-        {"label": "D", "html": "pick out me", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>pick someone up: Đón ai đó. <br>pick out: Chọn ra.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Bạn có thể đón tôi tại sân bay lúc 8 giờ tối không?</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Từ 'collect' (đón) đồng nghĩa với 'pick up'. Đại từ tân ngữ 'me' phải đứng giữa 'pick' và 'up'.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai cấu trúc ngữ pháp (tân ngữ phải đứng giữa) hoặc sai nghĩa.</div>"
-    },
-    {
-      "id": 51,
-      "type": "grammar",
-      "questionHTML": "<strong>IV. VOCABULARY REWRITE</strong><br>We went to the station to say goodbye to our friends. (SEE)<br>→ We went to the station to _______________.",
-      "options": [
-        {"label": "A", "html": "see our friends off", "isCorrect": true},
-        {"label": "B", "html": "see off our friends", "isCorrect": false},
-        {"label": "C", "html": "see to our friends", "isCorrect": false},
-        {"label": "D", "html": "see our friends out", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>see someone off: Tiễn ai đó. <br>see to: Lo liệu, giải quyết. <br>see someone out: Tiễn ai đó ra đến cửa.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Chúng tôi đến nhà ga để tạm biệt bạn bè.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Cụm 'say goodbye to' đồng nghĩa với 'see someone off'. Khi tân ngữ là một cụm danh từ (our friends), có thể đứng giữa hoặc sau, nhưng 'see our friends off' phổ biến hơn. Tuy nhiên, để làm nhiễu ta chọn các cụm từ sai hẳn hoặc sai vị trí đối với đại từ.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai giới từ dẫn đến sai nghĩa cụm động từ.</div>"
-    },
-    {
-      "id": 52,
-      "type": "grammar",
-      "questionHTML": "<strong>IV. VOCABULARY REWRITE</strong><br>The driver stopped beside the road. (PULL)<br>→ The driver _______________ beside the road.",
-      "options": [
-        {"label": "A", "html": "pulled over", "isCorrect": true},
-        {"label": "B", "html": "pulled up", "isCorrect": false},
-        {"label": "C", "html": "pulled in", "isCorrect": false},
-        {"label": "D", "html": "pulled off", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>pull over: Tấp xe vào lề. <br>pull up: Dừng lại (nói chung). <br>pull in: Ghé vào (trạm xăng). <br>pull off: Lái xe khỏi đường chính / Thành công việc gì khó.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Tài xế đã tấp xe vào lề đường.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Từ 'stopped beside the road' diễn tả hành động 'pull over'.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các cụm động từ khác không sát nghĩa 'tấp vào lề đường' như 'pull over'.</div>"
-    },
-    {
-      "id": 53,
-      "type": "grammar",
-      "questionHTML": "<strong>IV. VOCABULARY REWRITE</strong><br>We returned home after a week abroad. (BACK)<br>→ We _______________ after a week abroad.",
-      "options": [
-        {"label": "A", "html": "got back", "isCorrect": true},
-        {"label": "B", "html": "took back", "isCorrect": false},
-        {"label": "C", "html": "brought back", "isCorrect": false},
-        {"label": "D", "html": "called back", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>get back: Quay trở về. <br>take back: Lấy lại, rút lại lời nói. <br>bring back: Mang trả lại, gợi nhớ. <br>call back: Gọi lại.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Chúng tôi đã trở về nhà sau một tuần ở nước ngoài.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Từ 'returned home' đồng nghĩa với 'got back'.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai nghĩa cụm động từ.</div>"
-    },
-    {
-      "id": 54,
-      "type": "grammar",
-      "questionHTML": "<strong>IV. VOCABULARY REWRITE</strong><br>The bus stopped to let the passengers get out. (DROP)<br>→ The bus stopped to _______________.",
-      "options": [
-        {"label": "A", "html": "drop the passengers off", "isCorrect": true},
-        {"label": "B", "html": "drop out the passengers", "isCorrect": false},
-        {"label": "C", "html": "drop the passengers out", "isCorrect": false},
-        {"label": "D", "html": "drop off out passengers", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>drop someone off: Thả ai xuống (xe). <br>drop out: Bỏ học, từ bỏ.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Xe buýt dừng lại để thả hành khách xuống.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Cụm 'let the passengers get out' đồng nghĩa với 'drop someone off'.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai cụm động từ hoặc sai vị trí giới từ.</div>"
-    },
-    {
-      "id": 55,
-      "type": "grammar",
-      "questionHTML": "<strong>IV. VOCABULARY REWRITE</strong><br>We are going towards the airport now. (MAKING)<br>→ We are _______________ the airport now.",
-      "options": [
-        {"label": "A", "html": "making for", "isCorrect": true},
-        {"label": "B", "html": "making out", "isCorrect": false},
-        {"label": "C", "html": "making up", "isCorrect": false},
-        {"label": "D", "html": "making into", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>make for: Đi về hướng. <br>make out: Nhận ra, hiểu thấu. <br>make up: Trang điểm, bịa chuyện, làm hòa. <br>make into: Biến thành.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Chúng tôi đang đi về hướng sân bay bây giờ.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Cụm 'going towards' đồng nghĩa với 'making for'.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các cụm động từ khác sai nghĩa hoàn toàn.</div>"
-    },
-    {
-      "id": 56,
-      "type": "grammar",
-      "questionHTML": "<strong>IV. VOCABULARY REWRITE</strong><br>We need to register at the hotel before 2 p.m. (CHECK)<br>→ We need to _______________ before 2 p.m.",
-      "options": [
-        {"label": "A", "html": "check in", "isCorrect": true},
-        {"label": "B", "html": "check out", "isCorrect": false},
-        {"label": "C", "html": "check up", "isCorrect": false},
-        {"label": "D", "html": "check on", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>check in: Làm thủ tục nhận phòng/đăng ký. <br>check out: Làm thủ tục trả phòng. <br>check up: Kiểm tra tổng quát (sức khỏe). <br>check on: Kiểm tra xem ai đó/cái gì có ổn không.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Chúng ta cần làm thủ tục nhận phòng tại khách sạn trước 2 giờ chiều.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Từ 'register at the hotel' đồng nghĩa với 'check in'.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai nghĩa cụm động từ.</div>"
-    },
-    {
-      "id": 57,
-      "type": "grammar",
-      "questionHTML": "<strong>IV. VOCABULARY REWRITE</strong><br>We must leave the hotel by 11 a.m. (CHECK)<br>→ We must _______________ by 11 a.m.",
-      "options": [
-        {"label": "A", "html": "check out", "isCorrect": true},
-        {"label": "B", "html": "check in", "isCorrect": false},
-        {"label": "C", "html": "check up", "isCorrect": false},
-        {"label": "D", "html": "check off", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>check out: Trả phòng. <br>check in: Nhận phòng. <br>check up: Khám sức khỏe. <br>check off: Đánh dấu (trong danh sách).</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Chúng ta phải trả phòng khách sạn trước 11 giờ sáng.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Từ 'leave the hotel' đồng nghĩa với 'check out'.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai nghĩa cụm động từ.</div>"
-    },
-    {
-      "id": 58,
-      "type": "grammar",
-      "questionHTML": "<strong>IV. VOCABULARY REWRITE</strong><br>She finally reached the same level as the other runners. (CATCH)<br>→ She finally managed to _______________ the other runners.",
-      "options": [
-        {"label": "A", "html": "catch up with", "isCorrect": true},
-        {"label": "B", "html": "catch up to", "isCorrect": false},
-        {"label": "C", "html": "catch on with", "isCorrect": false},
-        {"label": "D", "html": "catch out with", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>catch up with: Bắt kịp ai đó. <br>catch on: Trở nên phổ biến, hiểu ra. <br>catch out: Bắt quả tang.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Cô ấy cuối cùng đã bắt kịp với những vận động viên khác.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Từ 'reached the same level as' tương đương 'catch up with'.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các giới từ đi kèm ở các đáp án khác không tạo thành cụm từ đúng nghĩa 'bắt kịp'.</div>"
-    },
-    {
-      "id": 59,
-      "type": "grammar",
-      "questionHTML": "<strong>IV. VOCABULARY REWRITE</strong><br>We visited the main tourist attractions in Rome. (SIGHTS)<br>→ We _______________ in Rome.",
-      "options": [
-        {"label": "A", "html": "saw the sights", "isCorrect": true},
-        {"label": "B", "html": "watched the sights", "isCorrect": false},
-        {"label": "C", "html": "looked the sights", "isCorrect": false},
-        {"label": "D", "html": "viewed the sights", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>see the sights (idiom): Ngắm cảnh, tham quan. <br>watch/look/view: Các động từ này không đi kèm 'the sights' để tạo thành cụm từ mang nghĩa tham quan.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Chúng tôi đã đi tham quan các địa danh du lịch chính ở Rome.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Cụm 'visited the main tourist attractions' đồng nghĩa với 'see the sights' (chia quá khứ là saw the sights).</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các động từ khác sai collocation (cách kết hợp từ cố định).</div>"
-    },
-    {
-      "id": 60,
-      "type": "grammar",
-      "questionHTML": "<strong>IV. VOCABULARY REWRITE</strong><br>He travelled with very little luggage. (LIGHT)<br>→ He decided to _______________.",
-      "options": [
-        {"label": "A", "html": "travel light", "isCorrect": true},
-        {"label": "B", "html": "travel lightly", "isCorrect": false},
-        {"label": "C", "html": "go light", "isCorrect": false},
-        {"label": "D", "html": "travel lighting", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>travel light (idiom): Đi du lịch mang theo ít hành lý. <br>travel lightly: Dùng sai dạng trạng từ (idiom này dùng 'light').</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Anh ấy quyết định mang theo ít hành lý khi đi du lịch.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Cụm 'travelled with very little luggage' đồng nghĩa với 'travel light'.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác dùng sai idiom.</div>"
-    },
-    {
-      "id": 61,
-      "type": "grammar",
-      "questionHTML": "<strong>IV. VOCABULARY REWRITE</strong><br>They stayed in remote places that tourists rarely visit. (BEATEN)<br>→ They travelled _______________.",
-      "options": [
-        {"label": "A", "html": "off the beaten track", "isCorrect": true},
-        {"label": "B", "html": "out the beaten track", "isCorrect": false},
-        {"label": "C", "html": "off the beaten path", "isCorrect": false},
-        {"label": "D", "html": "on the beaten track", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>off the beaten track (idiom): Đến những nơi hẻo lánh, vắng người. <br>off the beaten path (thường dùng ở Mỹ, track phổ biến hơn ở Anh). <br>on the beaten track: Nơi phổ biến đông người.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Họ đã đi du lịch đến những nơi hẻo lánh ít du khách tới.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Cụm 'remote places that tourists rarely visit' đồng nghĩa với idiom 'off the beaten track'.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác dùng sai giới từ hoặc sai idiom theo cách dùng phổ biến tại Anh.</div>"
-    },
-    {
-      "id": 62,
-      "type": "grammar",
-      "questionHTML": "<strong>IV. VOCABULARY REWRITE</strong><br>He carries all his belongings because he is constantly travelling. (SUITCASE)<br>→ He is constantly _______________.",
-      "options": [
-        {"label": "A", "html": "living out of a suitcase", "isCorrect": true},
-        {"label": "B", "html": "living in a suitcase", "isCorrect": false},
-        {"label": "C", "html": "carrying a suitcase", "isCorrect": false},
-        {"label": "D", "html": "holding a suitcase", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>live out of a suitcase (idiom): Sống cảnh nay đây mai đó, di chuyển liên tục chỉ với một chiếc vali. <br>live in a suitcase: Sai giới từ.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Anh ấy liên tục di chuyển nay đây mai đó.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Việc liên tục mang theo đồ đạc vì di chuyển nhiều diễn tả bằng idiom 'living out of a suitcase'.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác dùng sai idiom hoặc dịch word-by-word không tự nhiên.</div>"
-    },
-    {
-      "id": 63,
-      "type": "grammar",
-      "questionHTML": "<strong>IV. VOCABULARY REWRITE</strong><br>We arranged everything before the trip. (ADVANCE)<br>→ We arranged everything _______________.",
-      "options": [
-        {"label": "A", "html": "in advance", "isCorrect": true},
-        {"label": "B", "html": "on advance", "isCorrect": false},
-        {"label": "C", "html": "at advance", "isCorrect": false},
-        {"label": "D", "html": "for advance", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>in advance (idiom): Trước. <br>on/at/for advance: Không có cấu trúc này.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Chúng tôi đã sắp xếp mọi thứ trước chuyến đi.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Từ 'before the trip' có thể thay bằng 'in advance' mang nghĩa 'sắp xếp trước'.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác dùng sai giới từ của cụm cố định.</div>"
-    },
-    {
-      "id": 64,
-      "type": "grammar",
-      "questionHTML": "<strong>IV. VOCABULARY REWRITE</strong><br>I don't know the answer immediately without checking. (HEAD)<br>→ I don't know the answer _______________.",
-      "options": [
-        {"label": "A", "html": "off the top of my head", "isCorrect": true},
-        {"label": "B", "html": "on the top of my head", "isCorrect": false},
-        {"label": "C", "html": "from the top of my head", "isCorrect": false},
-        {"label": "D", "html": "at the top of my head", "isCorrect": false}
-      ],
-      "explanationHTML": "<div class=\"explanation-step\"><strong>1. Dịch nghĩa đáp án:</strong><br>off the top of my head (idiom): Nói ngay ra mà không cần suy nghĩ/kiểm tra. <br>on/from/at the top: Dùng sai giới từ.</div>\n<div class=\"explanation-step\"><strong>2. Dịch câu hỏi:</strong><br>Tôi không thể trả lời ngay lập tức mà không kiểm tra lại.</div>\n<div class=\"explanation-step\"><strong>3. Giải thích đáp án đúng:</strong><br>Từ 'immediately without checking' tương đương 'off the top of my head'.</div>\n<div class=\"explanation-step\"><strong>4. Vì sao các đáp án khác sai:</strong><br>Các đáp án khác sai giới từ của cụm cố định.</div>"
-    }
-  ];
-  const userState = {};
-  let audioCtx = null;
-
-  function initAudio() {
-    if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-  }
-
-  function playTone(frequency, duration, type, volume) {
-    try {
-      initAudio();
-      const oscillator = audioCtx.createOscillator();
-      const gainNode = audioCtx.createGain();
-      oscillator.type = type;
-      oscillator.frequency.value = frequency;
-      
-      gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-      
-      oscillator.connect(gainNode);
-      gainNode.connect(audioCtx.destination);
-      
-      oscillator.start();
-      oscillator.stop(audioCtx.currentTime + duration);
-    } catch(e) {}
-  }
-
-  function playSelectSound() { playTone(600, 0.08, 'sine', 0.15); }
-  
-  function playCorrectSound() {
-    try {
-      initAudio();
-      playTone(800, 0.1, 'sine', 0.2);
-      setTimeout(() => playTone(1200, 0.15, 'sine', 0.2), 100);
-    } catch(e) {}
-  }
-  
-  function playWrongSound() { playTone(150, 0.2, 'sawtooth', 0.12); }
-
-  function shuffleArray(array) {
-    const arr = [...array];
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      
-    }
-    return arr;
-  }
-
-  function renderQuiz() {
-    const container = document.getElementById('quiz-container');
-    quizData.forEach(q => {
-      userState[q.id] = { selected: null, checked: false, isCorrect: null };
-      
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.id = `card-${q.id}`;
-      
-      let html = `<div class="question-text">${q.id}. ${q.questionHTML}</div>`;
-      html += `<div class="options-container" id="options-${q.id}">`;
-      
-      // Shuffle content and labels independently
-      const shuffledOptions = shuffleArray(q.options);
-      const labels = ['A', 'B', 'C', 'D'];
-      const shuffledLabels = shuffleArray(labels);
-      
-      shuffledOptions.forEach((opt, index) => {
-        const displayLabel = shuffledLabels[index];
-        html += `
-          <button class="option-btn" 
-                  data-qid="${q.id}" 
-                  data-original-label="${opt.label}"
-                  data-display-label="${displayLabel}"
-                  id="opt-${q.id}-${opt.label}">
-            <span class="option-label">${displayLabel}.</span> 
-            <span class="option-content">${opt.html}</span>
-          </button>`;
-      });
-      
-      html += `</div>
-        <div class="clearfix">
-          <button id="check-btn-${q.id}" class="action-btn" disabled onclick="checkAnswer(${q.id})">Kiểm tra</button>
-        </div>
-        <div id="explanation-${q.id}" class="explanation">${q.explanationHTML}</div>
-      `;
-      card.innerHTML = html;
-      container.appendChild(card);
-    });
-    
-    // Add event listeners to all option buttons
-    document.querySelectorAll('.option-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        initAudio(); // Initialize audio context on first user interaction
-        const qid = parseInt(this.getAttribute('data-qid'));
-        const origLabel = this.getAttribute('data-original-label');
-        
-        if (userState[qid].checked) return;
-        
-        userState[qid].selected = origLabel;
-        
-        // Update UI for selection
-        document.querySelectorAll(`#options-${qid} .option-btn`).forEach(b => b.classList.remove('pending'));
-        this.classList.add('pending');
-        
-        document.getElementById(`check-btn-${qid}`).disabled = false;
-        playSelectSound();
-      });
-    });
-  }
-
-  function checkAnswer(qid, isAuto = false) {
-    const state = userState[qid];
-    if (state.checked) return;
-    
-    const qData = quizData.find(q => q.id === qid);
-    const correctOpt = qData.options.find(o => o.isCorrect).label;
-    
-    state.checked = true;
-    if (state.selected === correctOpt) {
-      state.isCorrect = true;
-    } else {
-      state.isCorrect = false;
-    }
-    
-    // UI Updates
-    document.querySelectorAll(`#options-${qid} .option-btn`).forEach(b => {
-      b.style.pointerEvents = 'none';
-      b.classList.remove('pending');
-      const orig = b.getAttribute('data-original-label');
-      
-      if (orig === correctOpt) {
-        b.classList.add('correct');
-        b.innerHTML = b.innerHTML.replace('<span class="option-label">', '✓ <span class="option-label">');
-      } else if (orig === state.selected && !state.isCorrect) {
-        b.classList.add('wrong');
-        b.innerHTML = b.innerHTML.replace('<span class="option-label">', '✕ <span class="option-label">');
-      }
-    });
-    
-    document.getElementById(`explanation-${qid}`).style.display = 'block';
-    const checkBtn = document.getElementById(`check-btn-${qid}`);
-    if(checkBtn) {
-        checkBtn.disabled = true;
-        checkBtn.style.display = 'none';
-    }
-    
-    if (!isAuto) {
-      if (state.isCorrect) playCorrectSound();
-      else playWrongSound();
-    }
-  }
-
-  function submitQuiz() {
-    const studentName = document.getElementById('studentName').value.trim();
-    if (!studentName) {
-      alert('Vui lòng nhập tên học sinh trước khi nộp bài!');
-      document.getElementById('studentName').focus();
-      return;
-    }
-    
-    document.getElementById('submit-btn').disabled = true;
-    
-    // Check all unanswered/un-checked questions
-    quizData.forEach(q => {
-      if (!userState[q.id].checked) {
-        if (userState[q.id].selected !== null) {
-          checkAnswer(q.id, true);
-        } else {
-          // Not selected anything
-          userState[q.id].checked = true;
-          userState[q.id].isCorrect = false;
-          const correctOpt = q.options.find(o => o.isCorrect).label;
-          document.querySelectorAll(`#options-${q.id} .option-btn`).forEach(b => {
-            b.style.pointerEvents = 'none';
-            if (b.getAttribute('data-original-label') === correctOpt) {
-              b.classList.add('correct');
-              b.innerHTML = b.innerHTML.replace('<span class="option-label">', '✓ <span class="option-label">');
-            }
-          });
-          document.getElementById(`explanation-${q.id}`).style.display = 'block';
-          const checkBtn = document.getElementById(`check-btn-${q.id}`);
-          if(checkBtn) {
-            checkBtn.style.display = 'none';
-          }
+(function() {
+    const quizData = [
+        {
+            id: 33,
+            type: "gap_fill_text",
+            questionHTML: "<b>Điền từ:</b> We need to make an {{blank:b1}} with the hotel about our late arrival. (ARRANGE)",
+            blanks: [{ blankId: "b1", correctAnswers: ["arrangement", "arrangements"] }],
+            explanationHTML: "<b>Dịch nghĩa:</b> Chúng ta cần thỏa thuận (sắp xếp) với khách sạn về việc đến muộn. (TỪ GỐC: ARRANGE - SẮP XẾP)<br><b>Giải thích:</b> Sau mạo từ 'an' cần một danh từ số ít (hoặc số nhiều nếu bỏ an, nhưng ở đây có 'an'). 'Arrange' (động từ) -> 'arrangement' (danh từ: sự sắp xếp, thỏa thuận).",
+            passageId: null
+        },
+        {
+            id: 34,
+            type: "gap_fill_text",
+            questionHTML: "<b>Điền từ:</b> The travel agency offers a wide {{blank:b1}} of holiday destinations. (CHOOSE)",
+            blanks: [{ blankId: "b1", correctAnswers: ["choice", "choices"] }],
+            explanationHTML: "<b>Dịch nghĩa:</b> Công ty du lịch cung cấp nhiều lựa chọn về các điểm đến nghỉ dưỡng. (TỪ GỐC: CHOOSE - LỰA CHỌN)<br><b>Giải thích:</b> Cụm từ 'a wide choice of' (nhiều lựa chọn). Ta cần danh từ của 'choose' là 'choice'.",
+            passageId: null
+        },
+        {
+            id: 35,
+            type: "gap_fill_text",
+            questionHTML: "<b>Điền từ:</b> The local {{blank:b1}} welcomed visitors warmly. (INHABIT)",
+            blanks: [{ blankId: "b1", correctAnswers: ["inhabitants", "inhabitant"] }],
+            explanationHTML: "<b>Dịch nghĩa:</b> Những người dân địa phương chào đón du khách một cách nồng nhiệt. (TỪ GỐC: INHABIT - CƯ TRÚ)<br><b>Giải thích:</b> Cần danh từ chỉ người làm chủ ngữ. 'Inhabit' -> 'inhabitant' (cư dân). Thường dùng số nhiều 'inhabitants' trong ngữ cảnh này.",
+            passageId: null
+        },
+        {
+            id: 36,
+            type: "gap_fill_text",
+            questionHTML: "<b>Điền từ:</b> She is a professional {{blank:b1}} who specialises in travel photography. (PHOTOGRAPH)",
+            blanks: [{ blankId: "b1", correctAnswers: ["photographer"] }],
+            explanationHTML: "<b>Dịch nghĩa:</b> Cô ấy là một nhiếp ảnh gia chuyên nghiệp chuyên về nhiếp ảnh du lịch. (TỪ GỐC: PHOTOGRAPH - BỨC ẢNH/CHỤP ẢNH)<br><b>Giải thích:</b> Sau mạo từ 'a' và tính từ 'professional', đồng thời chỉ người (who) nên cần danh từ chỉ người: 'photographer' (nhiếp ảnh gia).",
+            passageId: null
+        },
+        {
+            id: 37,
+            type: "gap_fill_text",
+            questionHTML: "<b>Điền từ:</b> The two transport systems are completely {{blank:b1}}. (DIFFER)",
+            blanks: [{ blankId: "b1", correctAnswers: ["different"] }],
+            explanationHTML: "<b>Dịch nghĩa:</b> Hai hệ thống giao thông hoàn toàn khác nhau. (TỪ GỐC: DIFFER - KHÁC BIỆT)<br><b>Giải thích:</b> Đứng sau động từ to be 'are' và trạng từ 'completely' cần một tính từ. 'Differ' -> 'different' (khác biệt).",
+            passageId: null
+        },
+        {
+            id: 38,
+            type: "gap_fill_text",
+            questionHTML: "<b>Điền từ:</b> Travel can {{blank:b1}} your mind and broaden your horizons. (BROAD)",
+            blanks: [{ blankId: "b1", correctAnswers: ["broaden"] }],
+            explanationHTML: "<b>Dịch nghĩa:</b> Du lịch có thể mở mang tâm trí và mở rộng tầm nhìn của bạn. (TỪ GỐC: BROAD - RỘNG)<br><b>Giải thích:</b> Đứng sau động từ khuyết thiếu 'can' cần một động từ nguyên thể. 'Broad' (tính từ) -> 'broaden' (động từ: mở rộng).",
+            passageId: null
+        },
+        {
+            id: 39,
+            type: "gap_fill_text",
+            questionHTML: "<b>Điền từ:</b> Is there a {{blank:b1}} flight to Madrid, or do we have to change planes? (DIRECT)",
+            blanks: [{ blankId: "b1", correctAnswers: ["direct"] }],
+            explanationHTML: "<b>Dịch nghĩa:</b> Có chuyến bay thẳng đến Madrid không, hay chúng ta phải chuyển máy bay? (TỪ GỐC: DIRECT - TRỰC TIẾP)<br><b>Giải thích:</b> Đứng trước danh từ 'flight' cần một tính từ. 'Direct' bản thân nó đã là tính từ (chuyến bay thẳng).",
+            passageId: null
+        },
+        {
+            id: 40,
+            type: "gap_fill_text",
+            questionHTML: "<b>Điền từ:</b> We were surprised by the {{blank:b1}} diversity of the city. (CULTURE)",
+            blanks: [{ blankId: "b1", correctAnswers: ["cultural"] }],
+            explanationHTML: "<b>Dịch nghĩa:</b> Chúng tôi đã ngạc nhiên bởi sự đa dạng văn hóa của thành phố. (TỪ GỐC: CULTURE - VĂN HÓA)<br><b>Giải thích:</b> Đứng trước danh từ 'diversity' cần một tính từ. 'Culture' (danh từ) -> 'cultural' (tính từ: thuộc về văn hóa).",
+            passageId: null
+        },
+        {
+            id: 41,
+            type: "gap_fill_text",
+            questionHTML: "<b>Điền từ:</b> Our guide was extremely {{blank:b1}} about the history of the castle. (KNOW)",
+            blanks: [{ blankId: "b1", correctAnswers: ["knowledgeable"] }],
+            explanationHTML: "<b>Dịch nghĩa:</b> Hướng dẫn viên của chúng tôi cực kỳ am hiểu về lịch sử của lâu đài. (TỪ GỐC: KNOW - BIẾT)<br><b>Giải thích:</b> Đứng sau động từ to be 'was' và trạng từ 'extremely' cần tính từ. 'Know' -> 'knowledgeable' (am hiểu, có kiến thức sâu rộng).",
+            passageId: null
+        },
+        {
+            id: 42,
+            type: "gap_fill_text",
+            questionHTML: "<b>Điền từ:</b> The new railway is of great {{blank:b1}} to local residents. (IMPORTANT)",
+            blanks: [{ blankId: "b1", correctAnswers: ["importance"] }],
+            explanationHTML: "<b>Dịch nghĩa:</b> Tuyến đường sắt mới có tầm quan trọng lớn đối với cư dân địa phương. (TỪ GỐC: IMPORTANT - QUAN TRỌNG)<br><b>Giải thích:</b> Cấu trúc 'be of + (adj) + N' mang nghĩa là có tính chất gì. Đứng sau tính từ 'great' cần danh từ. 'Important' -> 'importance' (sự quan trọng).",
+            passageId: null
+        },
+        {
+            id: 43,
+            type: "gap_fill_text",
+            questionHTML: "<b>Điền từ:</b> The main {{blank:b1}} to the park is on the east side. (ENTER)",
+            blanks: [{ blankId: "b1", correctAnswers: ["entrance"] }],
+            explanationHTML: "<b>Dịch nghĩa:</b> Lối vào chính của công viên nằm ở phía đông. (TỪ GỐC: ENTER - ĐI VÀO)<br><b>Giải thích:</b> Đứng sau tính từ 'main' và làm chủ ngữ cần danh từ. 'Enter' (động từ) -> 'entrance' (lối vào).",
+            passageId: null
+        },
+        {
+            id: 44,
+            type: "gap_fill_text",
+            questionHTML: "<b>Điền từ:</b> After the renovation, the old station was almost {{blank:b1}}. (RECOGNISE)",
+            blanks: [{ blankId: "b1", correctAnswers: ["unrecognisable", "unrecognizable"] }],
+            explanationHTML: "<b>Dịch nghĩa:</b> Sau khi cải tạo, nhà ga cũ gần như không thể nhận ra. (TỪ GỐC: RECOGNISE - NHẬN RA)<br><b>Giải thích:</b> Đứng sau to be 'was' và trạng từ 'almost' cần tính từ. Dựa vào ngữ cảnh (sau cải tạo), nó thay đổi hoàn toàn nên phải là 'unrecognisable' (không thể nhận ra).",
+            passageId: null
+        },
+        {
+            id: 45,
+            type: "gap_fill_text",
+            questionHTML: "<b>Điền từ:</b> The {{blank:b1}} gives details of all train departures. (TIME)",
+            blanks: [{ blankId: "b1", correctAnswers: ["timetable"] }],
+            explanationHTML: "<b>Dịch nghĩa:</b> Thời gian biểu cung cấp chi tiết về tất cả các chuyến tàu khởi hành. (TỪ GỐC: TIME - THỜI GIAN)<br><b>Giải thích:</b> Làm chủ ngữ trong câu, chỉ một vật chứa thông tin khởi hành. 'Time' -> 'timetable' (thời gian biểu/lịch trình).",
+            passageId: null
+        },
+        {
+            id: 46,
+            type: "gap_fill_text",
+            questionHTML: "<b>Điền từ:</b> The airline is {{blank:b1}} improving its safety procedures. (CONTINUE)",
+            blanks: [{ blankId: "b1", correctAnswers: ["continuously", "continually"] }],
+            explanationHTML: "<b>Dịch nghĩa:</b> Hãng hàng không đang liên tục cải thiện các quy trình an toàn của mình. (TỪ GỐC: CONTINUE - TIẾP TỤC)<br><b>Giải thích:</b> Đứng giữa to be 'is' và động từ chính 'improving' cần trạng từ bổ nghĩa cho động từ. 'Continue' -> 'continuously' hoặc 'continually' (một cách liên tục).",
+            passageId: null
+        },
+        {
+            id: 47,
+            type: "gap_fill_text",
+            questionHTML: "<b>Điền từ:</b> The trip was so special that it became a very {{blank:b1}} experience. (MEMORY)",
+            blanks: [{ blankId: "b1", correctAnswers: ["memorable"] }],
+            explanationHTML: "<b>Dịch nghĩa:</b> Chuyến đi thật đặc biệt đến mức nó trở thành một trải nghiệm rất đáng nhớ. (TỪ GỐC: MEMORY - KỶ NIỆM/TRÍ NHỚ)<br><b>Giải thích:</b> Đứng trước danh từ 'experience' và sau trạng từ 'very' cần tính từ. 'Memory' -> 'memorable' (đáng nhớ).",
+            passageId: null
+        },
+        {
+            id: 48,
+            type: "gap_fill_text",
+            questionHTML: "<b>Điền từ:</b> The insurance policy provides worldwide travel {{blank:b1}}. (COVER)",
+            blanks: [{ blankId: "b1", correctAnswers: ["coverage"] }],
+            explanationHTML: "<b>Dịch nghĩa:</b> Hợp đồng bảo hiểm cung cấp phạm vi bảo hiểm du lịch trên toàn thế giới. (TỪ GỐC: COVER - BAO PHỦ)<br><b>Giải thích:</b> Ghép với 'travel' tạo thành cụm danh từ. 'Cover' (động từ/danh từ) -> 'coverage' (phạm vi bảo hiểm).",
+            passageId: null
+        },
+        {
+            id: 49,
+            type: "sentence_rewrite",
+            originalSentenceHTML: "<b>Viết lại câu:</b> We started our journey very early in the morning. (SET)<br>→ We ______________________________ very early in the morning.",
+            sampleAnswers: ["set off", "set out"],
+            explanationHTML: "<b>Dịch nghĩa:</b> Chúng tôi bắt đầu hành trình từ rất sớm vào buổi sáng.<br><b>Giải thích:</b> 'start a journey' = 'set off' hoặc 'set out' (khởi hành). Cần chia thì quá khứ đơn vì câu gốc dùng 'started'. Vậy đáp án là 'set off' hoặc 'set out'.",
+            passageId: null
+        },
+        {
+            id: 50,
+            type: "sentence_rewrite",
+            originalSentenceHTML: "<b>Viết lại câu:</b> Could you collect me at the airport at 8 p.m.? (PICK)<br>→ Could you ______________________________ at the airport at 8 p.m.?",
+            sampleAnswers: ["pick me up"],
+            explanationHTML: "<b>Dịch nghĩa:</b> Bạn có thể đón tôi tại sân bay lúc 8 giờ tối được không?<br><b>Giải thích:</b> 'collect someone' = 'pick someone up' (đón ai đó). Sau 'Could you' là động từ nguyên thể, và tân ngữ là 'me'. Vậy đáp án là 'pick me up'.",
+            passageId: null
+        },
+        {
+            id: 51,
+            type: "sentence_rewrite",
+            originalSentenceHTML: "<b>Viết lại câu:</b> We went to the station to say goodbye to our friends. (SEE)<br>→ We went to the station to ______________________________.",
+            sampleAnswers: ["see them off", "see our friends off"],
+            explanationHTML: "<b>Dịch nghĩa:</b> Chúng tôi đến nhà ga để tạm biệt những người bạn của chúng tôi.<br><b>Giải thích:</b> 'say goodbye to someone at the station/airport' = 'see someone off' (tiễn ai đó). 'our friends' có thể thay bằng 'them'. Vậy đáp án là 'see them off' hoặc 'see our friends off'.",
+            passageId: null
+        },
+        {
+            id: 52,
+            type: "sentence_rewrite",
+            originalSentenceHTML: "<b>Viết lại câu:</b> The driver stopped beside the road. (PULL)<br>→ The driver ______________________________ beside the road.",
+            sampleAnswers: ["pulled over"],
+            explanationHTML: "<b>Dịch nghĩa:</b> Người lái xe đã dừng lại bên lề đường.<br><b>Giải thích:</b> 'stop beside the road' (đối với xe cộ) = 'pull over' (tấp vào lề). Động từ phải chia quá khứ giống 'stopped', nên đáp án là 'pulled over'.",
+            passageId: null
+        },
+        {
+            id: 53,
+            type: "sentence_rewrite",
+            originalSentenceHTML: "<b>Viết lại câu:</b> We returned home after a week abroad. (BACK)<br>→ We ______________________________ after a week abroad.",
+            sampleAnswers: ["got back", "came back", "went back"],
+            explanationHTML: "<b>Dịch nghĩa:</b> Chúng tôi trở về nhà sau một tuần ở nước ngoài.<br><b>Giải thích:</b> 'return' = 'go back', 'come back', hoặc 'get back'. Chia ở quá khứ đơn theo 'returned', nên đáp án là 'got back' / 'came back' / 'went back'.",
+            passageId: null
+        },
+        {
+            id: 54,
+            type: "sentence_rewrite",
+            originalSentenceHTML: "<b>Viết lại câu:</b> The bus stopped to let the passengers get out. (DROP)<br>→ The bus stopped to ______________________________.",
+            sampleAnswers: ["drop the passengers off", "drop them off", "drop off the passengers"],
+            explanationHTML: "<b>Dịch nghĩa:</b> Xe buýt dừng lại để cho hành khách xuống.<br><b>Giải thích:</b> 'let someone get out (of a vehicle)' = 'drop someone off' (cho ai xuống xe). Vậy đáp án là 'drop the passengers off' hoặc 'drop them off'.",
+            passageId: null
+        },
+        {
+            id: 55,
+            type: "sentence_rewrite",
+            originalSentenceHTML: "<b>Viết lại câu:</b> We are going towards the airport now. (MAKING)<br>→ We are ______________________________ the airport now.",
+            sampleAnswers: ["making for"],
+            explanationHTML: "<b>Dịch nghĩa:</b> Chúng tôi đang đi về hướng sân bay bây giờ.<br><b>Giải thích:</b> 'go towards' = 'make for' (hướng tới). Trong thì hiện tại tiếp diễn, 'making' đã được chia sẵn. Đáp án là 'making for'.",
+            passageId: null
+        },
+        {
+            id: 56,
+            type: "sentence_rewrite",
+            originalSentenceHTML: "<b>Viết lại câu:</b> We need to register at the hotel before 2 p.m. (CHECK)<br>→ We need to ______________________________ before 2 p.m.",
+            sampleAnswers: ["check in"],
+            explanationHTML: "<b>Dịch nghĩa:</b> Chúng tôi cần đăng ký nhận phòng tại khách sạn trước 2 giờ chiều.<br><b>Giải thích:</b> 'register at a hotel' = 'check in' (làm thủ tục nhận phòng). Sau 'need to' là động từ nguyên thể. Đáp án là 'check in'.",
+            passageId: null
+        },
+        {
+            id: 57,
+            type: "sentence_rewrite",
+            originalSentenceHTML: "<b>Viết lại câu:</b> We must leave the hotel by 11 a.m. (CHECK)<br>→ We must ______________________________ by 11 a.m.",
+            sampleAnswers: ["check out"],
+            explanationHTML: "<b>Dịch nghĩa:</b> Chúng tôi phải rời khỏi khách sạn trước 11 giờ sáng.<br><b>Giải thích:</b> 'leave the hotel' = 'check out' (làm thủ tục trả phòng). Sau 'must' là động từ nguyên thể. Đáp án là 'check out'.",
+            passageId: null
+        },
+        {
+            id: 58,
+            type: "sentence_rewrite",
+            originalSentenceHTML: "<b>Viết lại câu:</b> She finally reached the same level as the other runners. (CATCH)<br>→ She finally managed to ______________________________ the other runners.",
+            sampleAnswers: ["catch up with"],
+            explanationHTML: "<b>Dịch nghĩa:</b> Cuối cùng cô ấy cũng đuổi kịp những người chạy khác.<br><b>Giải thích:</b> 'reach the same level as' = 'catch up with' (đuổi kịp, bắt kịp ai đó). Động từ đi sau 'managed to' giữ nguyên thể. Đáp án là 'catch up with'.",
+            passageId: null
+        },
+        {
+            id: 59,
+            type: "sentence_rewrite",
+            originalSentenceHTML: "<b>Viết lại câu:</b> We visited the main tourist attractions in Rome. (SIGHTS)<br>→ We ______________________________ in Rome.",
+            sampleAnswers: ["saw the sights"],
+            explanationHTML: "<b>Dịch nghĩa:</b> Chúng tôi đã đi tham quan các điểm du lịch chính ở Rome.<br><b>Giải thích:</b> 'visit tourist attractions' = 'see the sights' (ngắm cảnh). Chia quá khứ đơn theo 'visited'. Đáp án là 'saw the sights'.",
+            passageId: null
+        },
+        {
+            id: 60,
+            type: "sentence_rewrite",
+            originalSentenceHTML: "<b>Viết lại câu:</b> He travelled with very little luggage. (LIGHT)<br>→ He decided to ______________________________.",
+            sampleAnswers: ["travel light"],
+            explanationHTML: "<b>Dịch nghĩa:</b> Anh ấy đã đi du lịch với rất ít hành lý.<br><b>Giải thích:</b> 'travel with very little luggage' = 'travel light' (du lịch nhẹ nhàng, mang ít đồ). Sau 'decided to' là động từ nguyên thể. Đáp án là 'travel light'.",
+            passageId: null
+        },
+        {
+            id: 61,
+            type: "sentence_rewrite",
+            originalSentenceHTML: "<b>Viết lại câu:</b> They stayed in remote places that tourists rarely visit. (BEATEN)<br>→ They travelled ______________________________.",
+            sampleAnswers: ["off the beaten track", "off the beaten path"],
+            explanationHTML: "<b>Dịch nghĩa:</b> Họ đã ở những nơi xa xôi hẻo lánh mà du khách hiếm khi lui tới.<br><b>Giải thích:</b> Cụm thành ngữ 'off the beaten track' (hoặc path) nghĩa là nơi hẻo lánh, ít người tới. Đáp án là 'off the beaten track'.",
+            passageId: null
+        },
+        {
+            id: 62,
+            type: "sentence_rewrite",
+            originalSentenceHTML: "<b>Viết lại câu:</b> He carries all his belongings because he is constantly travelling. (SUITCASE)<br>→ He is constantly ______________________________.",
+            sampleAnswers: ["living out of a suitcase"],
+            explanationHTML: "<b>Dịch nghĩa:</b> Anh ấy mang theo tất cả đồ đạc của mình vì anh ấy liên tục đi lại.<br><b>Giải thích:</b> Thành ngữ 'live out of a suitcase' nghĩa là di chuyển liên tục, sống bằng đồ đạc trong vali. Sau 'is constantly' cần V-ing. Đáp án là 'living out of a suitcase'.",
+            passageId: null
+        },
+        {
+            id: 63,
+            type: "sentence_rewrite",
+            originalSentenceHTML: "<b>Viết lại câu:</b> We arranged everything before the trip. (ADVANCE)<br>→ We arranged everything ______________________________.",
+            sampleAnswers: ["in advance"],
+            explanationHTML: "<b>Dịch nghĩa:</b> Chúng tôi đã sắp xếp mọi thứ trước chuyến đi.<br><b>Giải thích:</b> 'before the trip' có thể được thay thế bằng 'in advance' (trước, sớm). Đáp án là 'in advance'.",
+            passageId: null
+        },
+        {
+            id: 64,
+            type: "sentence_rewrite",
+            originalSentenceHTML: "<b>Viết lại câu:</b> I don't know the answer immediately without checking. (HEAD)<br>→ I don't know the answer ______________________________.",
+            sampleAnswers: ["off the top of my head"],
+            explanationHTML: "<b>Dịch nghĩa:</b> Tôi không biết câu trả lời ngay lập tức mà không cần kiểm tra.<br><b>Giải thích:</b> Thành ngữ 'off the top of my head' nghĩa là ngay lập tức nhớ ra hoặc biết mà không cần kiểm tra, suy nghĩ nhiều. Đáp án là 'off the top of my head'.",
+            passageId: null
         }
-      }
-    });
-    
-    // Play single sound for submit
-    const correctCount = Object.values(userState).filter(s => s.isCorrect).length;
-    const totalCount = quizData.length;
-    if (correctCount === totalCount) playCorrectSound();
-    else playWrongSound();
-    
-    // Show results
-    document.getElementById('result-section').style.display = 'block';
-    document.getElementById('score-text').innerText = `Điểm của bạn: ${correctCount} / ${totalCount}`;
-    
-    renderSummaryTable();
-    sendGoogleForm(studentName, correctCount, totalCount);
-    
-    document.getElementById('result-section').scrollIntoView({ behavior: 'smooth' });
-  }
+    ];
 
-  function renderSummaryTable() {
-    const container = document.getElementById('summary-container');
-    let html = '';
-    
-    const correctCount = Object.values(userState).filter(s => s.isCorrect).length;
-    if (correctCount === quizData.length) {
-      html += '<h3 style="text-align:center; color: var(--color-correct);">🎉 Chúc mừng bạn đã trả lời đúng 100% các câu hỏi! 🎉</h3>';
+    let userState = {};
+    let totalQuestions = quizData.length;
+    let audioCtx = null;
+
+    function initAudio() {
+        if (!audioCtx) {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContext();
+            } catch (e) {}
+        }
     }
-    
-    const itemsPerRow = 15;
-    for (let i = 0; i < quizData.length; i += itemsPerRow) {
-      const chunk = quizData.slice(i, i + itemsPerRow);
-      
-      html += '<table class="summary-table"><tr><th>Câu</th>';
-      chunk.forEach(q => { html += `<th>${q.id}</th>`; });
-      html += '</tr>';
-      
-      ['A', 'B', 'C', 'D'].forEach(label => {
-        html += `<tr><th>${label}</th>`;
-        chunk.forEach(q => {
-          const state = userState[q.id];
-          const correctOpt = q.options.find(o => o.isCorrect).label;
-          let cellClass = 'cell-neutral';
-          
-          if (state.selected === null) {
-            cellClass = 'cell-empty'; // Highlight whole column red if not selected
-          } else if (label === correctOpt) {
-            cellClass = 'cell-correct';
-          } else if (label === state.selected && !state.isCorrect) {
-            cellClass = 'cell-wrong';
-          }
-          
-          html += `<td class="${cellClass}">${label}</td>`;
+
+    function playSound(type) {
+        initAudio();
+        if (!audioCtx) return;
+        try {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            const now = audioCtx.currentTime;
+            if (type === 'select') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, now);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+                osc.start(now);
+                osc.stop(now + 0.08);
+            } else if (type === 'correct') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(800, now);
+                osc.frequency.setValueAtTime(1200, now + 0.1);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+                osc.start(now);
+                osc.stop(now + 0.25);
+            } else if (type === 'wrong') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, now);
+                gain.gain.setValueAtTime(0.12, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+                osc.start(now);
+                osc.stop(now + 0.2);
+            } else if (type === 'submit') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(500, now);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+                osc.start(now);
+                osc.stop(now + 0.12);
+            }
+        } catch(e) {}
+    }
+
+    function escapeHTML(str){
+        if (!str) return "";
+        const d = document.createElement('div');
+        d.textContent = str;
+        return d.innerHTML;
+    }
+
+    function normalizeAnswer(str){
+        return str.trim().replace(/\s+/g,' ').toLowerCase();
+    }
+
+    function updateProgress() {
+        let interacted = 0;
+        let checkedCount = 0;
+        quizData.forEach(q => {
+            const st = userState[q.id];
+            if (st.checked) {
+                interacted++;
+                checkedCount++;
+                return;
+            }
+            if (q.type === 'gap_fill_text') {
+                const vals = Object.values(st.answer).filter(v => v !== null && v.trim() !== "");
+                if (vals.length > 0) interacted++;
+            } else if (q.type === 'sentence_rewrite') {
+                if (st.answer && st.answer.trim() !== "") interacted++;
+            }
         });
-        html += '</tr>';
-      });
-      html += '</table><br>';
+        const pct = (interacted / totalQuestions) * 100;
+        document.getElementById('progress-bar').style.width = pct + '%';
+        document.getElementById('progress-text').textContent = `Đã làm: ${interacted}/${totalQuestions}`;
+        
+        const nameVal = document.getElementById('student-name').value.trim();
+        document.getElementById('btn-submit').disabled = (nameVal === "");
     }
-    container.innerHTML = html;
-  }
 
-  function sendGoogleForm(studentName, correctCount, totalCount) {
-    const score = `${correctCount}/${totalCount}`;
-    const percentage = Math.round((correctCount / totalCount) * 100) + '%';
-    
-    let wrongDetails = [];
-    quizData.forEach(q => {
-      const state = userState[q.id];
-      if (!state.isCorrect) {
-        const correctOpt = q.options.find(o => o.isCorrect).label;
-        const selected = state.selected || 'Bỏ trống';
-        wrongDetails.push(`Câu ${q.id}: Chọn ${selected} (Đúng: ${correctOpt})`);
-      }
+    function renderQuiz() {
+        const container = document.getElementById('quiz-container');
+        container.innerHTML = '';
+        
+        quizData.forEach(q => {
+            if (q.type === 'gap_fill_text') {
+                userState[q.id] = { answer: {}, checked: false, isCorrect: null, blankResults: {} };
+                q.blanks.forEach(b => {
+                    userState[q.id].answer[b.blankId] = null;
+                });
+            } else if (q.type === 'sentence_rewrite') {
+                userState[q.id] = { answer: null, checked: false, isCorrect: null, blankResults: null };
+            }
+            
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.id = `card-${q.id}`;
+            
+            let html = `<div class="question">`;
+            if (q.type === 'gap_fill_text') {
+                let qText = q.questionHTML;
+                q.blanks.forEach(b => {
+                    qText = qText.replace(`{{blank:${b.blankId}}}`, `<input type="text" class="input-box" data-id="${q.id}" data-blank="${b.blankId}" autocomplete="off">`);
+                });
+                html += qText;
+            } else if (q.type === 'sentence_rewrite') {
+                html += q.originalSentenceHTML;
+                html += `</div><div class="answer-area"><textarea class="textarea-box" data-id="${q.id}" placeholder="Nhập câu trả lời của bạn..."></textarea></div>`;
+            }
+            if (q.type === 'gap_fill_text') html += `</div>`;
+            
+            html += `<button class="btn-check" id="check-btn-${q.id}" disabled>Kiểm tra</button>`;
+            html += `<div class="explanation" id="exp-${q.id}">${q.explanationHTML}</div>`;
+            
+            card.innerHTML = html;
+            container.appendChild(card);
+        });
+        
+        document.querySelectorAll('.input-box, .textarea-box').forEach(inp => {
+            inp.addEventListener('input', (e) => {
+                const qId = parseInt(e.target.getAttribute('data-id'));
+                const st = userState[qId];
+                if (st.checked) return;
+                
+                const val = e.target.value;
+                if (e.target.classList.contains('input-box')) {
+                    const bId = e.target.getAttribute('data-blank');
+                    st.answer[bId] = val;
+                } else {
+                    st.answer = val;
+                }
+                
+                if (val.trim() !== "") {
+                    e.target.classList.add('pending');
+                } else {
+                    e.target.classList.remove('pending');
+                }
+                
+                checkEnableCheckBtn(qId);
+                updateProgress();
+            });
+            
+            inp.addEventListener('blur', (e) => {
+                const val = e.target.value;
+                if (val.trim() !== "" && !userState[parseInt(e.target.getAttribute('data-id'))].checked) {
+                    playSound('select');
+                }
+            });
+        });
+        
+        document.querySelectorAll('.btn-check').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const qId = parseInt(e.target.id.replace('check-btn-', ''));
+                handleCheck(qId);
+            });
+        });
+    }
+
+    function checkEnableCheckBtn(qId) {
+        const q = quizData.find(x => x.id === qId);
+        const st = userState[qId];
+        let hasInput = false;
+        if (q.type === 'gap_fill_text') {
+            hasInput = Object.values(st.answer).some(v => v !== null && v.trim() !== "");
+        } else if (q.type === 'sentence_rewrite') {
+            hasInput = st.answer !== null && st.answer.trim() !== "";
+        }
+        document.getElementById(`check-btn-${qId}`).disabled = !hasInput;
+    }
+
+    function handleCheck(qId, fromSubmit = false) {
+        const q = quizData.find(x => x.id === qId);
+        const st = userState[qId];
+        if (st.checked) return;
+        
+        if (!fromSubmit) {
+            let canCheck = true;
+            if (q.type === 'gap_fill_text') {
+                canCheck = q.blanks.every(b => st.answer[b.blankId] !== null && st.answer[b.blankId].trim() !== "");
+            } else if (q.type === 'sentence_rewrite') {
+                canCheck = st.answer !== null && st.answer.trim() !== "";
+            }
+            if (!canCheck) {
+                alert("Vui lòng điền đủ chỗ trống trước khi kiểm tra!");
+                return;
+            }
+        }
+        
+        st.checked = true;
+        const card = document.getElementById(`card-${qId}`);
+        const inputs = card.querySelectorAll('.input-box, .textarea-box');
+        inputs.forEach(inp => {
+            inp.disabled = true;
+            inp.classList.remove('pending');
+        });
+        document.getElementById(`check-btn-${qId}`).disabled = true;
+        
+        if (q.type === 'sentence_rewrite') {
+            st.isCorrect = null;
+            if (!fromSubmit) {
+                document.getElementById(`exp-${qId}`).style.display = 'block';
+            }
+            return;
+        }
+        
+        if (q.type === 'gap_fill_text') {
+            let allCorrect = true;
+            q.blanks.forEach(b => {
+                const userAns = st.answer[b.blankId] ? normalizeAnswer(st.answer[b.blankId]) : "";
+                const isC = b.correctAnswers.some(ca => normalizeAnswer(ca) === userAns);
+                st.blankResults[b.blankId] = isC;
+                if (!isC) allCorrect = false;
+                
+                const inp = card.querySelector(`input[data-blank="${b.blankId}"]`);
+                if (isC) {
+                    inp.classList.add('correct');
+                } else {
+                    inp.classList.add('wrong');
+                    const correctSpan = document.createElement('span');
+                    correctSpan.className = 'correct-answer-text';
+                    correctSpan.textContent = ` (${b.correctAnswers[0]})`;
+                    inp.parentNode.insertBefore(correctSpan, inp.nextSibling);
+                }
+            });
+            st.isCorrect = allCorrect;
+            if (!fromSubmit) {
+                if (allCorrect) playSound('correct');
+                else playSound('wrong');
+                document.getElementById(`exp-${qId}`).style.display = 'block';
+            }
+        }
+    }
+
+    document.getElementById('student-name').addEventListener('input', updateProgress);
+
+    document.getElementById('btn-submit').addEventListener('click', () => {
+        let name = document.getElementById('student-name').value.trim();
+        if (!name) {
+            alert("Vui lòng nhập tên!");
+            return;
+        }
+        
+        quizData.forEach(q => {
+            if (!userState[q.id].checked) {
+                handleCheck(q.id, true);
+                if (q.type !== 'sentence_rewrite') {
+                    if (userState[q.id].isCorrect === null) userState[q.id].isCorrect = false;
+                }
+            }
+        });
+        
+        let gradable = 0;
+        let correct = 0;
+        let wrongDetails = [];
+        
+        quizData.forEach(q => {
+            const st = userState[q.id];
+            if (st.isCorrect !== null) {
+                gradable++;
+                if (st.isCorrect) correct++;
+                else {
+                    let userStr = "";
+                    let correctStr = "";
+                    if (q.type === 'gap_fill_text') {
+                        userStr = Object.values(st.answer).map(v => v || "trống").join(", ");
+                        correctStr = q.blanks.map(b => b.correctAnswers[0]).join(", ");
+                    }
+                    wrongDetails.push(`Câu ${q.id}: Học sinh chọn "${userStr}" (sai), đáp án đúng là "${correctStr}"`);
+                }
+            }
+        });
+        
+        if (gradable > 0) {
+            playSound('submit');
+            if (correct === gradable) setTimeout(() => playSound('correct'), 500);
+        } else {
+            playSound('submit');
+        }
+        
+        const scoreStr = gradable > 0 ? `${correct}/${gradable}` : "Không có câu trắc nghiệm";
+        
+        const formData = new URLSearchParams();
+        formData.append("entry.1861648410", name);
+        formData.append("entry.1691800437", scoreStr);
+        formData.append("entry.639295732", wrongDetails.join("\n"));
+        formData.append("entry.370465671", "U1 U2 Đề 3");
+        
+        fetch("https://docs.google.com/forms/d/e/1FAIpQLSfZCAK2lpNE8O8Ieqwc3SI1ubr6HZDvGZR91AsSpUk8kEBqaA/formResponse", {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: formData.toString()
+        }).then(() => {
+            showPopup(gradable > 0 ? `Điểm của bạn: ${scoreStr}` : "Bài này không có câu được chấm tự động.", wrongDetails.length > 0 ? "Bạn cần ôn tập thêm nhé!" : "Tuyệt vời, đúng hết rồi!");
+        }).catch(err => {
+            showPopup("Đã lưu kết quả cục bộ", "Lỗi gửi điểm (bỏ qua nếu đang làm offline).");
+        });
+        
+        document.getElementById('btn-submit').disabled = true;
+        renderWrongList();
     });
-    const loisai = wrongDetails.length > 0 ? wrongDetails.join(' | ') : 'Không có lỗi sai';
-    
-    const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSelQyzh_lWyb2vZUnQ1jc1p9FLRknDZiUt9NiUiiX1epHTFLw/formResponse';
-    
-    const formData = new FormData();
-    formData.append('entry.351633352', 'U1-U2 Đề 3');
-    formData.append('entry.1895948982', studentName);
-    formData.append('entry.1232319784', score);
-    formData.append('entry.1125920425', percentage);
-    formData.append('entry.1907417670', loisai);
-    
-    fetch(formUrl, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: formData
-    }).catch(console.error);
-  }
 
-  document.getElementById('submit-btn').addEventListener('click', submitQuiz);
-  
-  // Start
-  renderQuiz();
+    function showPopup(title, msg) {
+        document.getElementById('popup-title').textContent = title;
+        document.getElementById('popup-message').textContent = msg;
+        document.getElementById('popup-overlay').style.display = 'flex';
+    }
+
+    document.getElementById('popup-close').addEventListener('click', () => {
+        document.getElementById('popup-overlay').style.display = 'none';
+        const wls = document.getElementById('wrong-list-section');
+        wls.style.display = 'block';
+        wls.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    function renderWrongList() {
+        const wlc = document.getElementById('wrong-list-container');
+        const elc = document.getElementById('essay-list-container');
+        wlc.innerHTML = '';
+        elc.innerHTML = '';
+        
+        let allCorrectGradable = true;
+        let hasGradable = false;
+        
+        quizData.forEach(q => {
+            const st = userState[q.id];
+            if (st.isCorrect !== null) {
+                hasGradable = true;
+                if (!st.isCorrect) allCorrectGradable = false;
+            }
+            
+            if (st.isCorrect === false) {
+                const c = document.createElement('div');
+                c.className = 'card';
+                let html = `<strong>Câu ${q.id}:</strong> ${q.questionHTML}<br><br>`;
+                if (q.type === 'gap_fill_text') {
+                    q.blanks.forEach(b => {
+                        const uA = st.answer[b.blankId] || "(Bạn chưa điền)";
+                        if (!st.blankResults[b.blankId]) {
+                            html += `<span>Bạn điền: <span class="user-wrong-text">${escapeHTML(uA)}</span></span><br>`;
+                            html += `<span>Đáp án đúng: <span class="correct-answer-text">${escapeHTML(b.correctAnswers[0])}</span></span><br><br>`;
+                        } else {
+                            html += `<span>Chỗ trống ${b.blankId}: <span class="correct-answer-text">${escapeHTML(uA)}</span></span><br><br>`;
+                        }
+                    });
+                }
+                html += `<div class="explanation" style="display:block;">${q.explanationHTML}</div>`;
+                c.innerHTML = html;
+                wlc.appendChild(c);
+            } else if (st.isCorrect === null) {
+                const c = document.createElement('div');
+                c.className = 'card';
+                let html = `<strong>Câu ${q.id}:</strong> ${q.originalSentenceHTML}<br><br>`;
+                const uA = st.answer ? escapeHTML(st.answer) : "(Bạn chưa viết câu trả lời)";
+                html += `<span>Bài làm của bạn: <br><strong>${uA}</strong></span><br><br>`;
+                html += `<span>Đáp án mẫu: <span class="correct-answer-text">${q.sampleAnswers.join(" <strong>HOẶC</strong> ")}</span></span><br><br>`;
+                html += `<div class="explanation" style="display:block;">${q.explanationHTML}</div>`;
+                c.innerHTML = html;
+                elc.appendChild(c);
+            }
+        });
+        
+        if (hasGradable && allCorrectGradable) {
+            wlc.innerHTML = '<div style="text-align:center; font-size:18px; color:var(--color-correct); font-weight:bold;">Chúc mừng! Bạn đã trả lời đúng tất cả các câu hỏi trắc nghiệm!</div>';
+        }
+    }
+
+    renderQuiz();
+    updateProgress();
+})();
 </script>
 </body>
 </html>
