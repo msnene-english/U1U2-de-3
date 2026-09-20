@@ -5,127 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>U1-U2 Đề 3</title>
     <style>
-        :root{--color-primary:#4F46E5;--color-secondary:#06B6D4;--color-accent:#F59E0B;--color-bg:#F8FAFC;--color-card:#FFFFFF;--color-correct:#22C55E;--color-wrong:#EF4444;--color-selecting:#2563EB;--color-pending:#FEF3C7;--color-pending-text:#92400E;}
-        body { font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif; background-color: var(--color-bg); margin: 0; padding: 0; color: #333; }
-        .watermark { position: absolute; top: 10px; left: 10px; font-size: 14px; font-weight: 500; color: #666; }
-        .footer-watermark { text-align: center; padding: 20px; font-size: 14px; color: #666; }
-        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f0f2f5; position: relative; z-index: 1; }
+        .watermark { position: absolute; top: 30px; left: 0; right: 0; text-align: center; font-size: 50px; color: rgba(0, 0, 0, 0.04); font-weight: bold; pointer-events: none; z-index: -1; user-select: none; }
+        .watermark div { transform: rotate(-30deg); margin: 200px 0; }
+        h1, h2 { color: #2c3e50; text-align: center; }
+        .screen { display: none; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .screen.active { display: block; }
         
-        #start-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: var(--color-bg); position: relative; }
-        #start-screen h1 { margin-bottom: 20px; font-size: 24px; text-align: center; }
-        #student-name-input { padding: 12px 16px; font-size: 16px; border: 2px solid #cbd5e1; border-radius: 8px; margin-bottom: 20px; width: 300px; max-width: 90%; outline: none; }
-        #student-name-input:focus { border-color: var(--color-primary); }
-        #start-btn { padding: 14px 32px; font-size: 17px; background-color: var(--color-primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: background 0.2s; }
-        #start-btn:hover { background-color: #4338ca; }
+        input[type="text"] { width: 100%; padding: 12px; margin: 10px 0 20px; border: 2px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; transition: border-color 0.3s; }
+        input[type="text"]:focus { border-color: #3498db; outline: none; }
         
-        #quiz-screen { display: none; position: relative; }
+        button { background: #3498db; color: #fff; border: none; padding: 12px 24px; font-size: 16px; border-radius: 6px; cursor: pointer; transition: background 0.3s, transform 0.1s; }
+        button:hover { background: #2980b9; }
+        button:active { transform: scale(0.98); }
+        button:disabled { background: #95a5a6; cursor: not-allowed; }
         
-        .progress-container { margin-bottom: 30px; text-align: center; position: sticky; top: 0; background: var(--color-bg); padding: 15px 0; z-index: 10; border-bottom: 1px solid #e2e8f0; }
-        .progress-text { font-weight: 600; font-size: 16px; color: #475569; }
-        .progress-bar-bg { width: 100%; height: 8px; background-color: #e2e8f0; border-radius: 4px; overflow: hidden; margin-top: 10px; }
-        .progress-bar-fill { height: 100%; background-color: var(--color-primary); width: 0%; transition: width 0.3s ease; }
+        .question-block { margin-bottom: 25px; padding: 15px; background: #f9f9f9; border-left: 4px solid #3498db; border-radius: 0 8px 8px 0; }
+        .instruction-box { margin-bottom: 15px; padding: 10px 15px; background: #e8f4fd; border: 1px solid #b6d4fe; border-radius: 6px; font-weight: bold; color: #004085; }
+        .question-text { font-weight: 500; margin-bottom: 15px; font-size: 16px; line-height: 1.8; }
         
-        .card { background: var(--color-card); border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.08); padding: 24px; margin-bottom: 24px; transition: transform 0.2s, box-shadow 0.2s; }
-        .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.15); }
+        .options { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+        .option { padding: 12px 15px; background: #fff; border: 2px solid #eee; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 10px; }
+        .option:hover { border-color: #3498db; background: #f8faff; }
+        .option.selected { border-color: #3498db; background: #ebf5ff; }
+        .option.correct-opt { border-color: #2ecc71; background: #eafaf1; }
+        .option.wrong-opt { border-color: #e74c3c; background: #fdedec; }
         
-        .question-title { font-size: 16px; font-weight: 500; color: #64748b; margin-bottom: 10px; }
-        .question-text { font-size: 21px; font-weight: 600; line-height: 1.6; margin-bottom: 18px; overflow-wrap: break-word; }
-        .original-sentence { font-size: 19px; font-weight: 500; margin-bottom: 12px; color: #1e293b; }
+        .radio-circle { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 50%; position: relative; }
+        .option.selected .radio-circle::after { content: ''; position: absolute; top: 4px; left: 4px; width: 12px; height: 12px; background: #3498db; border-radius: 50%; }
         
-        .input-gap { padding: 6px 12px; font-size: 19px; border: 2px solid #cbd5e1; border-radius: 6px; width: auto; min-width: 150px; margin: 0 5px; outline: none; transition: all 0.2s; font-family: inherit; font-weight: 500; color: #0f172a; display: inline-block; }
-        .input-gap:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2); }
-        .input-gap.pending { background-color: var(--color-pending); color: var(--color-pending-text); border-color: var(--color-accent); transform: scale(1.02); }
-        .input-gap.correct { background-color: var(--color-correct) !important; color: white !important; border-color: var(--color-correct) !important; }
-        .input-gap.wrong { background-color: var(--color-wrong) !important; color: white !important; border-color: var(--color-wrong) !important; animation: shake 0.2s; }
+        .gap-fill-input { width: 120px !important; padding: 4px 8px !important; margin: 0 5px !important; display: inline-block !important; border: 1px solid #ccc !important; border-radius: 4px !important; font-size: 16px !important; }
         
-        textarea.sentence-rewrite { width: 100%; padding: 16px; font-size: 18px; border: 2px solid #cbd5e1; border-radius: 8px; resize: vertical; min-height: 100px; box-sizing: border-box; font-family: inherit; margin-top: 10px; outline: none; transition: all 0.2s; }
-        textarea.sentence-rewrite:focus { border-color: var(--color-primary); }
-        textarea.sentence-rewrite.pending { background-color: var(--color-pending); color: var(--color-pending-text); border-color: var(--color-accent); }
+        .reordering-container { display: flex; flex-direction: column; gap: 15px; }
+        .word-bank, .drop-zone { display: flex; flex-wrap: wrap; gap: 8px; min-height: 45px; padding: 10px; background: #fff; border: 2px dashed #ddd; border-radius: 8px; }
+        .word-chip { padding: 8px 16px; background: #3498db; color: #fff; border-radius: 20px; cursor: pointer; user-select: none; font-weight: 500; transition: transform 0.1s; }
+        .word-chip:active { transform: scale(0.95); }
+        .word-chip.correct { background: #2ecc71; }
+        .word-chip.wrong { background: #e74c3c; }
         
-        .check-btn { padding: 12px 24px; font-size: 17px; font-weight: 600; background-color: var(--color-secondary); color: white; border: none; border-radius: 8px; cursor: pointer; min-height: 48px; margin-top: 20px; transition: opacity 0.2s; }
-        .check-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .rewrite-input { width: 100%; height: 80px; padding: 12px; border: 2px solid #ddd; border-radius: 6px; resize: vertical; font-size: 16px; font-family: inherit; }
         
-        .explanation { display: none; margin-top: 24px; padding: 16px 20px; background-color: #f8fafc; border-left: 4px solid var(--color-primary); border-radius: 0 8px 8px 0; font-size: 17px; line-height: 1.6; color: #334155; }
+        .check-btn { margin-top: 15px; background: #3498db; font-size: 14px; padding: 8px 16px; }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background: #eef2f5; border-radius: 6px; font-size: 14.5px; line-height: 1.5; color: #2c3e50; border-left: 4px solid #2ecc71; }
         
-        .correct-answer-inline { color: var(--color-correct); font-weight: 700; margin-left: 8px; font-size: 19px; }
+        .progress-bar { width: 100%; height: 10px; background: #ddd; border-radius: 5px; margin-bottom: 20px; overflow: hidden; }
+        .progress-fill { height: 100%; background: #2ecc71; width: 0%; transition: width 0.3s; }
         
-        .sample-answer-box { margin-top: 16px; padding: 16px; background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; display: none; }
-        .sample-answer-title { font-weight: 600; color: #166534; margin-bottom: 8px; font-size: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .sample-answer-content { font-size: 18px; color: #15803d; font-weight: 500; }
-        
-        #submit-btn { display: block; width: 100%; padding: 18px; font-size: 19px; font-weight: 700; background-color: var(--color-primary); color: white; border: none; border-radius: 12px; cursor: pointer; margin-top: 40px; box-shadow: 0 4px 12px rgba(79,70,229,0.3); transition: transform 0.2s; }
-        #submit-btn:hover { transform: translateY(-2px); }
-        #submit-btn:disabled { background-color: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
-        
-        #results-section { display: none; margin-top: 60px; }
-        .section-title { font-size: 24px; font-weight: 700; color: #0f172a; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #e2e8f0; }
-        
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
-        .modal-content { background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 450px; width: 90%; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); }
-        .modal-title { font-size: 24px; font-weight: 700; color: #0f172a; margin-bottom: 16px; }
-        .modal-score { font-size: 48px; font-weight: 800; color: var(--color-primary); margin: 20px 0; }
-        .modal-text { font-size: 17px; color: #475569; margin-bottom: 24px; line-height: 1.6; }
-        .modal-close { padding: 14px 32px; background: var(--color-primary); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 17px; font-weight: 600; width: 100%; }
-        
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
-        
-        .locked { pointer-events: none; }
+        .result-details { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 6px; text-align: left; max-height: 300px; overflow-y: auto; font-size: 14px; }
+        .error-item { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee; color: #e74c3c; }
     </style>
 </head>
 <body>
+    <div class="watermark">
+        <div>U1-U2 Đề 1</div>
+        <div>U1-U2 Đề 1</div>
+        <div>U1-U2 Đề 1</div>
+        <div>U1-U2 Đề 1</div>
+    </div>
 
-<div id="start-screen">
-    <div class="watermark">GV biên soạn: Ms Chí Nên - 0852639652</div>
-    <h1>U1-U2 Đề 3</h1>
-    <p style="margin-bottom: 20px; color: #64748b; font-size: 16px;">Vui lòng nhập tên của bạn để bắt đầu</p>
-    <input type="text" id="student-name-input" placeholder="Nhập họ và tên..." autocomplete="off">
-    <button id="start-btn">Bắt đầu làm bài</button>
-</div>
-
-<div id="quiz-screen">
-    <div class="watermark">GV biên soạn: Ms Chí Nên - 0852639652</div>
-    <div class="progress-container">
-        <div class="progress-text">Tiến độ (Phần điền từ): <span id="progress-count">0/16</span></div>
-        <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="progress-fill"></div>
+    <div id="startScreen" class="screen active">
+        <h1>U1-U2 Đề 3</h1>
+        <p style="text-align: center; color: #7f8c8d;">Nhập họ và tên của bạn để bắt đầu làm bài</p>
+        <input type="text" id="studentName" placeholder="Ví dụ: Nguyễn Văn A" autocomplete="off">
+        <div style="text-align: center;">
+            <button onclick="startTest()">Bắt đầu làm bài</button>
         </div>
     </div>
 
-    <div class="container" id="quiz-container">
-        <!-- Quiz content will be injected here -->
-    </div>
-    
-    <div class="container">
-        <button id="submit-btn">Nộp bài</button>
-        
-        <div id="results-section">
-            <h2 class="section-title" id="wrong-answers-title">DANH SÁCH CÁC CÂU LÀM SAI</h2>
-            <div id="wrong-answers-container"></div>
-            
-            <h2 class="section-title" style="margin-top: 40px;">Các câu tự luận — hãy tự đối chiếu đáp án mẫu</h2>
-            <div id="essay-answers-container"></div>
+    <div id="testScreen" class="screen">
+        <h2>U1-U2 Đề 3</h2>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div id="questionsContainer"></div>
+        <div style="text-align: center; margin-top: 30px;">
+            <button id="submitBtn" onclick="confirmSubmit()" style="background: #2ecc71; font-weight: bold; padding: 15px 40px;">NỘP BÀI</button>
         </div>
     </div>
-    
-    <div class="footer-watermark">GV biên soạn: Ms Chí Nên - 0852639652</div>
-</div>
 
-<div class="modal-overlay" id="result-modal">
-    <div class="modal-content">
-        <div class="modal-title">Hoàn thành bài tập!</div>
-        <div class="modal-score" id="modal-score-text">0/16</div>
-        <div class="modal-text" id="modal-feedback-text"></div>
-        <button class="modal-close" id="modal-close-btn">Xem chi tiết</button>
+    <div id="resultScreen" class="screen" style="text-align: center;">
+        <h1 style="color: #2ecc71; font-size: 36px;">Hoàn thành!</h1>
+        <h2 id="scoreDisplay" style="font-size: 48px; margin: 20px 0; color: #2c3e50;"></h2>
+        <p id="feedbackText" style="font-size: 18px; color: #7f8c8d;"></p>
+        <div class="result-details" id="resultDetails"></div>
     </div>
-</div>
 
-<!-- Hidden iframe to submit to Google Form in background without CORS issues -->
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){formSubmitted();}"></iframe>
-
-<script>
-const quizData = [
+    <script>
+        const testName = 'U1-U2 Đề 3';
+        const quizData = [
     // WORD FORM (33-48)
-    { id: 33, type: 'gap_fill_text', questionHTML: "33. We need to make an {{blank:b1}} with the hotel about our late arrival. (ARRANGE)", blanks: [{ blankId: 'b1', correctAnswers: ['arrangement'] }], explanationHTML: "Dịch: Chúng ta cần sắp xếp với khách sạn về việc đến muộn.<br>Từ gốc: <strong>ARRANGE</strong> (động từ: sắp xếp).<br>Vị trí cần điền đứng sau mạo từ 'an', do đó cần một danh từ. Danh từ của arrange là <strong>arrangement</strong>." },
+    { id: 33, type: 'gap_fill_text', questionHTML: "<b>I. Fill in the blanks.</b><br>33. We need to make an {{blank:b1}} with the hotel about our late arrival. (ARRANGE)", blanks: [{ blankId: 'b1', correctAnswers: ['arrangement'] }], explanationHTML: "Dịch: Chúng ta cần sắp xếp với khách sạn về việc đến muộn.<br>Từ gốc: <strong>ARRANGE</strong> (động từ: sắp xếp).<br>Vị trí cần điền đứng sau mạo từ 'an', do đó cần một danh từ. Danh từ của arrange là <strong>arrangement</strong>." },
     { id: 34, type: 'gap_fill_text', questionHTML: "34. The travel agency offers a wide {{blank:b1}} of holiday destinations. (CHOOSE)", blanks: [{ blankId: 'b1', correctAnswers: ['choice', 'selection', 'range'] }], explanationHTML: "Dịch: Đại lý du lịch cung cấp nhiều sự lựa chọn về các điểm đến cho kỳ nghỉ.<br>Từ gốc: <strong>CHOOSE</strong> (động từ: lựa chọn).<br>Cụm từ 'a wide choice/selection/range of' nghĩa là nhiều sự lựa chọn đa dạng. Cần điền danh từ." },
     { id: 35, type: 'gap_fill_text', questionHTML: "35. The local {{blank:b1}} welcomed visitors warmly. (INHABIT)", blanks: [{ blankId: 'b1', correctAnswers: ['inhabitants'] }], explanationHTML: "Dịch: Những cư dân địa phương chào đón du khách một cách nồng nhiệt.<br>Từ gốc: <strong>INHABIT</strong> (động từ: cư trú).<br>Sau tính từ 'local' cần danh từ chỉ người ở số nhiều (vì chào đón du khách) nên dùng <strong>inhabitants</strong>." },
     { id: 36, type: 'gap_fill_text', questionHTML: "36. She is a professional {{blank:b1}} who specialises in travel photography. (PHOTOGRAPH)", blanks: [{ blankId: 'b1', correctAnswers: ['photographer'] }], explanationHTML: "Dịch: Cô ấy là một nhiếp ảnh gia chuyên nghiệp chuyên về nhiếp ảnh du lịch.<br>Từ gốc: <strong>PHOTOGRAPH</strong> (danh từ: bức ảnh / động từ: chụp ảnh).<br>Sau tính từ 'professional' và mệnh đề quan hệ 'who' chỉ người, cần danh từ chỉ người: <strong>photographer</strong>." },
@@ -160,519 +127,383 @@ const quizData = [
     { id: 63, type: 'sentence_rewrite', originalSentenceHTML: "63. We arranged everything before the trip. (ADVANCE)", questionHTML: "→ We arranged everything ______________________________.", sampleAnswers: ["We arranged everything in advance."], explanationHTML: "Dịch: Chúng tôi đã sắp xếp mọi thứ trước chuyến đi.<br>Cấu trúc: <strong>in advance</strong> nghĩa là làm trước (về thời gian), tương đương 'before'." },
     { id: 64, type: 'sentence_rewrite', originalSentenceHTML: "64. I don't know the answer immediately without checking. (HEAD)", questionHTML: "→ I don't know the answer ______________________________.", sampleAnswers: ["I don't know the answer off the top of my head."], explanationHTML: "Dịch: Tôi không biết ngay câu trả lời mà không cần kiểm tra.<br>Cấu trúc: <strong>off the top of one's head</strong> (idiom) nghĩa là nhớ ra ngay lập tức, bật ra trong đầu mà không cần suy nghĩ hay tra cứu, tương đương 'immediately without checking'." }
 ];
-
-let userState = {};
-let totalGapFill = 0;
-let answeredGapFill = 0;
-let studentName = "";
-let audioCtx = null;
-let submitted = false;
-
-function initAudio() {
-    if (!audioCtx) {
-        try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
-        catch (e) {}
-    }
-    if (audioCtx && audioCtx.state === 'suspended') { audioCtx.resume(); }
-}
-
-function playTone(type, freq, duration, vol) {
-    if (!audioCtx) return;
-    try {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = type;
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(vol, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + duration);
-    } catch(e) {}
-}
-
-function playInputSound() { playTone('sine', 600, 0.08, 0.15); }
-function playCorrectSound() { 
-    if(!audioCtx) return;
-    try {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(800, audioCtx.currentTime);
-        osc.frequency.setValueAtTime(1200, audioCtx.currentTime + 0.1);
-        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.25);
-    } catch(e) {}
-}
-function playWrongSound() { playTone('sawtooth', 150, 0.2, 0.12); }
-function playSubmitSound() { playTone('triangle', 500, 0.12, 0.15); }
-
-function escapeHTML(str) {
-    const d = document.createElement('div');
-    d.textContent = str;
-    return d.innerHTML;
-}
-
-function normalizeAnswer(str) {
-    if(!str) return "";
-    return str.trim().replace(/\s+/g, ' ').toLowerCase();
-}
-
-(function() {
-    quizData.forEach(q => {
-        if (q.type === 'gap_fill_text') {
-            totalGapFill++;
-            userState[q.id] = { answer: {}, checked: false, isCorrect: null, blankResults: {} };
-            q.blanks.forEach(b => userState[q.id].answer[b.blankId] = "");
-        } else if (q.type === 'sentence_rewrite') {
-            userState[q.id] = { answer: "", checked: false, isCorrect: null };
-        }
-    });
-
-    const startBtn = document.getElementById('start-btn');
-    const nameInput = document.getElementById('student-name-input');
-    
-    startBtn.addEventListener('click', () => {
-        const name = nameInput.value.trim();
-        if (!name) {
-            alert("Vui lòng nhập tên của bạn để bắt đầu làm bài!");
-            nameInput.focus();
-            return;
-        }
-        studentName = name;
-        document.getElementById('start-screen').style.display = 'none';
-        document.getElementById('quiz-screen').style.display = 'block';
-        initAudio();
-        renderQuiz();
-        updateProgress();
-    });
-
-    nameInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') startBtn.click();
-    });
-
-    function renderQuiz() {
-        const container = document.getElementById('quiz-container');
-        container.innerHTML = '';
         
-        quizData.forEach(q => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.id = `card-${q.id}`;
-            
-            if (q.type === 'gap_fill_text') {
-                let html = `<div class="question-title">Phần Điền từ (Word Form)</div>`;
-                let qHtml = q.questionHTML;
-                q.blanks.forEach(b => {
-                    qHtml = qHtml.replace(`{{blank:${b.blankId}}}`, `<input type="text" class="input-gap" data-qid="${q.id}" data-bid="${b.blankId}" autocomplete="off">`);
-                });
-                html += `<div class="question-text">${qHtml}</div>`;
-                html += `<button class="check-btn" id="check-btn-${q.id}" disabled>Kiểm tra</button>`;
-                html += `<span class="correct-answer-inline" id="correct-ans-${q.id}"></span>`;
-                html += `<div class="explanation" id="exp-${q.id}">${q.explanationHTML}</div>`;
-                card.innerHTML = html;
-                container.appendChild(card);
+        let state = {};
+        
+        function init() {
+            const container = document.getElementById('questionsContainer');
+            quizData.forEach((q, index) => {
+                state[q.id] = { checked: false, isCorrect: false, value: null };
                 
-                const inputs = card.querySelectorAll('.input-gap');
-                inputs.forEach(input => {
-                    let hasPlayedSound = false;
-                    input.addEventListener('input', (e) => {
-                        const val = e.target.value;
-                        userState[q.id].answer[e.target.dataset.bid] = val;
-                        
-                        if (val.trim()) {
-                            e.target.classList.add('pending');
-                            if (!hasPlayedSound) {
-                                initAudio();
-                                playInputSound();
-                                hasPlayedSound = true;
-                            }
-                        } else {
-                            e.target.classList.remove('pending');
-                            hasPlayedSound = false;
-                        }
-                        
-                        updateCheckBtn(q.id);
-                        updateProgress();
-                    });
-                });
+                let block = document.createElement('div');
+                block.className = 'question-block';
+                block.id = 'q-block-' + q.id;
                 
-                card.querySelector(`#check-btn-${q.id}`).addEventListener('click', () => {
-                    checkGapFill(q.id);
-                });
-                
-            } else if (q.type === 'sentence_rewrite') {
-                let html = `<div class="question-title">Phần Viết lại câu (Không tính vào điểm)</div>`;
-                html += `<div class="original-sentence">${q.originalSentenceHTML}</div>`;
-                html += `<div class="question-text">${q.questionHTML}</div>`;
-                html += `<textarea class="sentence-rewrite" data-qid="${q.id}" placeholder="Nhập câu trả lời của bạn vào đây..."></textarea>`;
-                html += `<button class="check-btn" id="check-btn-${q.id}" disabled>Xong / Lưu tạm</button>`;
-                html += `<div class="sample-answer-box" id="sample-${q.id}">
-                            <div class="sample-answer-title">Đáp án mẫu:</div>
-                            <div class="sample-answer-content">${q.sampleAnswers.join("<br>")}</div>
-                         </div>`;
-                html += `<div class="explanation" id="exp-${q.id}">${q.explanationHTML}</div>`;
-                card.innerHTML = html;
-                container.appendChild(card);
-                
-                const textarea = card.querySelector('textarea');
-                let hasPlayedSound = false;
-                textarea.addEventListener('input', (e) => {
-                    const val = e.target.value;
-                    userState[q.id].answer = val;
-                    if (val.trim()) {
-                        e.target.classList.add('pending');
-                        if (!hasPlayedSound) {
-                            initAudio();
-                            playInputSound();
-                            hasPlayedSound = true;
-                        }
+                let qText = q.questionHTML || q.question;
+                if (q.type === 'sentence_rewrite' && q.originalSentenceHTML) {
+                    // If questionHTML starts with a section title, put it before the original sentence
+                    let titleMatch = qText.match(/^(<b>.*?<\/b>\s*<br\s*\/?>\s*)/i);
+                    if (titleMatch) {
+                        qText = titleMatch[1] + q.originalSentenceHTML + '<br>' + qText.substring(titleMatch[1].length);
                     } else {
-                        e.target.classList.remove('pending');
-                        hasPlayedSound = false;
+                        qText = q.originalSentenceHTML + '<br>' + qText;
                     }
-                    updateCheckBtn(q.id);
-                });
+                }
                 
-                card.querySelector(`#check-btn-${q.id}`).addEventListener('click', () => {
-                    checkSentenceRewrite(q.id);
-                });
-            }
-        });
-        
-        document.getElementById('submit-btn').addEventListener('click', submitQuiz);
-    }
-
-    function updateCheckBtn(qid) {
-        const q = quizData.find(x => x.id === qid);
-        const btn = document.getElementById(`check-btn-${qid}`);
-        if (userState[qid].checked) return;
-        
-        if (q.type === 'gap_fill_text') {
-            let hasInput = false;
-            let allFilled = true;
-            q.blanks.forEach(b => {
-                const val = userState[qid].answer[b.blankId];
-                if (val && val.trim()) hasInput = true;
-                else allFilled = false;
-            });
-            btn.disabled = !hasInput;
-        } else if (q.type === 'sentence_rewrite') {
-            btn.disabled = !userState[qid].answer.trim();
-        }
-    }
-
-    function updateProgress() {
-        let count = 0;
-        quizData.forEach(q => {
-            if (q.type === 'gap_fill_text') {
-                let hasInput = false;
-                q.blanks.forEach(b => {
-                    if (userState[q.id].answer[b.blankId] && userState[q.id].answer[b.blankId].trim()) {
-                        hasInput = true;
-                    }
-                });
-                if (hasInput) count++;
-            }
-        });
-        answeredGapFill = count;
-        document.getElementById('progress-count').textContent = `${count}/${totalGapFill}`;
-        document.getElementById('progress-fill').style.width = `${(count/totalGapFill)*100}%`;
-    }
-
-    function checkGapFill(qid) {
-        const q = quizData.find(x => x.id === qid);
-        const state = userState[qid];
-        if (state.checked) return;
-        
-        let allFilled = true;
-        q.blanks.forEach(b => {
-            if (!state.answer[b.blankId] || !state.answer[b.blankId].trim()) allFilled = false;
-        });
-        if (!allFilled) {
-            alert("Vui lòng điền đủ tất cả các ô trống trước khi kiểm tra!");
-            return;
-        }
-
-        initAudio();
-        state.checked = true;
-        let allCorrect = true;
-        
-        q.blanks.forEach(b => {
-            const inputEl = document.querySelector(`input[data-qid="${qid}"][data-bid="${b.blankId}"]`);
-            inputEl.classList.remove('pending');
-            inputEl.classList.add('locked');
-            inputEl.readOnly = true;
-            
-            const normAns = normalizeAnswer(state.answer[b.blankId]);
-            let isCorrect = false;
-            b.correctAnswers.forEach(ca => {
-                if (normAns === normalizeAnswer(ca)) isCorrect = true;
-            });
-            
-            state.blankResults[b.blankId] = isCorrect;
-            if (!isCorrect) allCorrect = false;
-            
-            if (isCorrect) {
-                inputEl.classList.add('correct');
-            } else {
-                inputEl.classList.add('wrong');
-            }
-        });
-        
-        state.isCorrect = allCorrect;
-        
-        if (allCorrect) playCorrectSound();
-        else playWrongSound();
-        
-        if (!allCorrect) {
-            let correctTexts = [];
-            q.blanks.forEach(b => {
-                correctTexts.push(b.correctAnswers[0]);
-            });
-            const ansEl = document.getElementById(`correct-ans-${qid}`);
-            ansEl.textContent = correctTexts.join(' / ');
-            ansEl.style.display = 'inline-block';
-        }
-        
-        document.getElementById(`exp-${qid}`).style.display = 'block';
-        const btn = document.getElementById(`check-btn-${qid}`);
-        btn.disabled = true;
-        btn.textContent = "Đã kiểm tra";
-    }
-
-    function checkSentenceRewrite(qid) {
-        const state = userState[qid];
-        if (state.checked) return;
-        
-        if (!state.answer.trim()) {
-            alert("Vui lòng nhập câu trả lời!");
-            return;
-        }
-        
-        state.checked = true;
-        state.isCorrect = null;
-        
-        const textarea = document.querySelector(`textarea[data-qid="${qid}"]`);
-        textarea.classList.remove('pending');
-        textarea.classList.add('locked');
-        textarea.readOnly = true;
-        
-        document.getElementById(`sample-${qid}`).style.display = 'block';
-        document.getElementById(`exp-${qid}`).style.display = 'block';
-        
-        const btn = document.getElementById(`check-btn-${qid}`);
-        btn.disabled = true;
-        btn.textContent = "Đã lưu";
-    }
-
-    window.formSubmitted = function() {
-        // Form submitted callback
-    }
-
-    function submitQuiz() {
-        if (submitted) return;
-        
-        quizData.forEach(q => {
-            const state = userState[q.id];
-            if (!state.checked) {
+                // Wrap instruction in a nice box if it exists
+                if (qText.startsWith('<b>') && qText.match(/^<b>(.*?)<\/b>\s*<br\s*\/?>\s*/i)) {
+                    qText = qText.replace(/^<b>(.*?)<\/b>\s*<br\s*\/?>\s*/i, '<div class="instruction-box">$1</div>');
+                }
+                
                 if (q.type === 'gap_fill_text') {
-                    state.checked = true;
-                    let allCorrect = true;
-                    q.blanks.forEach(b => {
-                        const inputEl = document.querySelector(`input[data-qid="${q.id}"][data-bid="${b.blankId}"]`);
-                        inputEl.classList.remove('pending');
-                        inputEl.classList.add('locked');
-                        inputEl.readOnly = true;
-                        
-                        const val = state.answer[b.blankId];
-                        const normAns = normalizeAnswer(val);
-                        let isCorrect = false;
-                        if (normAns) {
-                            b.correctAnswers.forEach(ca => {
-                                if (normAns === normalizeAnswer(ca)) isCorrect = true;
-                            });
-                        }
-                        state.blankResults[b.blankId] = isCorrect;
-                        if (!isCorrect) allCorrect = false;
-                        
-                        if (isCorrect && normAns) {
-                            inputEl.classList.add('correct');
-                        } else if (normAns) {
-                            inputEl.classList.add('wrong');
-                        }
-                    });
-                    state.isCorrect = allCorrect;
-                    
-                    if (!allCorrect) {
-                        let correctTexts = [];
-                        q.blanks.forEach(b => correctTexts.push(b.correctAnswers[0]));
-                        const ansEl = document.getElementById(`correct-ans-${q.id}`);
-                        ansEl.textContent = correctTexts.join(' / ');
-                        ansEl.style.display = 'inline-block';
+                    if (q.blanks) {
+                        q.blanks.forEach(b => {
+                            let blankStr = '{{blank:' + b.blankId + '}}';
+                            let inpStr = '<input type="text" id="input-' + q.id + '-' + b.blankId + '" class="gap-fill-input" autocomplete="off">';
+                            qText = qText.replace(blankStr, inpStr);
+                        });
                     }
-                    document.getElementById(`exp-${q.id}`).style.display = 'block';
-                    document.getElementById(`check-btn-${q.id}`).disabled = true;
-                    
-                } else if (q.type === 'sentence_rewrite') {
-                    state.checked = true;
-                    state.isCorrect = null;
-                    const textarea = document.querySelector(`textarea[data-qid="${q.id}"]`);
-                    textarea.classList.remove('pending');
-                    textarea.classList.add('locked');
-                    textarea.readOnly = true;
-                    document.getElementById(`sample-${q.id}`).style.display = 'block';
-                    document.getElementById(`exp-${q.id}`).style.display = 'block';
-                    document.getElementById(`check-btn-${q.id}`).disabled = true;
                 }
-            }
-        });
-        
-        let correctCount = 0;
-        let errors = [];
-        
-        quizData.forEach(q => {
-            const state = userState[q.id];
-            if (q.type === 'gap_fill_text') {
-                if (state.isCorrect) {
-                    correctCount++;
-                } else {
-                    let ansArr = [];
-                    let corrArr = [];
-                    q.blanks.forEach(b => {
-                        let userAns = state.answer[b.blankId];
-                        ansArr.push(userAns ? userAns : "(trống)");
-                        corrArr.push(b.correctAnswers[0]);
-                    });
-                    errors.push(`Câu ${q.id}: Học sinh điền ${ansArr.join(', ')} (sai), đáp án đúng là ${corrArr.join(', ')}`);
-                }
-            }
-        });
-        
-        let scoreStr = `${correctCount}/${totalGapFill}`;
-        
-        const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfZCAK2lpNE8O8Ieqwc3SI1ubr6HZDvGZR91AsSpUk8kEBqaA/formResponse";
-        const form = document.createElement('form');
-        form.action = formUrl;
-        form.method = "POST";
-        form.target = "hidden_iframe";
-        
-        const data = {
-            'entry.1861648410': studentName,
-            'entry.1691800437': correctCount.toString(),
-            'entry.639295732': errors.join("\n"),
-            'entry.370465671': "U1-U2 Đề 3"
-        };
-        
-        for (let key in data) {
-            let input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = key;
-            input.value = data[key];
-            form.appendChild(input);
-        }
-        
-        document.body.appendChild(form);
-        form.submit();
-        submitted = true;
-        
-        initAudio();
-        if (correctCount === totalGapFill && totalGapFill > 0) {
-            playCorrectSound();
-        } else {
-            playSubmitSound();
-        }
-        
-        document.getElementById('submit-btn').disabled = true;
-        document.getElementById('submit-btn').textContent = "Đã nộp bài";
-        
-        document.getElementById('modal-score-text').textContent = scoreStr;
-        let msg = correctCount === totalGapFill ? "Tuyệt vời! Bạn đã trả lời đúng tất cả các câu trắc nghiệm." : "Hãy xem lại các câu làm sai bên dưới nhé.";
-        msg += "<br>Bạn đã hoàn thành " + quizData.filter(q=>q.type==='sentence_rewrite' && userState[q.id].answer.trim()).length + "/16 câu trả lời tự do.";
-        
-        document.getElementById('modal-feedback-text').innerHTML = msg;
-        document.getElementById('result-modal').style.display = 'flex';
-        
-        renderResultsSection();
-    }
-    
-    document.getElementById('modal-close-btn').addEventListener('click', () => {
-        document.getElementById('result-modal').style.display = 'none';
-        document.getElementById('results-section').style.display = 'block';
-        window.scrollTo({
-            top: document.getElementById('results-section').offsetTop - 20,
-            behavior: 'smooth'
-        });
-    });
-
-    function renderResultsSection() {
-        const wrongContainer = document.getElementById('wrong-answers-container');
-        const essayContainer = document.getElementById('essay-answers-container');
-        wrongContainer.innerHTML = '';
-        essayContainer.innerHTML = '';
-        
-        let hasWrong = false;
-        
-        quizData.forEach(q => {
-            const state = userState[q.id];
-            
-            if (q.type === 'gap_fill_text' && state.isCorrect === false) {
-                hasWrong = true;
-                const card = document.createElement('div');
-                card.className = 'card';
                 
-                let qHtml = q.questionHTML;
-                q.blanks.forEach(b => {
-                    let userVal = state.answer[b.blankId];
-                    let isC = state.blankResults[b.blankId];
-                    let ca = b.correctAnswers[0];
-                    let htmlRep = "";
-                    
-                    if (isC) {
-                        htmlRep = `<span style="color:var(--color-correct); font-weight:bold;">${escapeHTML(userVal)}</span>`;
-                    } else if (userVal && userVal.trim()) {
-                        htmlRep = `<span style="color:var(--color-wrong); text-decoration:line-through; font-weight:bold; margin-right:8px;">${escapeHTML(userVal)}</span><span style="color:var(--color-correct); font-weight:bold;">${escapeHTML(ca)}</span>`;
-                    } else {
-                        htmlRep = `<span style="color:var(--color-correct); font-weight:bold; margin-right:8px;">${escapeHTML(ca)}</span><span style="color:#64748b; font-style:italic; font-size: 15px;">(Bạn chưa điền)</span>`;
+                let html = '<div class="question-text">' + qText + '</div>';
+                
+                if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                    html += '<div class="options">';
+                    q.options.forEach((opt, index) => {
+                        let optText = opt.text || opt.html || '';
+                        let label = opt.label || String.fromCharCode(65 + index);
+                        html += '<div class="option" data-index="' + index + '" onclick="selectOption(\'' + q.id + '\', ' + index + ')">';
+                        html += '<div class="radio-circle"></div>';
+                        html += '<b>' + label + '.</b> ' + optText.replace(/^[A-D]\.\s*/, '');
+                        html += '</div>';
+                    });
+                    html += '</div>';
+                }
+                else if (q.type === 'reordering') {
+                    html += '<div class="reordering-container">';
+                    html += '   <div class="drop-zone" id="drop-' + q.id + '"></div>';
+                    html += '   <div class="word-bank" id="bank-' + q.id + '">';
+                    if (q.words) {
+                        let shuffledWords = [...q.words].sort(() => Math.random() - 0.5);
+                        shuffledWords.forEach(w => {
+                            html += '<span class="word-chip" id="chip-' + q.id + '-' + w.tokenId + '" data-token="' + w.tokenId + '" onclick="moveChip(\'' + q.id + '\', \'' + w.tokenId + '\')">' + w.text + '</span>';
+                        });
                     }
-                    qHtml = qHtml.replace(`{{blank:${b.blankId}}}`, htmlRep);
+                    html += '</div></div>';
+                }
+                else if (q.type === 'sentence_rewrite') {
+                    html += '<textarea class="rewrite-input" id="input-' + q.id + '" placeholder="Nhập câu trả lời của bạn..."></textarea>';
+                }
+                
+                html += '<button class="check-btn" id="check-btn-' + q.id + '" onclick="checkQuestion(\'' + q.id + '\')">Kiểm tra</button>';
+                html += '<div class="explanation" id="expl-' + q.id + '"></div>';
+                
+                block.innerHTML = html;
+                container.appendChild(block);
+            });
+        }
+        
+        function selectOption(qid, index) {
+            if (state[qid].checked) return;
+            const q = quizData.find(x => x.id.toString() === qid.toString());
+            const options = document.querySelectorAll('#q-block-' + qid + ' .option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[index].classList.add('selected');
+            state[qid].value = q.options[index].label || String.fromCharCode(65 + index);
+            updateProgress();
+        }
+
+        function startTest() {
+            const nameInput = document.getElementById('studentName').value.trim();
+            if (!nameInput) {
+                alert('Vui lòng nhập họ và tên của bạn!');
+                document.getElementById('studentName').focus();
+                return;
+            }
+            document.getElementById('startScreen').classList.remove('active');
+            document.getElementById('testScreen').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+        
+        function moveChip(qid, tokenId) {
+            if (state[qid].checked) return;
+            const chip = document.getElementById('chip-' + qid + '-' + tokenId);
+            const bank = document.getElementById('bank-' + qid);
+            const drop = document.getElementById('drop-' + qid);
+            
+            if (chip.parentElement === bank) {
+                drop.appendChild(chip);
+            } else {
+                bank.appendChild(chip);
+            }
+        }
+        
+        function checkQuestion(qid) {
+            if (state[qid].checked) return;
+            const q = quizData.find(x => x.id.toString() === qid.toString());
+            if (!q) return;
+            
+            // Validate answered
+            if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                let val = state[qid].value;
+                if (!val) { alert("Vui lòng chọn một đáp án!"); return; }
+            } else if (q.type === 'gap_fill_text') {
+                let allFilled = true;
+                if (q.blanks) {
+                    q.blanks.forEach(b => {
+                        const el = document.getElementById('input-' + qid + '-' + b.blankId);
+                        if (!el || !el.value.trim()) allFilled = false;
+                    });
+                }
+                if (!allFilled) { alert("Vui lòng điền vào tất cả chỗ trống!"); return; }
+            } else if (q.type === 'reordering') {
+                const bank = document.getElementById('bank-' + qid);
+                if (bank && bank.children.length > 0) { alert("Vui lòng ghép tất cả các từ!"); return; }
+            } else if (q.type === 'sentence_rewrite') {
+                const el = document.getElementById('input-' + qid);
+                if (!el || !el.value.trim()) { alert("Vui lòng nhập câu trả lời!"); return; }
+            }
+            
+            // Check logic
+            state[qid].checked = true;
+            document.getElementById('check-btn-' + qid).disabled = true;
+            const expl = document.getElementById('expl-' + qid);
+            expl.innerHTML = q.explanationHTML || q.explanation || '';
+            expl.style.display = 'block';
+            
+            let isCorrect = false;
+            let errorDetails = "";
+            
+            if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                const selectedVal = state[qid].value;
+                const correctOptIndex = q.options.findIndex(o => o.isCorrect);
+                const correctOptLabel = q.options[correctOptIndex].label || String.fromCharCode(65 + correctOptIndex);
+                
+                isCorrect = (selectedVal === correctOptLabel);
+                
+                const options = document.querySelectorAll('#q-block-' + qid + ' .option');
+                options.forEach(opt => opt.style.pointerEvents = 'none');
+                
+                const selectedIndex = q.options.findIndex((o, i) => (o.label || String.fromCharCode(65 + i)) === selectedVal);
+                
+                if (isCorrect) {
+                    if(options[selectedIndex]) options[selectedIndex].classList.add('correct-opt');
+                } else {
+                    if(options[selectedIndex]) options[selectedIndex].classList.add('wrong-opt');
+                    if(options[correctOptIndex]) options[correctOptIndex].classList.add('correct-opt');
+                    errorDetails = 'Câu ' + qid + ': Học sinh chọn ' + selectedVal + ' (sai), đáp án đúng là ' + correctOptLabel;
+                }
+            } 
+            else if (q.type === 'gap_fill_text') {
+                let allCorrect = true;
+                let userAnswersArr = [];
+                let correctAnswersArr = [];
+                
+                if (q.blanks) {
+                    q.blanks.forEach(b => {
+                        const input = document.getElementById('input-' + qid + '-' + b.blankId);
+                        const val = input.value.trim().toLowerCase();
+                        input.disabled = true;
+                        
+                        const isAnsCorrect = b.correctAnswers.some(ans => ans.toLowerCase() === val);
+                        if (isAnsCorrect) {
+                            input.style.backgroundColor = '#eafaf1';
+                            input.style.borderColor = '#2ecc71';
+                        } else {
+                            allCorrect = false;
+                            input.style.backgroundColor = '#fdedec';
+                            input.style.borderColor = '#e74c3c';
+                        }
+                        userAnswersArr.push(input.value.trim());
+                        correctAnswersArr.push(b.correctAnswers.join(' / '));
+                    });
+                }
+                
+                isCorrect = allCorrect;
+                if (!isCorrect) {
+                    errorDetails = 'Câu ' + qid + ': Điền sai. Đáp án đúng: ' + correctAnswersArr.join(', ');
+                }
+                let ansHtml = '<div style="margin-top:10px; padding:10px; background:#f8f9fa; border-left:4px solid #2ecc71;"><b>Đáp án đúng:</b><br>' + correctAnswersArr.map((ans, i) => 'Ô ' + (i+1) + ': <b>' + ans + '</b>').join('<br>') + '</div>';
+                expl.innerHTML = ansHtml + expl.innerHTML;
+            }
+            else if (q.type === 'reordering') {
+                const drop = document.getElementById('drop-' + qid);
+                const currentOrder = Array.from(drop.children).map(c => c.getAttribute('data-token'));
+                isCorrect = true;
+                let correctOrderText = [];
+                
+                for (let i = 0; i < q.correctOrder.length; i++) {
+                    const expectedToken = q.correctOrder[i];
+                    const expectedWord = q.words.find(w => w.tokenId === expectedToken).text;
+                    correctOrderText.push(expectedWord);
+                    
+                    if (currentOrder[i] !== expectedToken) {
+                        isCorrect = false;
+                    }
+                }
+                
+                Array.from(drop.children).forEach(chip => {
+                    chip.style.pointerEvents = 'none';
+                    if (isCorrect) chip.classList.add('correct');
+                    else chip.classList.add('wrong');
                 });
                 
-                card.innerHTML = `<div class="question-text">${qHtml}</div><div class="explanation" style="display:block;">${q.explanationHTML}</div>`;
-                wrongContainer.appendChild(card);
+                if (!isCorrect) {
+                    let ansDiv = document.createElement('div');
+                    ansDiv.style.marginTop = '10px';
+                    ansDiv.innerHTML = '<b>Đáp án đúng:</b><br><div class="drop-zone" style="background:#eafaf1;border-color:#2ecc71;">' + 
+                        correctOrderText.map(t => '<span class="word-chip correct" style="pointer-events:none;">' + t + '</span>').join('') + 
+                        '</div>';
+                    drop.parentElement.appendChild(ansDiv);
+                    errorDetails = 'Câu ghép từ ' + qid + ' sai. Thứ tự đúng: ' + correctOrderText.join(' ');
+                }
+            }
+            else if (q.type === 'sentence_rewrite') {
+                const input = document.getElementById('input-' + qid);
+                const val = input.value.trim().toLowerCase();
+                input.disabled = true;
+                
+                const stripHtml = s => s.replace(/<[^>]*>?/gm, '');
+                const normalize = s => stripHtml(s).replace(/[.,!?]/g, '').replace(/\s+/g, ' ').trim();
+                const normVal = normalize(val);
+                
+                let ansArr = q.correctAnswers || q.sampleAnswers || [];
+                let qHtml = q.questionHTML || '';
+                let parts = qHtml.split(/_+|\.{3,}/);
+                let exactMissingPart = '';
+                
+                isCorrect = ansArr.some(ans => {
+                    let normAns = normalize(ans.toLowerCase());
+                    if (normAns === normVal) return true;
+                    
+                    if (parts.length >= 2) {
+                        let prefix = normalize(parts[0].replace(/^(->|\?|→)\s*/, '').toLowerCase());
+                        let suffix = normalize(parts[parts.length - 1].toLowerCase());
+                        
+                        let partialAns = normAns;
+                        // Use regex to strip prefix (with optional trailing space)
+                        if (prefix) {
+                            let prefixEsc = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                            partialAns = partialAns.replace(new RegExp('^' + prefixEsc + '\\s*'), '').trim();
+                        }
+                        // Use regex to strip suffix (with optional leading space)
+                        if (suffix) {
+                            let suffixEsc = suffix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                            partialAns = partialAns.replace(new RegExp('\\s*' + suffixEsc + '$'), '').trim();
+                        }
+                        
+                        exactMissingPart = partialAns;
+                        if (partialAns && partialAns === normVal) return true;
+                    }
+                    return false;
+                });
+                
+                let correctDisplay = ansArr[0] || '';
+                
+                if (isCorrect) {
+                    input.style.backgroundColor = '#eafaf1';
+                    input.style.borderColor = '#2ecc71';
+                } else {
+                    input.style.backgroundColor = '#fdedec';
+                    input.style.borderColor = '#e74c3c';
+                    errorDetails = 'Câu viết lại ' + qid + ' sai. Đáp án mẫu:<br><b>' + correctDisplay + '</b>' + (exactMissingPart ? '<br><i>(Hoặc chỉ cần điền: <b>' + exactMissingPart + '</b>)</i>' : '');
+                }
+                
+                let firstMissingPart = '';
+                if (parts.length >= 2 && correctDisplay) {
+                    let prefix = normalize(parts[0].replace(/^(->|\?|→)\s*/, '').toLowerCase());
+                    let suffix = normalize(parts[parts.length - 1].toLowerCase());
+                    let partialAns = normalize(correctDisplay.toLowerCase());
+                    if (prefix) {
+                        let prefixEsc = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                        partialAns = partialAns.replace(new RegExp('^' + prefixEsc + '\\s*'), '').trim();
+                    }
+                    if (suffix) {
+                        let suffixEsc = suffix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                        partialAns = partialAns.replace(new RegExp('\\s*' + suffixEsc + '$'), '').trim();
+                    }
+                    if (partialAns) firstMissingPart = partialAns;
+                }
+                
+                let ansHtml = '<div style="margin-top:10px; padding:10px; background:#f8f9fa; border-left:4px solid #2ecc71;"><b>Đáp án đúng:</b><br>' + correctDisplay + (firstMissingPart ? '<br><i>(Hoặc chỉ cần điền: <b>' + firstMissingPart + '</b>)</i>' : '') + '</div>';
+                expl.innerHTML = ansHtml + expl.innerHTML;
             }
             
-            if (q.type === 'sentence_rewrite') {
-                const card = document.createElement('div');
-                card.className = 'card';
-                
-                let userVal = state.answer ? state.answer.trim() : "";
-                let displayAns = userVal ? `<div style="font-size: 19px; padding: 12px; background: #f1f5f9; border-radius: 8px; margin: 10px 0; font-family: monospace;">${escapeHTML(userVal)}</div>` : `<div style="font-size: 16px; color: #64748b; font-style: italic; margin: 10px 0;">(Bạn chưa viết câu trả lời)</div>`;
-                
-                card.innerHTML = `
-                    <div class="original-sentence">${q.originalSentenceHTML}</div>
-                    <div class="question-text" style="font-size:18px; margin-bottom:8px;">${q.questionHTML}</div>
-                    ${displayAns}
-                    <div class="sample-answer-box" style="display:block;">
-                        <div class="sample-answer-title">Đáp án mẫu:</div>
-                        <div class="sample-answer-content">${q.sampleAnswers.join("<br>")}</div>
-                    </div>
-                    <div class="explanation" style="display:block;">${q.explanationHTML}</div>
-                `;
-                essayContainer.appendChild(card);
-            }
-        });
-        
-        if (!hasWrong) {
-            wrongContainer.innerHTML = `<div style="padding: 20px; background: #f0fdf4; color: #166534; font-weight: 600; border-radius: 8px; text-align: center; font-size: 18px;">🎉 Chúc mừng! Bạn đã trả lời đúng tất cả các câu hỏi trắc nghiệm!</div>`;
+            state[qid].isCorrect = isCorrect;
+            state[qid].errorDetails = errorDetails;
+            updateProgress();
         }
-    }
-})();
-</script>
+        
+        function updateProgress() {
+            const total = quizData.length;
+            const checkedCount = Object.values(state).filter(s => s.checked).length;
+            const pct = (checkedCount / total) * 100;
+            document.getElementById('progressFill').style.width = pct + '%';
+        }
+        
+        function confirmSubmit() {
+            const total = quizData.length;
+            const checkedCount = Object.values(state).filter(s => s.checked).length;
+            if (checkedCount < total) {
+                if (!confirm(`Bạn mới kiểm tra ${checkedCount}/${total} câu. Bạn có chắc chắn muốn nộp bài?`)) {
+                    return;
+                }
+            }
+            submitTest();
+        }
+        
+        function submitTest() {
+            const studentName = document.getElementById('studentName').value.trim();
+            const total = quizData.length;
+            const correctCount = Object.values(state).filter(s => s.isCorrect).length;
+            const score = (correctCount / total) * 10;
+            
+            const errors = Object.values(state)
+                .filter(s => s.checked && !s.isCorrect && s.errorDetails)
+                .map(s => s.errorDetails);
+            const errorReport = errors.length > 0 ? errors.join('\n') : "Không có lỗi sai";
+            
+            document.getElementById('testScreen').classList.remove('active');
+            document.getElementById('resultScreen').classList.add('active');
+            
+            document.getElementById('scoreDisplay').innerText = score.toFixed(1) + ' / 10';
+            
+            let feedback = '';
+            if (score >= 9) feedback = 'Xuất sắc! Bạn nắm bài rất vững.';
+            else if (score >= 7) feedback = 'Khá tốt! Hãy cố gắng hơn một chút nhé.';
+            else if (score >= 5) feedback = 'Đạt yêu cầu. Bạn cần ôn tập thêm.';
+            else feedback = 'Chưa đạt. Bạn cần xem lại kỹ bài học!';
+            document.getElementById('feedbackText').innerText = feedback;
+            
+            const detailsDiv = document.getElementById('resultDetails');
+            if (errors.length > 0) {
+                detailsDiv.innerHTML = '<h3>Chi tiết các câu sai:</h3>' + 
+                    errors.map(e => '<div class="error-item">' + e + '</div>').join('');
+            } else {
+                detailsDiv.innerHTML = '<h3 style="color:#2ecc71;">Chúc mừng bạn đã trả lời đúng tất cả các câu hỏi!</h3>';
+            }
+            
+            // Submit to Google Form
+            const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfZCAK2lpNE8O8Ieqwc3SI1ubr6HZDvGZR91AsSpUk8kEBqaA/formResponse';
+            const formData = new FormData();
+            formData.append('entry.1861648410', studentName);
+            formData.append('entry.1691800437', score.toFixed(2));
+            formData.append('entry.639295732', errorReport);
+            formData.append('entry.370465671', testName);
+            
+            fetch(formUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            }).then(() => {
+                window.scrollTo(0, 0);
+            }).catch(err => {
+                alert('Có lỗi khi gửi kết quả. Vui lòng thử lại!');
+                console.error(err);
+            });
+        }
+        
+        init();
+    </script>
 </body>
 </html>
