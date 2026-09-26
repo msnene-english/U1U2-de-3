@@ -1,88 +1,75 @@
 <!DOCTYPE html>
-    <html lang="vi">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U1-U2 Đề 3</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f0f2f5; position: relative; z-index: 1; overflow-x: hidden; }
-        .watermark { position: absolute; top: 30px; left: 0; right: 0; text-align: center; font-size: 50px; color: rgba(0, 0, 0, 0.04); font-weight: bold; pointer-events: none; z-index: -1; user-select: none; }
-        .watermark div { transform: rotate(-30deg); margin: 200px 0; }
-@media (max-width: 600px) {
-    .watermark { font-size: 20px; top: 10px; }
-    .watermark div { margin: 90px 0; }
-}
-@media (max-width: 400px) {
-    .watermark { font-size: 16px; }
-    .watermark div { margin: 70px 0; }
-}
-        h1, h2 { color: #2c3e50; text-align: center; }
-        .screen { display: none; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .screen.active { display: block; }
-        
-        input[type="text"] { width: 100%; padding: 12px; margin: 10px 0 20px; border: 2px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; transition: border-color 0.3s; }
-        input[type="text"]:focus { border-color: #3498db; outline: none; }
-        
-        button { background: #3498db; color: #fff; border: none; padding: 12px 24px; font-size: 16px; border-radius: 6px; cursor: pointer; transition: background 0.3s, transform 0.1s; }
-        button:hover { background: #2980b9; }
-        button:active { transform: scale(0.98); }
-        button:disabled { background: #95a5a6; cursor: not-allowed; }
-        
-        .question-block { margin-bottom: 25px; padding: 15px; background: #f9f9f9; border-left: 4px solid #3498db; border-radius: 0 8px 8px 0; }
-        .instruction-box { margin-bottom: 15px; padding: 10px 15px; background: #e8f4fd; border: 1px solid #b6d4fe; border-radius: 6px; font-weight: bold; color: #004085; }
-        .question-text { font-weight: 500; margin-bottom: 15px; font-size: 16px; line-height: 1.8; }
-        
-        .options { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
-        .option { padding: 12px 15px; background: #fff; border: 2px solid #eee; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 10px; }
-        .option:hover { border-color: #3498db; background: #f8faff; }
-        .option.selected { border-color: #3498db; background: #ebf5ff; }
-        .option.correct-opt { border-color: #2ecc71; background: #eafaf1; }
-        .option.wrong-opt { border-color: #e74c3c; background: #fdedec; }
-        
-        .radio-circle { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 50%; position: relative; }
-        .option.selected .radio-circle::after { content: ''; position: absolute; top: 4px; left: 4px; width: 12px; height: 12px; background: #3498db; border-radius: 50%; }
-        
-        .gap-fill-input { width: 120px !important; padding: 4px 8px !important; margin: 0 5px !important; display: inline-block !important; border: 1px solid #ccc !important; border-radius: 4px !important; font-size: 16px !important; }
-        
-        .reordering-container { display: flex; flex-direction: column; gap: 15px; }
-        .word-bank, .drop-zone { display: flex; flex-wrap: wrap; gap: 8px; min-height: 45px; padding: 10px; background: #fff; border: 2px dashed #ddd; border-radius: 8px; }
-        .word-chip { padding: 8px 16px; background: #3498db; color: #fff; border-radius: 20px; cursor: pointer; user-select: none; font-weight: 500; transition: transform 0.1s; }
-        .word-chip:active { transform: scale(0.95); }
-        .word-chip.correct { background: #2ecc71; }
-        .word-chip.wrong { background: #e74c3c; }
-        
-        .rewrite-input { width: 100%; height: 80px; padding: 12px; border: 2px solid #ddd; border-radius: 6px; resize: vertical; font-size: 16px; font-family: inherit; }
-        
-        .check-btn { margin-top: 15px; background: #3498db; font-size: 14px; padding: 8px 16px; }
-        .explanation { display: none; margin-top: 15px; padding: 15px; background: #eef2f5; border-radius: 6px; font-size: 14.5px; line-height: 1.5; color: #2c3e50; border-left: 4px solid #2ecc71; }
-        
-        .progress-bar { width: 100%; height: 10px; background: #ddd; border-radius: 5px; margin-bottom: 20px; overflow: hidden; }
-        .progress-fill { height: 100%; background: #2ecc71; width: 0%; transition: width 0.3s; }
-        
-        .result-details { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 6px; text-align: left; max-height: 300px; overflow-y: auto; font-size: 14px; }
-        .error-item { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee; color: #e74c3c; }
-    </style>
-    </head>
-    <body>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U1U2 đề 3</title>
+<style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f0f2f5; position: relative; z-index: 1; overflow-x: hidden; }
+    .watermark { position: absolute; top: 30px; left: 0; right: 0; text-align: center; font-size: 50px; color: rgba(0, 0, 0, 0.04); font-weight: bold; pointer-events: none; z-index: -1; user-select: none; }
+    .watermark div { transform: rotate(-30deg); margin: 200px 0; }
+    @media (max-width: 600px) { .watermark { font-size: 20px; top: 10px; } .watermark div { margin: 90px 0; } }
+    @media (max-width: 400px) { .watermark { font-size: 16px; } .watermark div { margin: 70px 0; } }
+    h1, h2 { color: #2c3e50; text-align: center; }
+    .screen { position: relative; display: none; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .screen.active { display: block; }
+    
+    input[type="text"] { width: 100%; padding: 12px; margin: 10px 0 20px; border: 2px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; transition: border-color 0.3s; }
+    input[type="text"]:focus { border-color: #3498db; outline: none; }
+    
+    button { background: #3498db; color: #fff; border: none; padding: 12px 24px; font-size: 16px; border-radius: 6px; cursor: pointer; transition: background 0.3s, transform 0.1s; }
+    button:hover { background: #2980b9; }
+    button:active { transform: scale(0.98); }
+    button:disabled { background: #95a5a6; cursor: not-allowed; }
+    
+    .question-block { margin-bottom: 25px; padding: 15px; background: #f9f9f9; border-left: 4px solid #3498db; border-radius: 0 8px 8px 0; }
+    .instruction-box { margin-bottom: 15px; padding: 10px 15px; background: #e8f4fd; border: 1px solid #b6d4fe; border-radius: 6px; font-weight: bold; color: #004085; }
+    .question-text { font-weight: 500; margin-bottom: 15px; font-size: 16px; line-height: 1.8; }
+    
+    .options { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+    .option { padding: 12px 15px; background: #fff; border: 2px solid #eee; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 10px; }
+    .option:hover { border-color: #3498db; background: #f8faff; }
+    .option.selected { border-color: #3498db; background: #ebf5ff; }
+    .option.correct-opt { border-color: #2ecc71; background: #eafaf1; }
+    .option.wrong-opt { border-color: #e74c3c; background: #fdedec; }
+    
+    .radio-circle { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 50%; position: relative; }
+    .option.selected .radio-circle::after { content: ''; position: absolute; top: 4px; left: 4px; width: 12px; height: 12px; background: #3498db; border-radius: 50%; }
+    
+    .gap-fill-input { width: 120px !important; padding: 4px 8px !important; margin: 0 5px !important; display: inline-block !important; border: 1px solid #ccc !important; border-radius: 4px !important; font-size: 16px !important; }
+    
+    .word-bank, .drop-zone { display: flex; flex-wrap: wrap; gap: 8px; min-height: 45px; padding: 10px; background: #fff; border: 2px dashed #ddd; border-radius: 8px; margin-top: 10px;}
+    .word-chip { padding: 8px 16px; background: #3498db; color: #fff; border-radius: 20px; cursor: pointer; user-select: none; font-weight: 500; transition: transform 0.1s; }
+    .word-chip:active { transform: scale(0.95); }
+    
+    .rewrite-input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 16px; font-family: inherit; }
+    
+    .check-btn { margin-top: 15px; background: #3498db; font-size: 14px; padding: 8px 16px; }
+    .explanation { display: none; margin-top: 15px; padding: 15px; background: #eef2f5; border-radius: 6px; font-size: 14.5px; line-height: 1.5; color: #2c3e50; border-left: 4px solid #2ecc71; }
+    
+    .result-details { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 6px; text-align: left; max-height: 400px; overflow-y: auto; font-size: 14px; border: 1px solid #ddd; }
+    .error-item { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee; color: #333; }
+</style>
+</head>
+<body>
     <div class="watermark">
-        <div>U1-U2 Đề 3<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
-        <div>U1-U2 Đề 3<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
-        <div>U1-U2 Đề 3<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
-        <div>U1-U2 Đề 3<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
+        <div>U1U2 đề 3<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
+        <div>U1U2 đề 3<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
+        <div>U1U2 đề 3<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
+        <div>U1U2 đề 3<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
     </div>
     
     <div id="startScreen" class="screen active">
-        <h1>U1-U2 Đề 3</h1>
+        <h1>U1U2 đề 3</h1>
         <p style="text-align: center; color: #7f8c8d;">Nhập họ và tên của bạn để bắt đầu làm bài</p>
-        <input type="text" id="studentName" placeholder="Ví dụ: Nguyễn Văn A" autocomplete="off">
+        <input type="text" id="studentName"  autocomplete="off">
         <div style="text-align: center;">
             <button onclick="startTest()">Bắt đầu làm bài</button>
         </div>
     </div>
     
     <div id="testScreen" class="screen">
-        <h2>U1-U2 Đề 3</h2>
-        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div style="position:absolute; top:15px; left:20px; font-size:13px; color:#7f8c8d;">GV biên soạn: Ms Chí Nên - 0852639652</div><h2>U1U2 đề 3</h2>
         <div id="questionsContainer"></div>
         <div style="text-align: center; margin-top: 30px;">
             <button id="submitBtn" onclick="confirmSubmit()" style="background: #2ecc71; font-weight: bold; padding: 15px 40px;">NỘP BÀI</button>
@@ -91,471 +78,575 @@
     
     <div id="resultScreen" class="screen" style="text-align: center;">
         <h1 style="color: #2ecc71; font-size: 36px;">Hoàn thành!</h1>
-        <h2 id="scoreDisplay" style="font-size: 48px; margin: 20px 0; color: #2c3e50;"></h2>
-        <p id="feedbackText" style="font-size: 18px; color: #7f8c8d;"></p>
+        <div style="font-size: 24px; color: #555;">Điểm của bạn:</div>
+        <h2 id="scoreDisplay" style="font-size: 48px; margin: 10px 0; color: #2c3e50;"></h2>
         <div class="result-details" id="resultDetails"></div>
     </div>
     
-    <div style="text-align: center; margin-top: 50px; padding: 20px; color: #7f8c8d; font-size: 14px; border-top: 1px solid #ddd;">
-        GV biên soạn: Ms Chí Nên - 0852639652
-    </div>
-    
     <script>
-        const testName = 'U1-U2 Đề 3';
-        const quizData = [
-    // WORD FORM (33-48)
-    { id: 33, type: 'gap_fill_text', questionHTML: "<b>I. Fill in the blanks.</b><br>33. We need to make an {{blank:b1}} with the hotel about our late arrival. (ARRANGE)", blanks: [{ blankId: 'b1', correctAnswers: ['arrangement'] }], explanationHTML: "Dịch: Chúng ta cần sắp xếp với khách sạn về việc đến muộn.<br>Từ gốc: <strong>ARRANGE</strong> (động từ: sắp xếp).<br>Vị trí cần điền đứng sau mạo từ 'an', do đó cần một danh từ. Danh từ của arrange là <strong>arrangement</strong>." },
-    { id: 34, type: 'gap_fill_text', questionHTML: "34. The travel agency offers a wide {{blank:b1}} of holiday destinations. (CHOOSE)", blanks: [{ blankId: 'b1', correctAnswers: ['choice', 'selection', 'range'] }], explanationHTML: "Dịch: Đại lý du lịch cung cấp nhiều sự lựa chọn về các điểm đến cho kỳ nghỉ.<br>Từ gốc: <strong>CHOOSE</strong> (động từ: lựa chọn).<br>Cụm từ 'a wide choice/selection/range of' nghĩa là nhiều sự lựa chọn đa dạng. Cần điền danh từ." },
-    { id: 35, type: 'gap_fill_text', questionHTML: "35. The local {{blank:b1}} welcomed visitors warmly. (INHABIT)", blanks: [{ blankId: 'b1', correctAnswers: ['inhabitants'] }], explanationHTML: "Dịch: Những cư dân địa phương chào đón du khách một cách nồng nhiệt.<br>Từ gốc: <strong>INHABIT</strong> (động từ: cư trú).<br>Sau tính từ 'local' cần danh từ chỉ người ở số nhiều (vì chào đón du khách) nên dùng <strong>inhabitants</strong>." },
-    { id: 36, type: 'gap_fill_text', questionHTML: "36. She is a professional {{blank:b1}} who specialises in travel photography. (PHOTOGRAPH)", blanks: [{ blankId: 'b1', correctAnswers: ['photographer'] }], explanationHTML: "Dịch: Cô ấy là một nhiếp ảnh gia chuyên nghiệp chuyên về nhiếp ảnh du lịch.<br>Từ gốc: <strong>PHOTOGRAPH</strong> (danh từ: bức ảnh / động từ: chụp ảnh).<br>Sau tính từ 'professional' và mệnh đề quan hệ 'who' chỉ người, cần danh từ chỉ người: <strong>photographer</strong>." },
-    { id: 37, type: 'gap_fill_text', questionHTML: "37. The two transport systems are completely {{blank:b1}}. (DIFFER)", blanks: [{ blankId: 'b1', correctAnswers: ['different'] }], explanationHTML: "Dịch: Hai hệ thống giao thông thì hoàn toàn khác biệt.<br>Từ gốc: <strong>DIFFER</strong> (động từ: khác nhau).<br>Sau động từ to be 'are' và trạng từ 'completely' cần một tính từ: <strong>different</strong>." },
-    { id: 38, type: 'gap_fill_text', questionHTML: "38. Travel can {{blank:b1}} your mind and broaden your horizons. (BROAD)", blanks: [{ blankId: 'b1', correctAnswers: ['broaden'] }], explanationHTML: "Dịch: Du lịch có thể mở rộng tâm trí và mở mang tầm nhìn của bạn.<br>Từ gốc: <strong>BROAD</strong> (tính từ: rộng).<br>Sau động từ khuyết thiếu 'can' cần một động từ nguyên thể (bare infinitive). Động từ của broad là <strong>broaden</strong>." },
-    { id: 39, type: 'gap_fill_text', questionHTML: "39. Is there a {{blank:b1}} flight to Madrid, or do we have to change planes? (DIRECT)", blanks: [{ blankId: 'b1', correctAnswers: ['direct'] }], explanationHTML: "Dịch: Có chuyến bay thẳng đến Madrid không, hay chúng ta phải đổi máy bay?<br>Từ gốc: <strong>DIRECT</strong> (tính từ/động từ: trực tiếp, thẳng).<br>Trước danh từ 'flight' cần tính từ, từ này giữ nguyên dạng là <strong>direct</strong> (chuyến bay thẳng)." },
-    { id: 40, type: 'gap_fill_text', questionHTML: "40. We were surprised by the {{blank:b1}} diversity of the city. (CULTURE)", blanks: [{ blankId: 'b1', correctAnswers: ['cultural'] }], explanationHTML: "Dịch: Chúng tôi đã ngạc nhiên bởi sự đa dạng văn hóa của thành phố.<br>Từ gốc: <strong>CULTURE</strong> (danh từ: văn hóa).<br>Trước danh từ 'diversity' cần tính từ bổ nghĩa: <strong>cultural</strong> (thuộc về văn hóa)." },
-    { id: 41, type: 'gap_fill_text', questionHTML: "41. Our guide was extremely {{blank:b1}} about the history of the castle. (KNOW)", blanks: [{ blankId: 'b1', correctAnswers: ['knowledgeable'] }], explanationHTML: "Dịch: Hướng dẫn viên của chúng tôi cực kỳ am hiểu về lịch sử của lâu đài.<br>Từ gốc: <strong>KNOW</strong> (động từ: biết).<br>Sau động từ to be 'was' và trạng từ 'extremely' cần tính từ chỉ người am hiểu: <strong>knowledgeable</strong>." },
-    { id: 42, type: 'gap_fill_text', questionHTML: "42. The new railway is of great {{blank:b1}} to local residents. (IMPORTANT)", blanks: [{ blankId: 'b1', correctAnswers: ['importance'] }], explanationHTML: "Dịch: Tuyến đường sắt mới có tầm quan trọng lớn đối với cư dân địa phương.<br>Từ gốc: <strong>IMPORTANT</strong> (tính từ: quan trọng).<br>Cấu trúc 'be of + (adj) + Noun' (ví dụ: of great importance = rất quan trọng). Cần điền danh từ <strong>importance</strong>." },
-    { id: 43, type: 'gap_fill_text', questionHTML: "43. The main {{blank:b1}} to the park is on the east side. (ENTER)", blanks: [{ blankId: 'b1', correctAnswers: ['entrance'] }], explanationHTML: "Dịch: Lối vào chính của công viên nằm ở phía đông.<br>Từ gốc: <strong>ENTER</strong> (động từ: đi vào).<br>Sau mạo từ 'The' và tính từ 'main' cần danh từ. Danh từ của enter là <strong>entrance</strong> (lối vào)." },
-    { id: 44, type: 'gap_fill_text', questionHTML: "44. After the renovation, the old station was almost {{blank:b1}}. (RECOGNISE)", blanks: [{ blankId: 'b1', correctAnswers: ['unrecognisable', 'unrecognizable'] }], explanationHTML: "Dịch: Sau khi cải tạo, nhà ga cũ gần như không thể nhận ra.<br>Từ gốc: <strong>RECOGNISE</strong> (động từ: nhận ra).<br>Cần tính từ mang nghĩa phủ định (vì thay đổi quá nhiều khiến không nhận ra được nữa): <strong>unrecognisable</strong> (hoặc unrecognizable)." },
-    { id: 45, type: 'gap_fill_text', questionHTML: "45. The {{blank:b1}} gives details of all train departures. (TIME)", blanks: [{ blankId: 'b1', correctAnswers: ['timetable'] }], explanationHTML: "Dịch: Lịch trình cung cấp chi tiết về tất cả các chuyến tàu khởi hành.<br>Từ gốc: <strong>TIME</strong> (danh từ: thời gian).<br>Từ vựng chỉ bảng giờ tàu/xe, lịch trình là danh từ ghép <strong>timetable</strong>." },
-    { id: 46, type: 'gap_fill_text', questionHTML: "46. The airline is {{blank:b1}} improving its safety procedures. (CONTINUE)", blanks: [{ blankId: 'b1', correctAnswers: ['continually', 'continuously'] }], explanationHTML: "Dịch: Hãng hàng không đang liên tục cải thiện các quy trình an toàn của mình.<br>Từ gốc: <strong>CONTINUE</strong> (động từ: tiếp tục).<br>Đứng giữa trợ động từ 'is' và động từ chính 'improving' (thì HTTD) cần trạng từ bổ nghĩa cho động từ: <strong>continually</strong> hoặc <strong>continuously</strong>." },
-    { id: 47, type: 'gap_fill_text', questionHTML: "47. The trip was so special that it became a very {{blank:b1}} experience. (MEMORY)", blanks: [{ blankId: 'b1', correctAnswers: ['memorable'] }], explanationHTML: "Dịch: Chuyến đi quá đặc biệt đến nỗi nó trở thành một trải nghiệm rất đáng nhớ.<br>Từ gốc: <strong>MEMORY</strong> (danh từ: trí nhớ, kỷ niệm).<br>Trước danh từ 'experience' cần tính từ. Tính từ của memory là <strong>memorable</strong> (đáng nhớ)." },
-    { id: 48, type: 'gap_fill_text', questionHTML: "48. The insurance policy provides worldwide travel {{blank:b1}}. (COVER)", blanks: [{ blankId: 'b1', correctAnswers: ['coverage'] }], explanationHTML: "Dịch: Hợp đồng bảo hiểm cung cấp phạm vi bảo hiểm du lịch trên toàn thế giới.<br>Từ gốc: <strong>COVER</strong> (động từ/danh từ: bao phủ, vỏ bọc).<br>Từ vựng dùng trong ngữ cảnh bảo hiểm (sự bảo hiểm, phạm vi bảo hiểm) là danh từ <strong>coverage</strong>." },
+    const __B64_QUIZ_DATA__ = 'W3siaWQiOjMzLCJ0eXBlIjoiZ2FwX2ZpbGxfdGV4dCIsInF1ZXN0aW9uSFRNTCI6IjxiPkkuIEZpbGwgaW4gdGhlIGJsYW5rcy48L2I+PGJyPjMzLiBXZSBuZWVkIHRvIG1ha2UgYW4ge3tibGFuazpiMX19IHdpdGggdGhlIGhvdGVsIGFib3V0IG91ciBsYXRlIGFycml2YWwuIChBUlJBTkdFKSIsImJsYW5rcyI6W3siYmxhbmtJZCI6ImIxIiwiY29ycmVjdEFuc3dlcnMiOlsiYXJyYW5nZW1lbnQiXX1dLCJleHBsYW5hdGlvbkhUTUwiOiJE4buLY2g6IENow7puZyB0YSBj4bqnbiBz4bqvcCB44bq/cCB24bubaSBraMOhY2ggc+G6oW4gduG7gSB2aeG7h2MgxJHhur9uIG114buZbi48YnI+VOG7qyBn4buRYzogPHN0cm9uZz5BUlJBTkdFPC9zdHJvbmc+ICjEkeG7mW5nIHThu6s6IHPhuq9wIHjhur9wKS48YnI+VuG7iyB0csOtIGPhuqduIMSRaeG7gW4gxJHhu6luZyBzYXUgbeG6oW8gdOG7qyAnYW4nLCBkbyDEkcOzIGPhuqduIG3hu5l0IGRhbmggdOG7qy4gRGFuaCB04burIGPhu6dhIGFycmFuZ2UgbMOgIDxzdHJvbmc+YXJyYW5nZW1lbnQ8L3N0cm9uZz4uIn0seyJpZCI6MzQsInR5cGUiOiJnYXBfZmlsbF90ZXh0IiwicXVlc3Rpb25IVE1MIjoiMzQuIFRoZSB0cmF2ZWwgYWdlbmN5IG9mZmVycyBhIHdpZGUge3tibGFuazpiMX19IG9mIGhvbGlkYXkgZGVzdGluYXRpb25zLiAoQ0hPT1NFKSIsImJsYW5rcyI6W3siYmxhbmtJZCI6ImIxIiwiY29ycmVjdEFuc3dlcnMiOlsiY2hvaWNlIiwic2VsZWN0aW9uIiwicmFuZ2UiXX1dLCJleHBsYW5hdGlvbkhUTUwiOiJE4buLY2g6IMSQ4bqhaSBsw70gZHUgbOG7i2NoIGN1bmcgY+G6pXAgbmhp4buBdSBz4buxIGzhu7FhIGNo4buNbiB24buBIGPDoWMgxJFp4buDbSDEkeG6v24gY2hvIGvhu7Mgbmdo4buJLjxicj5U4burIGfhu5FjOiA8c3Ryb25nPkNIT09TRTwvc3Ryb25nPiAoxJHhu5luZyB04burOiBs4buxYSBjaOG7jW4pLjxicj5D4bulbSB04burICdhIHdpZGUgY2hvaWNlL3NlbGVjdGlvbi9yYW5nZSBvZicgbmdoxKlhIGzDoCBuaGnhu4F1IHPhu7EgbOG7sWEgY2jhu41uIMSRYSBk4bqhbmcuIEPhuqduIMSRaeG7gW4gZGFuaCB04burLiJ9LHsiaWQiOjM1LCJ0eXBlIjoiZ2FwX2ZpbGxfdGV4dCIsInF1ZXN0aW9uSFRNTCI6IjM1LiBUaGUgbG9jYWwge3tibGFuazpiMX19IHdlbGNvbWVkIHZpc2l0b3JzIHdhcm1seS4gKElOSEFCSVQpIiwiYmxhbmtzIjpbeyJibGFua0lkIjoiYjEiLCJjb3JyZWN0QW5zd2VycyI6WyJpbmhhYml0YW50cyJdfV0sImV4cGxhbmF0aW9uSFRNTCI6IkThu4tjaDogTmjhu69uZyBjxrAgZMOibiDEkeG7i2EgcGjGsMahbmcgY2jDoG8gxJHDs24gZHUga2jDoWNoIG3hu5l0IGPDoWNoIG7hu5NuZyBuaGnhu4d0Ljxicj5U4burIGfhu5FjOiA8c3Ryb25nPklOSEFCSVQ8L3N0cm9uZz4gKMSR4buZbmcgdOG7qzogY8awIHRyw7opLjxicj5TYXUgdMOtbmggdOG7qyAnbG9jYWwnIGPhuqduIGRhbmggdOG7qyBjaOG7iSBuZ8aw4budaSDhu58gc+G7kSBuaGnhu4F1ICh2w6wgY2jDoG8gxJHDs24gZHUga2jDoWNoKSBuw6puIGTDuW5nIDxzdHJvbmc+aW5oYWJpdGFudHM8L3N0cm9uZz4uIn0seyJpZCI6MzYsInR5cGUiOiJnYXBfZmlsbF90ZXh0IiwicXVlc3Rpb25IVE1MIjoiMzYuIFNoZSBpcyBhIHByb2Zlc3Npb25hbCB7e2JsYW5rOmIxfX0gd2hvIHNwZWNpYWxpc2VzIGluIHRyYXZlbCBwaG90b2dyYXBoeS4gKFBIT1RPR1JBUEgpIiwiYmxhbmtzIjpbeyJibGFua0lkIjoiYjEiLCJjb3JyZWN0QW5zd2VycyI6WyJwaG90b2dyYXBoZXIiXX1dLCJleHBsYW5hdGlvbkhUTUwiOiJE4buLY2g6IEPDtCDhuqV5IGzDoCBt4buZdCBuaGnhur9wIOG6o25oIGdpYSBjaHV5w6puIG5naGnhu4dwIGNodXnDqm4gduG7gSBuaGnhur9wIOG6o25oIGR1IGzhu4tjaC48YnI+VOG7qyBn4buRYzogPHN0cm9uZz5QSE9UT0dSQVBIPC9zdHJvbmc+IChkYW5oIHThu6s6IGLhu6ljIOG6o25oIC8gxJHhu5luZyB04burOiBjaOG7pXAg4bqjbmgpLjxicj5TYXUgdMOtbmggdOG7qyAncHJvZmVzc2lvbmFsJyB2w6AgbeG7h25oIMSR4buBIHF1YW4gaOG7hyAnd2hvJyBjaOG7iSBuZ8aw4budaSwgY+G6p24gZGFuaCB04burIGNo4buJIG5nxrDhu51pOiA8c3Ryb25nPnBob3RvZ3JhcGhlcjwvc3Ryb25nPi4ifSx7ImlkIjozNywidHlwZSI6ImdhcF9maWxsX3RleHQiLCJxdWVzdGlvbkhUTUwiOiIzNy4gVGhlIHR3byB0cmFuc3BvcnQgc3lzdGVtcyBhcmUgY29tcGxldGVseSB7e2JsYW5rOmIxfX0uIChESUZGRVIpIiwiYmxhbmtzIjpbeyJibGFua0lkIjoiYjEiLCJjb3JyZWN0QW5zd2VycyI6WyJkaWZmZXJlbnQiXX1dLCJleHBsYW5hdGlvbkhUTUwiOiJE4buLY2g6IEhhaSBo4buHIHRo4buRbmcgZ2lhbyB0aMO0bmcgdGjDrCBob8OgbiB0b8OgbiBraMOhYyBiaeG7h3QuPGJyPlThu6sgZ+G7kWM6IDxzdHJvbmc+RElGRkVSPC9zdHJvbmc+ICjEkeG7mW5nIHThu6s6IGtow6FjIG5oYXUpLjxicj5TYXUgxJHhu5luZyB04burIHRvIGJlICdhcmUnIHbDoCB0cuG6oW5nIHThu6sgJ2NvbXBsZXRlbHknIGPhuqduIG3hu5l0IHTDrW5oIHThu6s6IDxzdHJvbmc+ZGlmZmVyZW50PC9zdHJvbmc+LiJ9LHsiaWQiOjM4LCJ0eXBlIjoiZ2FwX2ZpbGxfdGV4dCIsInF1ZXN0aW9uSFRNTCI6IjM4LiBUcmF2ZWwgY2FuIHt7Ymxhbms6YjF9fSB5b3VyIG1pbmQgYW5kIGJyb2FkZW4geW91ciBob3Jpem9ucy4gKEJST0FEKSIsImJsYW5rcyI6W3siYmxhbmtJZCI6ImIxIiwiY29ycmVjdEFuc3dlcnMiOlsiYnJvYWRlbiJdfV0sImV4cGxhbmF0aW9uSFRNTCI6IkThu4tjaDogRHUgbOG7i2NoIGPDsyB0aOG7gyBt4bufIHLhu5luZyB0w6JtIHRyw60gdsOgIG3hu58gbWFuZyB04bqnbSBuaMOsbiBj4bunYSBi4bqhbi48YnI+VOG7qyBn4buRYzogPHN0cm9uZz5CUk9BRDwvc3Ryb25nPiAodMOtbmggdOG7qzogcuG7mW5nKS48YnI+U2F1IMSR4buZbmcgdOG7qyBraHV54bq/dCB0aGnhur91ICdjYW4nIGPhuqduIG3hu5l0IMSR4buZbmcgdOG7qyBuZ3V5w6puIHRo4buDIChiYXJlIGluZmluaXRpdmUpLiDEkOG7mW5nIHThu6sgY+G7p2EgYnJvYWQgbMOgIDxzdHJvbmc+YnJvYWRlbjwvc3Ryb25nPi4ifSx7ImlkIjozOSwidHlwZSI6ImdhcF9maWxsX3RleHQiLCJxdWVzdGlvbkhUTUwiOiIzOS4gSXMgdGhlcmUgYSB7e2JsYW5rOmIxfX0gZmxpZ2h0IHRvIE1hZHJpZCwgb3IgZG8gd2UgaGF2ZSB0byBjaGFuZ2UgcGxhbmVzPyAoRElSRUNUKSIsImJsYW5rcyI6W3siYmxhbmtJZCI6ImIxIiwiY29ycmVjdEFuc3dlcnMiOlsiZGlyZWN0Il19XSwiZXhwbGFuYXRpb25IVE1MIjoiROG7i2NoOiBDw7MgY2h1eeG6v24gYmF5IHRo4bqzbmcgxJHhur9uIE1hZHJpZCBraMO0bmcsIGhheSBjaMO6bmcgdGEgcGjhuqNpIMSR4buVaSBtw6F5IGJheT88YnI+VOG7qyBn4buRYzogPHN0cm9uZz5ESVJFQ1Q8L3N0cm9uZz4gKHTDrW5oIHThu6svxJHhu5luZyB04burOiB0cuG7sWMgdGnhur9wLCB0aOG6s25nKS48YnI+VHLGsOG7m2MgZGFuaCB04burICdmbGlnaHQnIGPhuqduIHTDrW5oIHThu6ssIHThu6sgbsOgeSBnaeG7ryBuZ3V5w6puIGThuqFuZyBsw6AgPHN0cm9uZz5kaXJlY3Q8L3N0cm9uZz4gKGNodXnhur9uIGJheSB0aOG6s25nKS4ifSx7ImlkIjo0MCwidHlwZSI6ImdhcF9maWxsX3RleHQiLCJxdWVzdGlvbkhUTUwiOiI0MC4gV2Ugd2VyZSBzdXJwcmlzZWQgYnkgdGhlIHt7Ymxhbms6YjF9fSBkaXZlcnNpdHkgb2YgdGhlIGNpdHkuIChDVUxUVVJFKSIsImJsYW5rcyI6W3siYmxhbmtJZCI6ImIxIiwiY29ycmVjdEFuc3dlcnMiOlsiY3VsdHVyYWwiXX1dLCJleHBsYW5hdGlvbkhUTUwiOiJE4buLY2g6IENow7puZyB0w7RpIMSRw6MgbmfhuqFjIG5oacOqbiBi4bufaSBz4buxIMSRYSBk4bqhbmcgdsSDbiBow7NhIGPhu6dhIHRow6BuaCBwaOG7kS48YnI+VOG7qyBn4buRYzogPHN0cm9uZz5DVUxUVVJFPC9zdHJvbmc+IChkYW5oIHThu6s6IHbEg24gaMOzYSkuPGJyPlRyxrDhu5tjIGRhbmggdOG7qyAnZGl2ZXJzaXR5JyBj4bqnbiB0w61uaCB04burIGLhu5UgbmdoxKlhOiA8c3Ryb25nPmN1bHR1cmFsPC9zdHJvbmc+ICh0aHXhu5ljIHbhu4EgdsSDbiBow7NhKS4ifSx7ImlkIjo0MSwidHlwZSI6ImdhcF9maWxsX3RleHQiLCJxdWVzdGlvbkhUTUwiOiI0MS4gT3VyIGd1aWRlIHdhcyBleHRyZW1lbHkge3tibGFuazpiMX19IGFib3V0IHRoZSBoaXN0b3J5IG9mIHRoZSBjYXN0bGUuIChLTk9XKSIsImJsYW5rcyI6W3siYmxhbmtJZCI6ImIxIiwiY29ycmVjdEFuc3dlcnMiOlsia25vd2xlZGdlYWJsZSJdfV0sImV4cGxhbmF0aW9uSFRNTCI6IkThu4tjaDogSMaw4bubbmcgZOG6q24gdmnDqm4gY+G7p2EgY2jDum5nIHTDtGkgY+G7sWMga+G7syBhbSBoaeG7g3UgduG7gSBs4buLY2ggc+G7rSBj4bunYSBsw6J1IMSRw6BpLjxicj5U4burIGfhu5FjOiA8c3Ryb25nPktOT1c8L3N0cm9uZz4gKMSR4buZbmcgdOG7qzogYmnhur90KS48YnI+U2F1IMSR4buZbmcgdOG7qyB0byBiZSAnd2FzJyB2w6AgdHLhuqFuZyB04burICdleHRyZW1lbHknIGPhuqduIHTDrW5oIHThu6sgY2jhu4kgbmfGsOG7nWkgYW0gaGnhu4N1OiA8c3Ryb25nPmtub3dsZWRnZWFibGU8L3N0cm9uZz4uIn0seyJpZCI6NDIsInR5cGUiOiJnYXBfZmlsbF90ZXh0IiwicXVlc3Rpb25IVE1MIjoiNDIuIFRoZSBuZXcgcmFpbHdheSBpcyBvZiBncmVhdCB7e2JsYW5rOmIxfX0gdG8gbG9jYWwgcmVzaWRlbnRzLiAoSU1QT1JUQU5UKSIsImJsYW5rcyI6W3siYmxhbmtJZCI6ImIxIiwiY29ycmVjdEFuc3dlcnMiOlsiaW1wb3J0YW5jZSJdfV0sImV4cGxhbmF0aW9uSFRNTCI6IkThu4tjaDogVHV54bq/biDEkcaw4budbmcgc+G6r3QgbeG7m2kgY8OzIHThuqdtIHF1YW4gdHLhu41uZyBs4bubbiDEkeG7kWkgduG7m2kgY8awIGTDom4gxJHhu4thIHBoxrDGoW5nLjxicj5U4burIGfhu5FjOiA8c3Ryb25nPklNUE9SVEFOVDwvc3Ryb25nPiAodMOtbmggdOG7qzogcXVhbiB0cuG7jW5nKS48YnI+Q+G6pXUgdHLDumMgJ2JlIG9mICsgKGFkaikgKyBOb3VuJyAodsOtIGThu6U6IG9mIGdyZWF0IGltcG9ydGFuY2UgPSBy4bqldCBxdWFuIHRy4buNbmcpLiBD4bqnbiDEkWnhu4FuIGRhbmggdOG7qyA8c3Ryb25nPmltcG9ydGFuY2U8L3N0cm9uZz4uIn0seyJpZCI6NDMsInR5cGUiOiJnYXBfZmlsbF90ZXh0IiwicXVlc3Rpb25IVE1MIjoiNDMuIFRoZSBtYWluIHt7Ymxhbms6YjF9fSB0byB0aGUgcGFyayBpcyBvbiB0aGUgZWFzdCBzaWRlLiAoRU5URVIpIiwiYmxhbmtzIjpbeyJibGFua0lkIjoiYjEiLCJjb3JyZWN0QW5zd2VycyI6WyJlbnRyYW5jZSJdfV0sImV4cGxhbmF0aW9uSFRNTCI6IkThu4tjaDogTOG7kWkgdsOgbyBjaMOtbmggY+G7p2EgY8O0bmcgdmnDqm4gbuG6sW0g4bufIHBow61hIMSRw7RuZy48YnI+VOG7qyBn4buRYzogPHN0cm9uZz5FTlRFUjwvc3Ryb25nPiAoxJHhu5luZyB04burOiDEkWkgdsOgbykuPGJyPlNhdSBt4bqhbyB04burICdUaGUnIHbDoCB0w61uaCB04burICdtYWluJyBj4bqnbiBkYW5oIHThu6suIERhbmggdOG7qyBj4bunYSBlbnRlciBsw6AgPHN0cm9uZz5lbnRyYW5jZTwvc3Ryb25nPiAobOG7kWkgdsOgbykuIn0seyJpZCI6NDQsInR5cGUiOiJnYXBfZmlsbF90ZXh0IiwicXVlc3Rpb25IVE1MIjoiNDQuIEFmdGVyIHRoZSByZW5vdmF0aW9uLCB0aGUgb2xkIHN0YXRpb24gd2FzIGFsbW9zdCB7e2JsYW5rOmIxfX0uIChSRUNPR05JU0UpIiwiYmxhbmtzIjpbeyJibGFua0lkIjoiYjEiLCJjb3JyZWN0QW5zd2VycyI6WyJ1bnJlY29nbmlzYWJsZSIsInVucmVjb2duaXphYmxlIl19XSwiZXhwbGFuYXRpb25IVE1MIjoiROG7i2NoOiBTYXUga2hpIGPhuqNpIHThuqFvLCBuaMOgIGdhIGPFqSBn4bqnbiBuaMawIGtow7RuZyB0aOG7gyBuaOG6rW4gcmEuPGJyPlThu6sgZ+G7kWM6IDxzdHJvbmc+UkVDT0dOSVNFPC9zdHJvbmc+ICjEkeG7mW5nIHThu6s6IG5o4bqtbiByYSkuPGJyPkPhuqduIHTDrW5oIHThu6sgbWFuZyBuZ2jEqWEgcGjhu6cgxJHhu4tuaCAodsOsIHRoYXkgxJHhu5VpIHF1w6Egbmhp4buBdSBraGnhur9uIGtow7RuZyBuaOG6rW4gcmEgxJHGsOG7o2MgbuG7r2EpOiA8c3Ryb25nPnVucmVjb2duaXNhYmxlPC9zdHJvbmc+IChob+G6t2MgdW5yZWNvZ25pemFibGUpLiJ9LHsiaWQiOjQ1LCJ0eXBlIjoiZ2FwX2ZpbGxfdGV4dCIsInF1ZXN0aW9uSFRNTCI6IjQ1LiBUaGUge3tibGFuazpiMX19IGdpdmVzIGRldGFpbHMgb2YgYWxsIHRyYWluIGRlcGFydHVyZXMuIChUSU1FKSIsImJsYW5rcyI6W3siYmxhbmtJZCI6ImIxIiwiY29ycmVjdEFuc3dlcnMiOlsidGltZXRhYmxlIl19XSwiZXhwbGFuYXRpb25IVE1MIjoiROG7i2NoOiBM4buLY2ggdHLDrG5oIGN1bmcgY+G6pXAgY2hpIHRp4bq/dCB24buBIHThuqV0IGPhuqMgY8OhYyBjaHV54bq/biB0w6B1IGto4bufaSBow6BuaC48YnI+VOG7qyBn4buRYzogPHN0cm9uZz5USU1FPC9zdHJvbmc+IChkYW5oIHThu6s6IHRo4budaSBnaWFuKS48YnI+VOG7qyB24buxbmcgY2jhu4kgYuG6o25nIGdp4budIHTDoHUveGUsIGzhu4tjaCB0csOsbmggbMOgIGRhbmggdOG7qyBnaMOpcCA8c3Ryb25nPnRpbWV0YWJsZTwvc3Ryb25nPi4ifSx7ImlkIjo0NiwidHlwZSI6ImdhcF9maWxsX3RleHQiLCJxdWVzdGlvbkhUTUwiOiI0Ni4gVGhlIGFpcmxpbmUgaXMge3tibGFuazpiMX19IGltcHJvdmluZyBpdHMgc2FmZXR5IHByb2NlZHVyZXMuIChDT05USU5VRSkiLCJibGFua3MiOlt7ImJsYW5rSWQiOiJiMSIsImNvcnJlY3RBbnN3ZXJzIjpbImNvbnRpbnVhbGx5IiwiY29udGludW91c2x5Il19XSwiZXhwbGFuYXRpb25IVE1MIjoiROG7i2NoOiBIw6NuZyBow6BuZyBraMO0bmcgxJFhbmcgbGnDqm4gdOG7pWMgY+G6o2kgdGhp4buHbiBjw6FjIHF1eSB0csOsbmggYW4gdG/DoG4gY+G7p2EgbcOsbmguPGJyPlThu6sgZ+G7kWM6IDxzdHJvbmc+Q09OVElOVUU8L3N0cm9uZz4gKMSR4buZbmcgdOG7qzogdGnhur9wIHThu6VjKS48YnI+xJDhu6luZyBnaeG7r2EgdHLhu6MgxJHhu5luZyB04burICdpcycgdsOgIMSR4buZbmcgdOG7qyBjaMOtbmggJ2ltcHJvdmluZycgKHRow6wgSFRURCkgY+G6p24gdHLhuqFuZyB04burIGLhu5UgbmdoxKlhIGNobyDEkeG7mW5nIHThu6s6IDxzdHJvbmc+Y29udGludWFsbHk8L3N0cm9uZz4gaG/hurdjIDxzdHJvbmc+Y29udGludW91c2x5PC9zdHJvbmc+LiJ9LHsiaWQiOjQ3LCJ0eXBlIjoiZ2FwX2ZpbGxfdGV4dCIsInF1ZXN0aW9uSFRNTCI6IjQ3LiBUaGUgdHJpcCB3YXMgc28gc3BlY2lhbCB0aGF0IGl0IGJlY2FtZSBhIHZlcnkge3tibGFuazpiMX19IGV4cGVyaWVuY2UuIChNRU1PUlkpIiwiYmxhbmtzIjpbeyJibGFua0lkIjoiYjEiLCJjb3JyZWN0QW5zd2VycyI6WyJtZW1vcmFibGUiXX1dLCJleHBsYW5hdGlvbkhUTUwiOiJE4buLY2g6IENodXnhur9uIMSRaSBxdcOhIMSR4bq3YyBiaeG7h3QgxJHhur9uIG7hu5dpIG7DsyB0cuG7nyB0aMOgbmggbeG7mXQgdHLhuqNpIG5naGnhu4dtIHLhuqV0IMSRw6FuZyBuaOG7my48YnI+VOG7qyBn4buRYzogPHN0cm9uZz5NRU1PUlk8L3N0cm9uZz4gKGRhbmggdOG7qzogdHLDrSBuaOG7mywga+G7tyBuaeG7h20pLjxicj5Ucsaw4bubYyBkYW5oIHThu6sgJ2V4cGVyaWVuY2UnIGPhuqduIHTDrW5oIHThu6suIFTDrW5oIHThu6sgY+G7p2EgbWVtb3J5IGzDoCA8c3Ryb25nPm1lbW9yYWJsZTwvc3Ryb25nPiAoxJHDoW5nIG5o4bubKS4ifSx7ImlkIjo0OCwidHlwZSI6ImdhcF9maWxsX3RleHQiLCJxdWVzdGlvbkhUTUwiOiI0OC4gVGhlIGluc3VyYW5jZSBwb2xpY3kgcHJvdmlkZXMgd29ybGR3aWRlIHRyYXZlbCB7e2JsYW5rOmIxfX0uIChDT1ZFUikiLCJibGFua3MiOlt7ImJsYW5rSWQiOiJiMSIsImNvcnJlY3RBbnN3ZXJzIjpbImNvdmVyYWdlIl19XSwiZXhwbGFuYXRpb25IVE1MIjoiROG7i2NoOiBI4bujcCDEkeG7k25nIGLhuqNvIGhp4buDbSBjdW5nIGPhuqVwIHBo4bqhbSB2aSBi4bqjbyBoaeG7g20gZHUgbOG7i2NoIHRyw6puIHRvw6BuIHRo4bq/IGdp4bubaS48YnI+VOG7qyBn4buRYzogPHN0cm9uZz5DT1ZFUjwvc3Ryb25nPiAoxJHhu5luZyB04burL2RhbmggdOG7qzogYmFvIHBo4bunLCB24buPIGLhu41jKS48YnI+VOG7qyB24buxbmcgZMO5bmcgdHJvbmcgbmfhu68gY+G6o25oIGLhuqNvIGhp4buDbSAoc+G7sSBi4bqjbyBoaeG7g20sIHBo4bqhbSB2aSBi4bqjbyBoaeG7g20pIGzDoCBkYW5oIHThu6sgPHN0cm9uZz5jb3ZlcmFnZTwvc3Ryb25nPi4ifSx7ImlkIjo0OSwidHlwZSI6InNlbnRlbmNlX3Jld3JpdGUiLCJvcmlnaW5hbFNlbnRlbmNlSFRNTCI6IjQ5LiBXZSBzdGFydGVkIG91ciBqb3VybmV5IHZlcnkgZWFybHkgaW4gdGhlIG1vcm5pbmcuIChTRVQpIiwicXVlc3Rpb25IVE1MIjoi4oaSIFdlIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fXyB2ZXJ5IGVhcmx5IGluIHRoZSBtb3JuaW5nLiIsInNhbXBsZUFuc3dlcnMiOlsiV2Ugc2V0IG9mZiB2ZXJ5IGVhcmx5IGluIHRoZSBtb3JuaW5nLiJdLCJleHBsYW5hdGlvbkhUTUwiOiJE4buLY2g6IENow7puZyB0w7RpIGLhuq90IMSR4bqndSBow6BuaCB0csOsbmggcuG6pXQgc+G7m20gdsOgbyBideG7lWkgc8OhbmcuPGJyPkPhuqV1IHRyw7pjOiA8c3Ryb25nPnNldCBvZmY8L3N0cm9uZz4gKHBocmFzYWwgdmVyYikgbWFuZyBuZ2jEqWEga2jhu59pIGjDoG5oLCBi4bqvdCDEkeG6p3UgbeG7mXQgY2h1eeG6v24gxJFpLCB0xrDGoW5nIMSRxrDGoW5nIHbhu5tpICdzdGFydCBhIGpvdXJuZXknLiIsImNvcnJlY3RBbnN3ZXJzIjpbIldlIHNldCBvZmYgdmVyeSBlYXJseSBpbiB0aGUgbW9ybmluZy4iXX0seyJpZCI6NTAsInR5cGUiOiJzZW50ZW5jZV9yZXdyaXRlIiwib3JpZ2luYWxTZW50ZW5jZUhUTUwiOiI1MC4gQ291bGQgeW91IGNvbGxlY3QgbWUgYXQgdGhlIGFpcnBvcnQgYXQgOCBwLm0uPyAoUElDSykiLCJxdWVzdGlvbkhUTUwiOiLihpIgQ291bGQgeW91IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fXyBhdCB0aGUgYWlycG9ydCBhdCA4IHAubS4/Iiwic2FtcGxlQW5zd2VycyI6WyJDb3VsZCB5b3UgcGljayBtZSB1cCBhdCB0aGUgYWlycG9ydCBhdCA4IHAubS4/Il0sImV4cGxhbmF0aW9uSFRNTCI6IkThu4tjaDogQuG6oW4gY8OzIHRo4buDIMSRw7NuIHTDtGkgdOG6oWkgc8OibiBiYXkgbMO6YyA4IGdp4budIHThu5FpIGtow7RuZz88YnI+Q+G6pXUgdHLDumM6IDxzdHJvbmc+cGljayBzb21lb25lIHVwPC9zdHJvbmc+IG5naMSpYSBsw6AgxJHDs24gYWkgxJHDsywgdMawxqFuZyDEkcawxqFuZyAnY29sbGVjdCBzb21lb25lJy4iLCJjb3JyZWN0QW5zd2VycyI6WyJDb3VsZCB5b3UgcGljayBtZSB1cCBhdCB0aGUgYWlycG9ydCBhdCA4IHAubS4/Il19LHsiaWQiOjUxLCJ0eXBlIjoic2VudGVuY2VfcmV3cml0ZSIsIm9yaWdpbmFsU2VudGVuY2VIVE1MIjoiNTEuIFdlIHdlbnQgdG8gdGhlIHN0YXRpb24gdG8gc2F5IGdvb2RieWUgdG8gb3VyIGZyaWVuZHMuIChTRUUpIiwicXVlc3Rpb25IVE1MIjoi4oaSIFdlIHdlbnQgdG8gdGhlIHN0YXRpb24gdG8gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fLiIsInNhbXBsZUFuc3dlcnMiOlsiV2Ugd2VudCB0byB0aGUgc3RhdGlvbiB0byBzZWUgb3VyIGZyaWVuZHMgb2ZmLiJdLCJleHBsYW5hdGlvbkhUTUwiOiJE4buLY2g6IENow7puZyB0w7RpIMSR4bq/biBuaMOgIGdhIMSR4buDIHRp4buFbiBi4bqhbiBiw6guPGJyPkPhuqV1IHRyw7pjOiA8c3Ryb25nPnNlZSBzb21lb25lIG9mZjwvc3Ryb25nPiBuZ2jEqWEgbMOgIHRp4buFbiBhaSDEkcOzLCB0xrDGoW5nIMSRxrDGoW5nICdzYXkgZ29vZGJ5ZSB0byBzb21lb25lJy4iLCJjb3JyZWN0QW5zd2VycyI6WyJXZSB3ZW50IHRvIHRoZSBzdGF0aW9uIHRvIHNlZSBvdXIgZnJpZW5kcyBvZmYuIl19LHsiaWQiOjUyLCJ0eXBlIjoic2VudGVuY2VfcmV3cml0ZSIsIm9yaWdpbmFsU2VudGVuY2VIVE1MIjoiNTIuIFRoZSBkcml2ZXIgc3RvcHBlZCBiZXNpZGUgdGhlIHJvYWQuIChQVUxMKSIsInF1ZXN0aW9uSFRNTCI6IuKGkiBUaGUgZHJpdmVyIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fXyBiZXNpZGUgdGhlIHJvYWQuIiwic2FtcGxlQW5zd2VycyI6WyJUaGUgZHJpdmVyIHB1bGxlZCBpbiBiZXNpZGUgdGhlIHJvYWQuIl0sImV4cGxhbmF0aW9uSFRNTCI6IkThu4tjaDogVMOgaSB44bq/IMSRw6MgZOG7q25nIHhlIGLDqm4gbOG7gSDEkcaw4budbmcuPGJyPkPhuqV1IHRyw7pjOiA8c3Ryb25nPnB1bGwgaW48L3N0cm9uZz4gbmdoxKlhIGzDoCB04bqlcCB4ZSB2w6BvIGzhu4EsIGThu6tuZyB4ZSwgdMawxqFuZyDEkcawxqFuZyAnc3RvcCcuIiwiY29ycmVjdEFuc3dlcnMiOlsiVGhlIGRyaXZlciBwdWxsZWQgaW4gYmVzaWRlIHRoZSByb2FkLiJdfSx7ImlkIjo1MywidHlwZSI6InNlbnRlbmNlX3Jld3JpdGUiLCJvcmlnaW5hbFNlbnRlbmNlSFRNTCI6IjUzLiBXZSByZXR1cm5lZCBob21lIGFmdGVyIGEgd2VlayBhYnJvYWQuIChCQUNLKSIsInF1ZXN0aW9uSFRNTCI6IuKGkiBXZSBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX18gYWZ0ZXIgYSB3ZWVrIGFicm9hZC4iLCJzYW1wbGVBbnN3ZXJzIjpbIldlIGdvdCBiYWNrIGFmdGVyIGEgd2VlayBhYnJvYWQuIl0sImV4cGxhbmF0aW9uSFRNTCI6IkThu4tjaDogQ2jDum5nIHTDtGkgxJHDoyB0cuG7nyB24buBIG5ow6Agc2F1IG3hu5l0IHR14bqnbiDhu58gbsaw4bubYyBuZ2/DoGkuPGJyPkPhuqV1IHRyw7pjOiA8c3Ryb25nPmdldCBiYWNrPC9zdHJvbmc+IG5naMSpYSBsw6AgcXVheSB0cuG7nyB24buBLCB0xrDGoW5nIMSRxrDGoW5nICdyZXR1cm4nLiIsImNvcnJlY3RBbnN3ZXJzIjpbIldlIGdvdCBiYWNrIGFmdGVyIGEgd2VlayBhYnJvYWQuIl19LHsiaWQiOjU0LCJ0eXBlIjoic2VudGVuY2VfcmV3cml0ZSIsIm9yaWdpbmFsU2VudGVuY2VIVE1MIjoiNTQuIFRoZSBidXMgc3RvcHBlZCB0byBsZXQgdGhlIHBhc3NlbmdlcnMgZ2V0IG91dC4gKERST1ApIiwicXVlc3Rpb25IVE1MIjoi4oaSIFRoZSBidXMgc3RvcHBlZCB0byBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX18uIiwic2FtcGxlQW5zd2VycyI6WyJUaGUgYnVzIHN0b3BwZWQgdG8gZHJvcCB0aGUgcGFzc2VuZ2VycyBvZmYuIl0sImV4cGxhbmF0aW9uSFRNTCI6IkThu4tjaDogWGUgYnXDvXQgZOG7q25nIGzhuqFpIMSR4buDIGNobyBow6BuaCBraMOhY2ggeHXhu5FuZy48YnI+Q+G6pXUgdHLDumM6IDxzdHJvbmc+ZHJvcCBzb21lb25lIG9mZjwvc3Ryb25nPiBuZ2jEqWEgbMOgIGNobyBhaSB4deG7kW5nIHhlLCB0xrDGoW5nIMSRxrDGoW5nICdsZXQgc29tZW9uZSBnZXQgb3V0Jy4iLCJjb3JyZWN0QW5zd2VycyI6WyJUaGUgYnVzIHN0b3BwZWQgdG8gZHJvcCB0aGUgcGFzc2VuZ2VycyBvZmYuIl19LHsiaWQiOjU1LCJ0eXBlIjoic2VudGVuY2VfcmV3cml0ZSIsIm9yaWdpbmFsU2VudGVuY2VIVE1MIjoiNTUuIFdlIGFyZSBnb2luZyB0b3dhcmRzIHRoZSBhaXJwb3J0IG5vdy4gKE1BS0lORykiLCJxdWVzdGlvbkhUTUwiOiLihpIgV2UgYXJlIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fXyB0aGUgYWlycG9ydCBub3cuIiwic2FtcGxlQW5zd2VycyI6WyJXZSBhcmUgbWFraW5nIGZvciB0aGUgYWlycG9ydCBub3cuIl0sImV4cGxhbmF0aW9uSFRNTCI6IkThu4tjaDogQ2jDum5nIHTDtGkgxJFhbmcgaMaw4bubbmcgduG7gSBwaMOtYSBzw6JuIGJheSBiw6J5IGdp4budLjxicj5D4bqldSB0csO6YzogPHN0cm9uZz5tYWtlIGZvcjwvc3Ryb25nPiBuZ2jEqWEgbMOgIMSRaSB24buBIGjGsOG7m25nIG7DoG8gxJHDsywgdGnhur9uIHThu5tpLCB0xrDGoW5nIMSRxrDGoW5nICdnbyB0b3dhcmRzJy4iLCJjb3JyZWN0QW5zd2VycyI6WyJXZSBhcmUgbWFraW5nIGZvciB0aGUgYWlycG9ydCBub3cuIl19LHsiaWQiOjU2LCJ0eXBlIjoic2VudGVuY2VfcmV3cml0ZSIsIm9yaWdpbmFsU2VudGVuY2VIVE1MIjoiNTYuIFdlIG5lZWQgdG8gcmVnaXN0ZXIgYXQgdGhlIGhvdGVsIGJlZm9yZSAyIHAubS4gKENIRUNLKSIsInF1ZXN0aW9uSFRNTCI6IuKGkiBXZSBuZWVkIHRvIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fXyBiZWZvcmUgMiBwLm0uIiwic2FtcGxlQW5zd2VycyI6WyJXZSBuZWVkIHRvIGNoZWNrIGluIGJlZm9yZSAyIHAubS4iXSwiZXhwbGFuYXRpb25IVE1MIjoiROG7i2NoOiBDaMO6bmcgdMO0aSBj4bqnbiBsw6BtIHRo4bunIHThu6VjIG5o4bqtbiBwaMOybmcga2jDoWNoIHPhuqFuIHRyxrDhu5tjIDIgZ2nhu50gY2hp4buBdS48YnI+Q+G6pXUgdHLDumM6IDxzdHJvbmc+Y2hlY2sgaW48L3N0cm9uZz4gbmdoxKlhIGzDoCDEkcSDbmcga8O9LCBsw6BtIHRo4bunIHThu6VjIG5o4bqtbiBwaMOybmcsIHTGsMahbmcgxJHGsMahbmcgJ3JlZ2lzdGVyIGF0IGEgaG90ZWwnLiIsImNvcnJlY3RBbnN3ZXJzIjpbIldlIG5lZWQgdG8gY2hlY2sgaW4gYmVmb3JlIDIgcC5tLiJdfSx7ImlkIjo1NywidHlwZSI6InNlbnRlbmNlX3Jld3JpdGUiLCJvcmlnaW5hbFNlbnRlbmNlSFRNTCI6IjU3LiBXZSBtdXN0IGxlYXZlIHRoZSBob3RlbCBieSAxMSBhLm0uIChDSEVDSykiLCJxdWVzdGlvbkhUTUwiOiLihpIgV2UgbXVzdCBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX18gYnkgMTEgYS5tLiIsInNhbXBsZUFuc3dlcnMiOlsiV2UgbXVzdCBjaGVjayBvdXQgYnkgMTEgYS5tLiJdLCJleHBsYW5hdGlvbkhUTUwiOiJE4buLY2g6IENow7puZyB0w7RpIHBo4bqjaSB0cuG6oyBwaMOybmcga2jDoWNoIHPhuqFuIHRyxrDhu5tjIDExIGdp4budIHRyxrBhLjxicj5D4bqldSB0csO6YzogPHN0cm9uZz5jaGVjayBvdXQ8L3N0cm9uZz4gbmdoxKlhIGzDoCBsw6BtIHRo4bunIHThu6VjIHRy4bqjIHBow7JuZywgcuG7nWkga2jDoWNoIHPhuqFuLCB0xrDGoW5nIMSRxrDGoW5nICdsZWF2ZSBhIGhvdGVsJy4iLCJjb3JyZWN0QW5zd2VycyI6WyJXZSBtdXN0IGNoZWNrIG91dCBieSAxMSBhLm0uIl19LHsiaWQiOjU4LCJ0eXBlIjoic2VudGVuY2VfcmV3cml0ZSIsIm9yaWdpbmFsU2VudGVuY2VIVE1MIjoiNTguIFNoZSBmaW5hbGx5IHJlYWNoZWQgdGhlIHNhbWUgbGV2ZWwgYXMgdGhlIG90aGVyIHJ1bm5lcnMuIChDQVRDSCkiLCJxdWVzdGlvbkhUTUwiOiLihpIgU2hlIGZpbmFsbHkgbWFuYWdlZCB0byBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX18gdGhlIG90aGVyIHJ1bm5lcnMuIiwic2FtcGxlQW5zd2VycyI6WyJTaGUgZmluYWxseSBtYW5hZ2VkIHRvIGNhdGNoIHVwIHdpdGggdGhlIG90aGVyIHJ1bm5lcnMuIl0sImV4cGxhbmF0aW9uSFRNTCI6IkThu4tjaDogQ3Xhu5FpIGPDuW5nIGPDtCDhuqV5IMSRw6MgYuG6r3Qga+G7i3Agbmjhu69uZyBuZ8aw4budaSBjaOG6oXkga2jDoWMuPGJyPkPhuqV1IHRyw7pjOiA8c3Ryb25nPmNhdGNoIHVwIHdpdGg8L3N0cm9uZz4gbmdoxKlhIGzDoCBi4bqvdCBr4buLcCwgxJF14buVaSBr4buLcCBhaSDEkcOzLCB0xrDGoW5nIMSRxrDGoW5nICdyZWFjaCB0aGUgc2FtZSBsZXZlbCBhcycuIiwiY29ycmVjdEFuc3dlcnMiOlsiU2hlIGZpbmFsbHkgbWFuYWdlZCB0byBjYXRjaCB1cCB3aXRoIHRoZSBvdGhlciBydW5uZXJzLiJdfSx7ImlkIjo1OSwidHlwZSI6InNlbnRlbmNlX3Jld3JpdGUiLCJvcmlnaW5hbFNlbnRlbmNlSFRNTCI6IjU5LiBXZSB2aXNpdGVkIHRoZSBtYWluIHRvdXJpc3QgYXR0cmFjdGlvbnMgaW4gUm9tZS4gKFNJR0hUUykiLCJxdWVzdGlvbkhUTUwiOiLihpIgV2UgX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fIGluIFJvbWUuIiwic2FtcGxlQW5zd2VycyI6WyJXZSBzYXcgdGhlIHNpZ2h0cyBpbiBSb21lLiJdLCJleHBsYW5hdGlvbkhUTUwiOiJE4buLY2g6IENow7puZyB0w7RpIMSRw6MgdGhhbSBxdWFuIGPDoWMgxJFp4buDbSBkdSBs4buLY2ggY2jDrW5oIOG7nyBSb21lLjxicj5D4bqldSB0csO6YzogPHN0cm9uZz5zZWUgdGhlIHNpZ2h0czwvc3Ryb25nPiBuZ2jEqWEgbMOgIG5n4bqvbSBj4bqjbmgsIHRoYW0gcXVhbiBkYW5oIGxhbSB0aOG6r25nIGPhuqNuaCwgdMawxqFuZyDEkcawxqFuZyAndmlzaXQgdG91cmlzdCBhdHRyYWN0aW9ucycuIiwiY29ycmVjdEFuc3dlcnMiOlsiV2Ugc2F3IHRoZSBzaWdodHMgaW4gUm9tZS4iXX0seyJpZCI6NjAsInR5cGUiOiJzZW50ZW5jZV9yZXdyaXRlIiwib3JpZ2luYWxTZW50ZW5jZUhUTUwiOiI2MC4gSGUgdHJhdmVsbGVkIHdpdGggdmVyeSBsaXR0bGUgbHVnZ2FnZS4gKExJR0hUKSIsInF1ZXN0aW9uSFRNTCI6IuKGkiBIZSBkZWNpZGVkIHRvIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fXy4iLCJzYW1wbGVBbnN3ZXJzIjpbIkhlIGRlY2lkZWQgdG8gdHJhdmVsIGxpZ2h0LiJdLCJleHBsYW5hdGlvbkhUTUwiOiJE4buLY2g6IEFuaCDhuqV5IMSRaSBkdSBs4buLY2ggduG7m2kgcuG6pXQgw610IGjDoG5oIGzDvS48YnI+Q+G6pXUgdHLDumM6IDxzdHJvbmc+dHJhdmVsIGxpZ2h0PC9zdHJvbmc+IChpZGlvbSkgbmdoxKlhIGzDoCDEkWkgZHUgbOG7i2NoIG1hbmcgdGhlbyDDrXQgaMOgbmggbMO9LCB0xrDGoW5nIMSRxrDGoW5nICd0cmF2ZWwgd2l0aCB2ZXJ5IGxpdHRsZSBsdWdnYWdlJy4iLCJjb3JyZWN0QW5zd2VycyI6WyJIZSBkZWNpZGVkIHRvIHRyYXZlbCBsaWdodC4iXX0seyJpZCI6NjEsInR5cGUiOiJzZW50ZW5jZV9yZXdyaXRlIiwib3JpZ2luYWxTZW50ZW5jZUhUTUwiOiI2MS4gVGhleSBzdGF5ZWQgaW4gcmVtb3RlIHBsYWNlcyB0aGF0IHRvdXJpc3RzIHJhcmVseSB2aXNpdC4gKEJFQVRFTikiLCJxdWVzdGlvbkhUTUwiOiLihpIgVGhleSB0cmF2ZWxsZWQgX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fLiIsInNhbXBsZUFuc3dlcnMiOlsiVGhleSB0cmF2ZWxsZWQgb2ZmIHRoZSBiZWF0ZW4gdHJhY2suIiwiVGhleSB0cmF2ZWxsZWQgb2ZmIHRoZSBiZWF0ZW4gcGF0aC4iXSwiZXhwbGFuYXRpb25IVE1MIjoiROG7i2NoOiBI4buNIOG7nyBuaOG7r25nIG7GoWkgaOG6u28gbMOhbmggbcOgIGtow6FjaCBkdSBs4buLY2ggaGnhur9tIGtoaSBnaMOpIHRoxINtLjxicj5D4bqldSB0csO6YzogPHN0cm9uZz5vZmYgdGhlIGJlYXRlbiB0cmFjayAvIHBhdGg8L3N0cm9uZz4gKGlkaW9tKSBuZ2jEqWEgbMOgIOG7nyBuxqFpIHhhIHjDtGkgaOG6u28gbMOhbmgsIMOtdCBuZ8aw4budaSBiaeG6v3QgxJHhur9uLCB0xrDGoW5nIMSRxrDGoW5nICdyZW1vdGUgcGxhY2VzJy4iLCJjb3JyZWN0QW5zd2VycyI6WyJUaGV5IHRyYXZlbGxlZCBvZmYgdGhlIGJlYXRlbiB0cmFjay4iLCJUaGV5IHRyYXZlbGxlZCBvZmYgdGhlIGJlYXRlbiBwYXRoLiJdfSx7ImlkIjo2MiwidHlwZSI6InNlbnRlbmNlX3Jld3JpdGUiLCJvcmlnaW5hbFNlbnRlbmNlSFRNTCI6IjYyLiBIZSBjYXJyaWVzIGFsbCBoaXMgYmVsb25naW5ncyBiZWNhdXNlIGhlIGlzIGNvbnN0YW50bHkgdHJhdmVsbGluZy4gKFNVSVRDQVNFKSIsInF1ZXN0aW9uSFRNTCI6IuKGkiBIZSBpcyBjb25zdGFudGx5IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fXy4iLCJzYW1wbGVBbnN3ZXJzIjpbIkhlIGlzIGNvbnN0YW50bHkgbGl2aW5nIG91dCBvZiBhIHN1aXRjYXNlLiJdLCJleHBsYW5hdGlvbkhUTUwiOiJE4buLY2g6IEFuaCDhuqV5IG1hbmcgdGhlbyBt4buNaSDEkeG7kyDEkeG6oWMgdsOsIHBo4bqjaSBsacOqbiB04bulYyBkaSBjaHV54buDbi48YnI+Q+G6pXUgdHLDumM6IDxzdHJvbmc+bGl2ZSBvdXQgb2YgYSBzdWl0Y2FzZTwvc3Ryb25nPiAoaWRpb20pIG5naMSpYSBsw6AgZGkgY2h1eeG7g24gbGnDqm4gdOG7pWMsIHPhu5FuZyByw6B5IMSRw6J5IG1haSDEkcOzLCBjaOG7iSBtYW5nIHRoZW8gbmjhu69uZyB0aOG7qSBj4bqnbiB0aGnhur90IHRyb25nIHZhbGkuIiwiY29ycmVjdEFuc3dlcnMiOlsiSGUgaXMgY29uc3RhbnRseSBsaXZpbmcgb3V0IG9mIGEgc3VpdGNhc2UuIl19LHsiaWQiOjYzLCJ0eXBlIjoic2VudGVuY2VfcmV3cml0ZSIsIm9yaWdpbmFsU2VudGVuY2VIVE1MIjoiNjMuIFdlIGFycmFuZ2VkIGV2ZXJ5dGhpbmcgYmVmb3JlIHRoZSB0cmlwLiAoQURWQU5DRSkiLCJxdWVzdGlvbkhUTUwiOiLihpIgV2UgYXJyYW5nZWQgZXZlcnl0aGluZyBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX18uIiwic2FtcGxlQW5zd2VycyI6WyJXZSBhcnJhbmdlZCBldmVyeXRoaW5nIGluIGFkdmFuY2UuIl0sImV4cGxhbmF0aW9uSFRNTCI6IkThu4tjaDogQ2jDum5nIHTDtGkgxJHDoyBz4bqvcCB44bq/cCBt4buNaSB0aOG7qSB0csaw4bubYyBjaHV54bq/biDEkWkuPGJyPkPhuqV1IHRyw7pjOiA8c3Ryb25nPmluIGFkdmFuY2U8L3N0cm9uZz4gbmdoxKlhIGzDoCBsw6BtIHRyxrDhu5tjICh24buBIHRo4budaSBnaWFuKSwgdMawxqFuZyDEkcawxqFuZyAnYmVmb3JlJy4iLCJjb3JyZWN0QW5zd2VycyI6WyJXZSBhcnJhbmdlZCBldmVyeXRoaW5nIGluIGFkdmFuY2UuIl19LHsiaWQiOjY0LCJ0eXBlIjoic2VudGVuY2VfcmV3cml0ZSIsIm9yaWdpbmFsU2VudGVuY2VIVE1MIjoiNjQuIEkgZG9uJ3Qga25vdyB0aGUgYW5zd2VyIGltbWVkaWF0ZWx5IHdpdGhvdXQgY2hlY2tpbmcuIChIRUFEKSIsInF1ZXN0aW9uSFRNTCI6IuKGkiBJIGRvbid0IGtub3cgdGhlIGFuc3dlciBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX18uIiwic2FtcGxlQW5zd2VycyI6WyJJIGRvbid0IGtub3cgdGhlIGFuc3dlciBvZmYgdGhlIHRvcCBvZiBteSBoZWFkLiJdLCJleHBsYW5hdGlvbkhUTUwiOiJE4buLY2g6IFTDtGkga2jDtG5nIGJp4bq/dCBuZ2F5IGPDonUgdHLhuqMgbOG7nWkgbcOgIGtow7RuZyBj4bqnbiBraeG7g20gdHJhLjxicj5D4bqldSB0csO6YzogPHN0cm9uZz5vZmYgdGhlIHRvcCBvZiBvbmUncyBoZWFkPC9zdHJvbmc+IChpZGlvbSkgbmdoxKlhIGzDoCBuaOG7myByYSBuZ2F5IGzhuq1wIHThu6ljLCBi4bqtdCByYSB0cm9uZyDEkeG6p3UgbcOgIGtow7RuZyBj4bqnbiBzdXkgbmdoxKkgaGF5IHRyYSBj4bupdSwgdMawxqFuZyDEkcawxqFuZyAnaW1tZWRpYXRlbHkgd2l0aG91dCBjaGVja2luZycuIiwiY29ycmVjdEFuc3dlcnMiOlsiSSBkb24ndCBrbm93IHRoZSBhbnN3ZXIgb2ZmIHRoZSB0b3Agb2YgbXkgaGVhZC4iXX1d';
     
-    // SENTENCE REWRITE (49-64)
-    { id: 49, type: 'sentence_rewrite', originalSentenceHTML: "49. We started our journey very early in the morning. (SET)", questionHTML: "→ We ______________________________ very early in the morning.", sampleAnswers: ["We set off very early in the morning."], explanationHTML: "Dịch: Chúng tôi bắt đầu hành trình rất sớm vào buổi sáng.<br>Cấu trúc: <strong>set off</strong> (phrasal verb) mang nghĩa khởi hành, bắt đầu một chuyến đi, tương đương với 'start a journey'." },
-    { id: 50, type: 'sentence_rewrite', originalSentenceHTML: "50. Could you collect me at the airport at 8 p.m.? (PICK)", questionHTML: "→ Could you ______________________________ at the airport at 8 p.m.?", sampleAnswers: ["Could you pick me up at the airport at 8 p.m.?"], explanationHTML: "Dịch: Bạn có thể đón tôi tại sân bay lúc 8 giờ tối không?<br>Cấu trúc: <strong>pick someone up</strong> nghĩa là đón ai đó, tương đương 'collect someone'." },
-    { id: 51, type: 'sentence_rewrite', originalSentenceHTML: "51. We went to the station to say goodbye to our friends. (SEE)", questionHTML: "→ We went to the station to ______________________________.", sampleAnswers: ["We went to the station to see our friends off."], explanationHTML: "Dịch: Chúng tôi đến nhà ga để tiễn bạn bè.<br>Cấu trúc: <strong>see someone off</strong> nghĩa là tiễn ai đó, tương đương 'say goodbye to someone'." },
-    { id: 52, type: 'sentence_rewrite', originalSentenceHTML: "52. The driver stopped beside the road. (PULL)", questionHTML: "→ The driver ______________________________ beside the road.", sampleAnswers: ["The driver pulled in beside the road."], explanationHTML: "Dịch: Tài xế đã dừng xe bên lề đường.<br>Cấu trúc: <strong>pull in</strong> nghĩa là tấp xe vào lề, dừng xe, tương đương 'stop'." },
-    { id: 53, type: 'sentence_rewrite', originalSentenceHTML: "53. We returned home after a week abroad. (BACK)", questionHTML: "→ We ______________________________ after a week abroad.", sampleAnswers: ["We got back after a week abroad."], explanationHTML: "Dịch: Chúng tôi đã trở về nhà sau một tuần ở nước ngoài.<br>Cấu trúc: <strong>get back</strong> nghĩa là quay trở về, tương đương 'return'." },
-    { id: 54, type: 'sentence_rewrite', originalSentenceHTML: "54. The bus stopped to let the passengers get out. (DROP)", questionHTML: "→ The bus stopped to ______________________________.", sampleAnswers: ["The bus stopped to drop the passengers off."], explanationHTML: "Dịch: Xe buýt dừng lại để cho hành khách xuống.<br>Cấu trúc: <strong>drop someone off</strong> nghĩa là cho ai xuống xe, tương đương 'let someone get out'." },
-    { id: 55, type: 'sentence_rewrite', originalSentenceHTML: "55. We are going towards the airport now. (MAKING)", questionHTML: "→ We are ______________________________ the airport now.", sampleAnswers: ["We are making for the airport now."], explanationHTML: "Dịch: Chúng tôi đang hướng về phía sân bay bây giờ.<br>Cấu trúc: <strong>make for</strong> nghĩa là đi về hướng nào đó, tiến tới, tương đương 'go towards'." },
-    { id: 56, type: 'sentence_rewrite', originalSentenceHTML: "56. We need to register at the hotel before 2 p.m. (CHECK)", questionHTML: "→ We need to ______________________________ before 2 p.m.", sampleAnswers: ["We need to check in before 2 p.m."], explanationHTML: "Dịch: Chúng tôi cần làm thủ tục nhận phòng khách sạn trước 2 giờ chiều.<br>Cấu trúc: <strong>check in</strong> nghĩa là đăng ký, làm thủ tục nhận phòng, tương đương 'register at a hotel'." },
-    { id: 57, type: 'sentence_rewrite', originalSentenceHTML: "57. We must leave the hotel by 11 a.m. (CHECK)", questionHTML: "→ We must ______________________________ by 11 a.m.", sampleAnswers: ["We must check out by 11 a.m."], explanationHTML: "Dịch: Chúng tôi phải trả phòng khách sạn trước 11 giờ trưa.<br>Cấu trúc: <strong>check out</strong> nghĩa là làm thủ tục trả phòng, rời khách sạn, tương đương 'leave a hotel'." },
-    { id: 58, type: 'sentence_rewrite', originalSentenceHTML: "58. She finally reached the same level as the other runners. (CATCH)", questionHTML: "→ She finally managed to ______________________________ the other runners.", sampleAnswers: ["She finally managed to catch up with the other runners."], explanationHTML: "Dịch: Cuối cùng cô ấy đã bắt kịp những người chạy khác.<br>Cấu trúc: <strong>catch up with</strong> nghĩa là bắt kịp, đuổi kịp ai đó, tương đương 'reach the same level as'." },
-    { id: 59, type: 'sentence_rewrite', originalSentenceHTML: "59. We visited the main tourist attractions in Rome. (SIGHTS)", questionHTML: "→ We ______________________________ in Rome.", sampleAnswers: ["We saw the sights in Rome."], explanationHTML: "Dịch: Chúng tôi đã tham quan các điểm du lịch chính ở Rome.<br>Cấu trúc: <strong>see the sights</strong> nghĩa là ngắm cảnh, tham quan danh lam thắng cảnh, tương đương 'visit tourist attractions'." },
-    { id: 60, type: 'sentence_rewrite', originalSentenceHTML: "60. He travelled with very little luggage. (LIGHT)", questionHTML: "→ He decided to ______________________________.", sampleAnswers: ["He decided to travel light."], explanationHTML: "Dịch: Anh ấy đi du lịch với rất ít hành lý.<br>Cấu trúc: <strong>travel light</strong> (idiom) nghĩa là đi du lịch mang theo ít hành lý, tương đương 'travel with very little luggage'." },
-    { id: 61, type: 'sentence_rewrite', originalSentenceHTML: "61. They stayed in remote places that tourists rarely visit. (BEATEN)", questionHTML: "→ They travelled ______________________________.", sampleAnswers: ["They travelled off the beaten track.", "They travelled off the beaten path."], explanationHTML: "Dịch: Họ ở những nơi hẻo lánh mà khách du lịch hiếm khi ghé thăm.<br>Cấu trúc: <strong>off the beaten track / path</strong> (idiom) nghĩa là ở nơi xa xôi hẻo lánh, ít người biết đến, tương đương 'remote places'." },
-    { id: 62, type: 'sentence_rewrite', originalSentenceHTML: "62. He carries all his belongings because he is constantly travelling. (SUITCASE)", questionHTML: "→ He is constantly ______________________________.", sampleAnswers: ["He is constantly living out of a suitcase."], explanationHTML: "Dịch: Anh ấy mang theo mọi đồ đạc vì phải liên tục di chuyển.<br>Cấu trúc: <strong>live out of a suitcase</strong> (idiom) nghĩa là di chuyển liên tục, sống rày đây mai đó, chỉ mang theo những thứ cần thiết trong vali." },
-    { id: 63, type: 'sentence_rewrite', originalSentenceHTML: "63. We arranged everything before the trip. (ADVANCE)", questionHTML: "→ We arranged everything ______________________________.", sampleAnswers: ["We arranged everything in advance."], explanationHTML: "Dịch: Chúng tôi đã sắp xếp mọi thứ trước chuyến đi.<br>Cấu trúc: <strong>in advance</strong> nghĩa là làm trước (về thời gian), tương đương 'before'." },
-    { id: 64, type: 'sentence_rewrite', originalSentenceHTML: "64. I don't know the answer immediately without checking. (HEAD)", questionHTML: "→ I don't know the answer ______________________________.", sampleAnswers: ["I don't know the answer off the top of my head."], explanationHTML: "Dịch: Tôi không biết ngay câu trả lời mà không cần kiểm tra.<br>Cấu trúc: <strong>off the top of one's head</strong> (idiom) nghĩa là nhớ ra ngay lập tức, bật ra trong đầu mà không cần suy nghĩ hay tra cứu, tương đương 'immediately without checking'." }
-];
-        
-          let state = {};
-
-function normalize(str) {
-    return str ? str.replace(/\u00a0/g, ' ').replace(/[\s\n\r]+/g, ' ').trim() : '';
-}
-
-window.submitted = false;
-
-function init() {
-    const container = document.getElementById('questionsContainer');
-    if (!container) return;
-    container.innerHTML = '';
+(function(){ 'use strict';
+    const QUIZ = eval('(' + decodeURIComponent(escape(atob(''+__B64_QUIZ_DATA__+''))) + ')');
     
-    quizData.forEach((q, index) => {
-      try {
-        if (!q) { console.warn('Bỏ qua câu hỏi rỗng/null tại vị trí index=' + index); return; }
-        if (!q.id) q.id = 'auto_id_' + index;
-        state[q.id] = { checked: false, isCorrect: false, value: null };
-        
-        let block = document.createElement('div');
-        block.className = 'question-block';
-        block.id = 'q-block-' + q.id;
-        
-        let qText = q.questionHTML || q.question || q.text || q.questionText || "";
-        let origText = q.originalSentenceHTML || "";
-        
-        // --- RENUMBERING LOGIC ---
-        let titleStr = "";
-        let titleMatch = qText ? qText.match(/^(<b>.*?<\/b>\s*<br\s*\/?>\s*)/i) : null;
-        if (titleMatch) {
-            titleStr = titleMatch[1];
-            qText = qText.substring(titleMatch[1].length);
+    let audioCtx;
+    function initAudio() { if(!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } }
+    function playTone(freq1, freq2, type, duration, vol) {
+        try {
+            initAudio();
+            let osc = audioCtx.createOscillator();
+            let gain = audioCtx.createGain();
+            osc.type = type;
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.frequency.setValueAtTime(freq1, audioCtx.currentTime);
+            if (freq2) osc.frequency.linearRampToValueAtTime(freq2, audioCtx.currentTime + duration/2);
+            gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        } catch(e){}
+    }
+    function playSelectSound() { playTone(600, null, 'sine', 0.08, 0.15); }
+    function playCorrectSound() { playTone(800, 1200, 'sine', 0.25, 0.2); }
+    function playWrongSound() { playTone(150, null, 'sawtooth', 0.2, 0.12); }
+    function playSubmitSound() { playTone(500, null, 'triangle', 0.12, 0.15); }
+
+    const quizContainer = document.getElementById('questionsContainer');
+    const startScreen = document.getElementById('startScreen');
+    const testScreen = document.getElementById('testScreen');
+    const resultScreen = document.getElementById('resultScreen');
+    const resultDetails = document.getElementById('resultDetails');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const studentNameInput = document.getElementById('studentName');
+    
+    let locked = {}; 
+    let submitted = false;
+    let questions = [];
+
+    const norm = s => String(s ?? '')
+      .normalize('NFC')
+      .replace(/[\u200B-\u200D\uFEFF]/g, '')          
+      .replace(/[\u2018\u2019\u201B\u2032\u00B4`]/g, "'") 
+      .replace(/[\u201C\u201D]/g, '"')
+      .replace(/[\u2013\u2014]/g, '-')
+      .replace(/\u00a0/g, ' ')
+      .replace(/\s+/g, ' ')
+      .replace(/\s+([.,!?;:])/g, '$1')
+      .replace(/[.!?,;:]+$/, '')                       
+      .trim().toLowerCase();
+      
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    
+    function acceptedSet(q) {
+      const set = new Set();
+      (q.correctAnswers || []).forEach(a => set.add(norm(a)));
+      return set;
+    }
+
+    function adaptQuestion(q, index) {
+        let nq = JSON.parse(JSON.stringify(q));
+        nq.id = (nq.id || nq.id === 0) ? String(nq.id) : String(index + 1);
+        if (nq.question || nq.text || nq.questionText) nq.questionHTML = nq.question || nq.text || nq.questionText || nq.questionHTML;
+        let stripped = false;
+        nq.questionHTML = (nq.questionHTML || '').replace(/(^|<br\s*\/?>|<\/b>|<\/strong>|<\/p>)\s*(?:C[^\s]*\s*\d+[:\.]?\s*|\d+[\.\)]\s*)/i, (match, p1) => {
+            if (!stripped) {
+                stripped = true;
+                return p1 + ' ';
+            }
+            return match;
+        });
+        if (nq.originalSentenceHTML) {
+            nq.originalSentenceHTML = (nq.originalSentenceHTML || '').replace(/(^|<br\s*\/?>|<\/b>|<\/strong>|<\/p>)\s*(?:C[^\s]*\s*\d+[:\.]?\s*|\d+[\.\)]\s*)/i, (match, p1) => {
+                return p1 + ' ';
+            });
         }
         
-        // Strip leading numbers from qText
-        if (qText) qText = qText.replace(/^\d+[\.\)]?\s*/, '');
-        if (origText) origText = origText.replace(/^\d+[\.\)]?\s*/, '');
-        
-        // Now prepend sequential number
-        let questionNumberHTML = '<b>Câu ' + (index + 1) + ': </b>';
-        
-        if (q.type === 'sentence_rewrite' && origText) {
-            qText = origText + '<br>' + questionNumberHTML + (qText || '');
-        } else {
-            qText = questionNumberHTML + (qText || '');
-        }
-        
-        // Re-attach title
-        qText = titleStr + qText;
-        // ---------------------------
-        
-        // Wrap instruction in a nice box if it exists
-        if (qText && qText.startsWith('<b>') && qText.match(/^<b>(.*?)<\/b>\s*<br\s*\/?>\s*/i)) {
-            qText = qText.replace(/^<b>(.*?)<\/b>\s*<br\s*\/?>\s*/i, '<div class="instruction-box">$1</div>');
-        }
-        
-        if (q.type === 'gap_fill_text') {
-            if (q.blanks) {
-                q.blanks.forEach(b => {
-                    let blankStr = '{{blank:' + b.blankId + '}}';
-                    let inpStr = '<input type="text" id="input-' + q.id + '-' + b.blankId + '" class="gap-fill-input" autocomplete="off">';
-                    if (qText && qText.includes(blankStr)) {
-                        qText = qText.replace(blankStr, inpStr);
-                    } else {
-                        qText += ' ' + inpStr;
-                    }
+        if (nq.type === 'sentence_rewrite') {
+            if (nq.sampleAnswers && !nq.correctAnswers) nq.correctAnswers = nq.sampleAnswers;
+            if (nq.answer && !nq.correctAnswers) nq.correctAnswers = [nq.answer];
+        } else if (nq.type === 'multiple_choice' || nq.type === 'mcq') {
+            let options = [];
+            let correctAnsStr = nq.answer || nq.correctAnswer;
+            (nq.options || []).forEach((opt, idx) => {
+                if (typeof opt === 'string') {
+                    let label = String.fromCharCode(65 + idx);
+                    let html = opt;
+                    let m = opt.match(/^([A-D])\s+(.*)/);
+                    if (m) { label = m[1]; html = m[2]; }
+                    options.push({label, html, isCorrect: (opt === correctAnsStr || (correctAnsStr && correctAnsStr.startsWith(label))) });
+                } else {
+                    options.push(opt);
+                }
+            });
+            options.sort(() => Math.random() - 0.5);
+            options.forEach((opt, idx) => { opt.displayLabel = String.fromCharCode(65 + idx); });
+            nq.options = options;
+        } else if (nq.type === 'gap_fill_text') {
+            if (!nq.blanks) nq.blanks = [];
+            if (nq.questionHTML && nq.questionHTML.includes('<input')) {
+                let blankId = 1;
+                nq.questionHTML = nq.questionHTML.replace(/<input[^>]+data-answer=['"]([^'"]+)['"][^>]*>/g, (match, ans) => {
+                    let bid = 'b' + blankId++;
+                    nq.blanks.push({blankId: bid, correctAnswers: [ans]});
+                    return `{{blank:${bid}}}`;
                 });
             }
         }
-        
-        // Conditional italics stripping for "từ thừa" ONLY
-        let checkStr = (qText || "").toLowerCase();
-        if (checkStr.includes('find the extra word') || checkStr.includes('từ thừa') || checkStr.includes('từ sai') || checkStr.includes('từ thừa')) {
-            qText = qText.replace(/<\/?i>/gi, '');
-        }
-        
-        let html = '<div class="question-text">' + qText + '</div>';
-        
-        if (q.type === 'multiple_choice' || q.type === 'mcq') {
-            html += '<div class="options">';
-            (q.options || []).forEach((opt, idx) => {
-                let optText = typeof opt === 'string' ? opt : (opt.text || opt.html || '');
-                let label = typeof opt === 'string' ? opt.charAt(0) : (opt.label || String.fromCharCode(65 + idx));
-                let displayHtml = typeof opt === 'string' ? optText.replace(/^[A-H]\.\s*/, '') : optText.replace(/^[A-H]\.\s*/, '');
-                html += '<div class="option" data-index="' + idx + '" onclick="selectOption(\'' + q.id + '\', ' + idx + ')">';
-                html += '<div class="radio-circle"></div>';
-                html += '<b>' + label + '.</b> ' + displayHtml;
-                html += '</div>';
-            });
-            html += '</div>';
-        } else if (q.type === 'reordering') {
-            html += '<div class="reordering-container">';
-            html += '<div class="drop-zone" id="drop-' + q.id + '"></div>';
-            html += '<div class="word-bank" id="bank-' + q.id + '">';
-            let shuffled = [...(q.words || [])].sort(() => Math.random() - 0.5);
-            shuffled.forEach(w => {
-                html += '<div class="word-chip" data-token="' + w.tokenId + '" onclick="toggleWord(this, \'' + q.id + '\')">' + w.text + '</div>';
-            });
-            html += '</div></div>';
-        } else if (q.type === 'sentence_rewrite') {
-            html += '<textarea class="rewrite-input" id="input-' + q.id + '" placeholder="Nhập câu trả lời của bạn..."></textarea>';
-        }
-        
-        html += '<button id="check-btn-' + q.id + '" class="check-btn" onclick="checkQuestion(\'' + q.id + '\')">Kiểm tra</button>';
-        html += '<div id="expl-' + q.id + '" class="explanation"></div>';
-        
-        block.innerHTML = html;
-        container.appendChild(block);
-      } catch (err) {
-        console.error('Lỗi khi render câu hỏi tại index=' + index + ', id=' + (q && q.id) + '. Bỏ qua câu này, tiếp tục các câu sau.', err);
-      }
-    });
-}
-
-function selectOption(qid, index) {
-    if (state[qid] && state[qid].checked) return;
-    const options = document.querySelectorAll('#q-block-' + qid + ' .option');
-    options.forEach(o => o.classList.remove('selected'));
-    if(options[index]) options[index].classList.add('selected');
-    const q = quizData.find(x => x.id.toString() === qid.toString());
-    if(!q) return;
-    let opt = q.options[index];
-    const label = typeof opt === 'string' ? opt.charAt(0) : (opt.label || String.fromCharCode(65 + index));
-    state[qid].value = label;
-}
-
-function toggleWord(el, qid) {
-    if (state[qid] && state[qid].checked) return;
-    const drop = document.getElementById('drop-' + qid);
-    const bank = document.getElementById('bank-' + qid);
-    if (el.parentElement.id === bank.id) {
-        drop.appendChild(el);
-    } else {
-        bank.appendChild(el);
+        return nq;
     }
-}
 
-function checkQuestion(qid, isSubmit = false) {
-    if (state[qid] && state[qid].checked) return;
-    const q = quizData.find(x => x.id.toString() === qid.toString());
-    if (!q) return;
-    
-    if (!isSubmit) {
-        if (q.type === 'multiple_choice' || q.type === 'mcq') {
-            let val = state[qid].value;
-            if (!val) { alert("Vui lòng chọn một đáp án!"); return; }
-        } else if (q.type === 'gap_fill_text') {
-            let allFilled = true;
-            if (q.blanks) {
-                q.blanks.forEach(b => {
-                    const el = document.getElementById('input-' + qid + '-' + b.blankId);
-                    if (!el || !el.value.trim()) allFilled = false;
-                });
+    function init() {
+        let lastTitle = null;
+        questions = QUIZ.map((q, i) => {
+            let nq = adaptQuestion(q, i);
+            if (q.title && q.title !== lastTitle) {
+                nq.showTitle = q.title;
+                lastTitle = q.title;
             }
-            if (!allFilled) { alert("Vui lòng điền vào tất cả chỗ trống!"); return; }
-        } else if (q.type === 'reordering') {
-            const bank = document.getElementById('bank-' + qid);
-            if (bank && bank.children.length > 0) { alert("Vui lòng ghép tất cả các từ!"); return; }
-        } else if (q.type === 'sentence_rewrite') {
-            const el = document.getElementById('input-' + qid);
-            if (!el || !el.value.trim()) { alert("Vui lòng nhập câu trả lời!"); return; }
-        }
-    }
-    
-    state[qid].checked = true;
-    
-    let checkBtn = document.getElementById('check-btn-' + qid);
-    if(checkBtn) checkBtn.disabled = true;
-    
-    const expl = document.getElementById('expl-' + qid);
-    if(expl) {
-        expl.innerHTML = q.explanationHTML || q.explanation || '';
-        expl.style.display = 'block';
-    }
-    
-    let isCorrect = false;
-    let errorDetails = "";
-    
-    if (q.type === 'multiple_choice' || q.type === 'mcq') {
-        const selectedVal = state[qid].value || "null";
-        
-        let correctOptIndex = (q.options || []).findIndex((o, i) => {
-            let ans = q.answer || q.correctAnswer;
-            if (typeof o === 'string') return o === ans || (ans && ans.startsWith(o.charAt(0)));
-            return o.isCorrect;
+            return nq;
         });
-        if (correctOptIndex === -1 && (q.answer || q.correctAnswer)) {
-            let ans = q.answer || q.correctAnswer;
-            correctOptIndex = (q.options || []).findIndex((o, i) => (typeof o === 'string' ? o.charAt(0) : (o.label || String.fromCharCode(65 + i))) === ans.charAt(0));
-        }
-        if (correctOptIndex === -1) correctOptIndex = 0; // fallback
-        
-        let correctOptObj = (q.options || [])[correctOptIndex];
-        const correctOptLabel = correctOptObj ? (typeof correctOptObj === 'string' ? correctOptObj.charAt(0) : (correctOptObj.label || String.fromCharCode(65 + correctOptIndex))) : "A";
-        
-        isCorrect = (selectedVal === correctOptLabel);
-        
-        const options = document.querySelectorAll('#q-block-' + qid + ' .option');
-        const selectedIndex = (q.options || []).findIndex((o, i) => {
-            let lbl = typeof o === 'string' ? o.charAt(0) : (o.label || String.fromCharCode(65 + i));
-            return lbl === selectedVal;
-        });
-        
-        if (isCorrect) {
-            if(options[correctOptIndex]) options[correctOptIndex].classList.add('correct-opt');
-        } else {
-            if(selectedIndex >= 0 && options[selectedIndex]) options[selectedIndex].classList.add('wrong-opt');
-            if(options[correctOptIndex]) options[correctOptIndex].classList.add('correct-opt');
-            errorDetails = 'Câu ' + qid + ': Học sinh chọn ' + selectedVal + ' (sai), đáp án đúng là ' + correctOptLabel;
-        }
-    } 
-    else if (q.type === 'gap_fill_text') {
-        let allCorrect = true;
-        let correctAnswersArr = [];
-        (q.blanks || []).forEach(b => {
-            const input = document.getElementById('input-' + qid + '-' + b.blankId);
-            const val = input ? normalize(input.value.toLowerCase()) : "";
-            let expectedAns = b.correctAnswers || [];
-            if (expectedAns.length === 0 && b.answer) expectedAns = [b.answer];
+        renderQuestions();
+    }
+
+    window.startTest = function() {
+        let name = studentNameInput.value.trim();
+        if(!name) { alert("Vui lòng nhập họ và tên!"); return; }
+        initAudio();
+        document.getElementById('startScreen').classList.remove('active');
+        document.getElementById('testScreen').classList.add('active');
+    };
+
+    function preventNav(e) {
+        e.preventDefault();
+        e.returnValue = '';
+    }
+    window.addEventListener('beforeunload', preventNav);
+
+    function renderQuestions() {
+        quizContainer.innerHTML = '';
+        questions.forEach((q, index) => {
+            if (q.showTitle && q.showTitle !== window._lastRenderedTitle) { window._lastRenderedTitle = q.showTitle;
+                let titleDiv = document.createElement('div');
+                titleDiv.className = 'instruction-box';
+                titleDiv.innerHTML = q.showTitle;
+                quizContainer.appendChild(titleDiv);
+            }
             
-            let isBlankCorrect = expectedAns.some(ans => normalize(ans.toLowerCase()) === val);
-            if (isBlankCorrect) {
-                if (input) {
-                    input.style.backgroundColor = '#eafaf1';
-                    input.style.borderColor = '#2ecc71';
+            let div = document.createElement('div');
+            div.className = 'question-block';
+            div.id = 'q-block-' + q.id;
+            
+            let qNumStr = `<strong>Câu ${index + 1}: </strong>`;
+            
+            let html = '';
+            if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                html = `<div class="question-text">${qNumStr} ${q.questionHTML}</div><div class="options">`;
+                q.options.forEach((opt, oIdx) => {
+                    html += `<div class="option" data-qid="${q.id}" data-idx="${oIdx}">
+                        <div class="radio-circle"></div> <b>${esc(opt.displayLabel || opt.label)}.</b> ${opt.html}
+                    </div>`;
+                });
+                html += `</div><div><button class="check-btn" id="check-btn-${q.id}" data-qid="${q.id}">Kiểm tra</button></div>`;
+            } else if (q.type === 'gap_fill_text') {
+                let text = q.questionHTML;
+                q.blanks.forEach(b => {
+                    let searchStr = `{{blank:${b.blankId}}}`;
+                    let inputHtml = `<input type="text" class="gap-fill-input" id="input-${q.id}-${b.blankId}" autocomplete="off" spellcheck="false" maxlength="80"> <span id="gap-res-${q.id}-${b.blankId}"></span>`;
+                    if (text.includes(searchStr)) text = text.replace(searchStr, inputHtml);
+                    else text += ' ' + inputHtml;
+                });
+                html = `<div class="question-text">${qNumStr} ${text}</div>
+                        <div><button class="check-btn" id="check-btn-${q.id}" data-qid="${q.id}">Kiểm tra</button></div>`;
+            } else if (q.type === 'sentence_rewrite') {
+                html = `<div class="question-text">${qNumStr} ${q.originalSentenceHTML ? q.originalSentenceHTML + '<br>' : ''}${q.questionHTML}</div>
+                        <input type="text" class="rewrite-input" id="input-${q.id}" autocomplete="off" spellcheck="false" >
+                        <div id="rw-res-${q.id}"></div>
+                        <div><button class="check-btn" id="check-btn-${q.id}" data-qid="${q.id}">Kiểm tra</button></div>`;
+            } else if (q.type === 'reordering') {
+                html = `<div class="question-text">${qNumStr} ${q.questionHTML}</div>
+                        <div class="word-bank" id="reorder-${q.id}">`;
+                let tokens = [...q.correctOrder]; for(let i = tokens.length - 1; i > 0; i--){const j = Math.floor(Math.random() * (i + 1)); [tokens[i], tokens[j]] = [tokens[j], tokens[i]];}
+                tokens.forEach(tok => { 
+                    let w = (q.words && q.words.find(x => x.tokenId === tok)) || (q.tokens && q.tokens.find(x => x.tokenId === tok));
+                    let text = w ? w.text : tok;
+                    html += `<span class="word-chip" data-qid="${q.id}" data-token="${esc(tok)}">${esc(text)}</span>`; 
+                });
+                html += `</div><div class="drop-zone" id="target-${q.id}"></div>
+                        <div><button class="check-btn" id="check-btn-${q.id}" data-qid="${q.id}">Kiểm tra</button></div>`;
+            }
+            
+            html += `<div class="explanation" id="expl-${q.id}"></div>`;
+            div.innerHTML = html;
+            quizContainer.appendChild(div);
+        });
+
+        document.querySelectorAll('input').forEach(inp => {
+            inp.addEventListener('input', () => { if(inp.value.length === 1) playSelectSound(); });
+        });
+    }
+    
+    quizContainer.addEventListener('click', e => {
+        if (submitted) return;
+        
+        let opt = e.target.closest('.option');
+        if (opt) {
+            let qid = opt.getAttribute('data-qid');
+            if (locked[qid]) return;
+            let qBlock = document.getElementById('q-block-' + qid);
+            qBlock.querySelectorAll('.option').forEach(o => { o.classList.remove('selected'); });
+            opt.classList.add('selected');
+            qBlock.setAttribute('data-selected-idx', opt.getAttribute('data-idx'));
+            playSelectSound();
+        }
+        
+        let chip = e.target.closest('.word-chip');
+        if (chip) {
+            let qid = chip.getAttribute('data-qid');
+            if (locked[qid]) return;
+            let target = document.getElementById('target-' + qid);
+            let source = document.getElementById('reorder-' + qid);
+            if (chip.parentElement.id === 'reorder-' + qid) {
+                target.appendChild(chip);
+            } else {
+                source.appendChild(chip);
+            }
+            playSelectSound();
+        }
+
+        let btn = e.target.closest('.check-btn');
+        if (btn) {
+            let qid = btn.getAttribute('data-qid');
+            if (locked[qid]) return;
+            let q = questions.find(x => x.id === qid);
+            
+            if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                let qBlock = document.getElementById('q-block-' + qid);
+                if (!qBlock.hasAttribute('data-selected-idx')) { alert("Bạn chưa chọn đáp án!"); return; }
+                let idx = parseInt(qBlock.getAttribute('data-selected-idx'));
+                locked[qid] = { idx };
+                let opt = qBlock.querySelector('.option[data-idx="'+idx+'"]');
+                checkMCQ(q, opt, idx);
+                btn.disabled = true;
+            } else if (q.type === 'gap_fill_text') {
+                let ans = {};
+                let empty = true;
+                q.blanks.forEach(b => {
+                    let el = document.getElementById(`input-${q.id}-${b.blankId}`);
+                    let val = el ? el.value.trim() : "";
+                    ans[b.blankId] = val;
+                    if (val) empty = false;
+                });
+                if (empty) { alert("Bạn chưa điền đáp án!"); return; }
+                locked[qid] = { ans };
+                checkGap(q, ans, btn);
+            } else if (q.type === 'sentence_rewrite') {
+                let el = document.getElementById(`input-${q.id}`); let val = el ? el.value.trim() : "";
+                if (!val) { alert("Bạn chưa viết câu trả lời!"); return; }
+                locked[qid] = { val };
+                checkRewrite(q, val, btn);
+            } else if (q.type === 'reordering') {
+                let tz = document.getElementById(`target-${q.id}`);
+                if (tz.children.length === 0) { alert("Bạn chưa ghép từ!"); return; }
+                let order = Array.from(tz.children).map(c => c.getAttribute('data-token'));
+                locked[q.id] = { order };
+                checkReorder(q, order, btn);
+            }
+        }
+    });
+
+    function showExplanation(q) {
+        let ex = document.getElementById('expl-' + q.id);
+        if (q.explanationHTML && ex) {
+            ex.innerHTML = q.explanationHTML.includes('Giải thích:') ? q.explanationHTML : '<strong>Giải thích:</strong><br>' + q.explanationHTML;
+            ex.style.display = 'block';
+        }
+    }
+
+    function checkMCQ(q, optEl, idx) {
+        let isCorrect = q.options[idx].isCorrect;
+        if (isCorrect) {
+            optEl.classList.add('correct-opt');
+            playCorrectSound();
+        } else {
+            optEl.classList.add('wrong-opt');
+            playWrongSound();
+            let correctOpt = q.options.find(o => o.isCorrect);
+            if (correctOpt) {
+                let correctIdx = q.options.indexOf(correctOpt);
+                document.querySelector(`.option[data-qid="${q.id}"][data-idx="${correctIdx}"]`).classList.add('correct-opt');
+            }
+        }
+        document.getElementById('q-block-' + q.id).style.pointerEvents = 'none';
+        showExplanation(q);
+    }
+    
+    function checkGap(q, ans, btn) {
+        let allCorrect = true;
+        q.blanks.forEach(b => {
+            let val = ans[b.blankId];
+            let isCorrect = false;
+            b.correctAnswers.forEach(ca => { if(norm(ca) === norm(val)) isCorrect = true; });
+            let resSpan = document.getElementById(`gap-res-${q.id}-${b.blankId}`);
+            let inputEl = document.getElementById(`input-${q.id}-${b.blankId}`);
+            if (isCorrect) {
+                inputEl.style.backgroundColor = '#eafaf1';
+                inputEl.style.borderColor = '#2ecc71';
+                resSpan.innerHTML = ` <span style="color:#2ecc71;font-weight:bold;">✓ Chính xác!</span>`;
+            } else {
+                allCorrect = false;
+                inputEl.style.backgroundColor = '#fdedec';
+                inputEl.style.borderColor = '#e74c3c';
+                resSpan.innerHTML = ` <span style="color:#2ecc71; font-weight:bold; margin-left: 5px;">${esc(b.correctAnswers[0])}</span>`;
+            }
+        });
+        if (allCorrect) playCorrectSound(); else playWrongSound();
+        document.getElementById('q-block-' + q.id).style.pointerEvents = 'none';
+        btn.disabled = true;
+        showExplanation(q);
+    }
+    
+
+    function getExpectedRewrite(q) {
+        let expected = q.correctAnswers[0];
+        let cleanQh = (q.questionHTML || '').replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ');
+        let parts = cleanQh.split(/_+/);
+        if (parts.length >= 2) {
+            let prefix = parts[0].replace(/^[\s\u2192\-\>]+/, '').trim();
+            let suffix = parts[1].trim();
+            if (prefix) {
+                let escPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                let regex = new RegExp('^' + escPrefix + '(?=\\s|$)\\s*', 'i');
+                if (regex.test(expected)) {
+                    expected = expected.replace(regex, '').trim();
+                }
+            }
+            if (suffix) {
+                let escSuffix = suffix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                let regex2 = new RegExp('\\s*' + escSuffix + '(?=\\s|$|\\W)', 'i');
+                if (regex2.test(expected)) {
+                    expected = expected.replace(regex2, '').trim();
+                } else if (suffix === '.') {
+                    expected = expected.replace(/\.$/, '').trim();
                 }
             } else {
-                if (input) {
-                    input.style.backgroundColor = '#fdedec';
-                    input.style.borderColor = '#e74c3c';
-                }
-                allCorrect = false;
+                expected = expected.replace(/\.$/, '').trim();
             }
-            correctAnswersArr.push(expectedAns.join(' / '));
-        });
-        isCorrect = allCorrect;
-        if (!isCorrect) {
-            errorDetails = 'Câu ' + qid + ': Điền sai. Đáp án đúng: ' + correctAnswersArr.join(', ');
         }
-        let ansHtml = '<div style="margin-top:10px; padding:10px; background:#f8f9fa; border-left:4px solid #2ecc71;"><b>Đáp án đúng:</b><br>' + correctAnswersArr.map((ans, i) => (correctAnswersArr.length > 1 ? 'Từ ' + (i+1) + ': ' : '') + '<b>' + ans + '</b>').join('<br>') + '</div>';
-        if(expl) expl.innerHTML = ansHtml + expl.innerHTML;
+        return expected;
     }
-    else if (q.type === 'reordering') {
-        const drop = document.getElementById('drop-' + qid);
-        const currentOrder = drop ? Array.from(drop.children).map(c => c.getAttribute('data-token')) : [];
-        isCorrect = true;
-        let correctOrderText = [];
-        let expOrder = q.correctOrder || [];
-        let expWords = q.words || [];
+
+    function checkRewrite(q, val, btn) {
+        let expected = getExpectedRewrite(q);
+        let uVal = val.trim();
+        if (uVal.endsWith('.') && !expected.endsWith('.')) uVal = uVal.slice(0, -1);
+        let isCorrect = (norm(uVal) === norm(expected)) || acceptedSet(q).has(norm(val));
         
-        for (let i = 0; i < expOrder.length; i++) {
-            const expectedToken = expOrder[i];
-            const expectedWordObj = expWords.find(w => w.tokenId === expectedToken);
-            const expectedWord = expectedWordObj ? expectedWordObj.text : "";
-            correctOrderText.push(expectedWord);
-            if (currentOrder[i] !== expectedToken) {
-                isCorrect = false;
-            }
-        }
-        if (!isCorrect) {
-            let ansDiv = document.createElement('div');
-            ansDiv.style.marginTop = '10px';
-            ansDiv.innerHTML = '<div style="padding:10px; background:#eafaf1; border:2px solid #2ecc71; border-radius:6px;">' + 
-                '<b>Thứ tự đúng:</b><br><br>' + 
-                correctOrderText.map(t => '<span class="word-chip correct" style="pointer-events:none;">' + t + '</span>').join('') + 
-                '</div>';
-            if(drop && drop.parentElement) drop.parentElement.appendChild(ansDiv);
-            errorDetails = 'Câu ' + qid + ' sai. Thực tế đúng: ' + correctOrderText.join(' ');
-        }
-    }
-    else if (q.type === 'sentence_rewrite') {
-        const el = document.getElementById('input-' + qid);
-        const val = el ? el.value.trim() : "";
-        const normVal = normalize(val.toLowerCase());
-        const ansArr = q.correctAnswers || [];
-        if (ansArr.length === 0 && q.answer) ansArr.push(q.answer);
-        
-        isCorrect = ansArr.some(ans => {
-            let normAns = normalize(ans.toLowerCase());
-            if (normAns === normVal) return true;
-            
-            let parts = normAns.split(' ');
-            let exactMissingPart = '';
-            if (parts.length >= 2 && normAns) {
-                let prefix = normalize(parts[0].replace(/^(->|\?|\’)\s*/, '').toLowerCase());
-                let suffix = normalize(parts[parts.length - 1].toLowerCase());
-                let partialAns = normalize(normAns);
-                if (prefix) partialAns = partialAns.replace(new RegExp('^' + prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\s*'), '').trim();
-                if (suffix) partialAns = partialAns.replace(new RegExp('\s*' + suffix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$'), '').trim();
-                exactMissingPart = partialAns;
-                if (partialAns && partialAns === normVal) return true;
-            }
-            return false;
-        });
-        
-        let correctDisplay = ansArr[0] || '';
-        
+        let rwRes = document.getElementById('rw-res-' + q.id);
+        let inputEl = document.getElementById('input-' + q.id);
         if (isCorrect) {
-            if(el) { el.style.backgroundColor = '#eafaf1'; el.style.borderColor = '#2ecc71'; }
+            inputEl.style.backgroundColor = '#eafaf1';
+            inputEl.style.borderColor = '#2ecc71';
+            rwRes.innerHTML = `<span style="color:#2ecc71;font-weight:bold;">&#10003; Chính xác!</span>`;
+            playCorrectSound();
         } else {
-            if(el) { el.style.backgroundColor = '#fdedec'; el.style.borderColor = '#e74c3c'; }
-            errorDetails = 'Câu ' + qid + ' sai. Đáp án mẫu:<br><b>' + correctDisplay + '</b>';
+            inputEl.style.backgroundColor = '#fdedec';
+            inputEl.style.borderColor = '#e74c3c';
+            rwRes.innerHTML = `<span style="color:#2ecc71; font-weight:bold; margin-left: 5px;">${esc(expected)}</span>`;
+            playWrongSound();
+        }
+        inputEl.disabled = true;
+        btn.disabled = true;
+        showExplanation(q);
+    }
+
+
+
+
+
+    function checkReorder(q, order, btn) {
+        let isCorrect = order.join(' ') === q.correctOrder.join(' ');
+        let tz = document.getElementById('target-' + q.id);
+        if (isCorrect) {
+            tz.style.backgroundColor = '#eafaf1';
+            tz.style.borderColor = '#2ecc71';
+            playCorrectSound();
+        } else {
+            tz.style.backgroundColor = '#fdedec';
+            tz.style.borderColor = '#e74c3c';
+            let div = document.createElement('div');
+            div.style.marginTop = '10px';
+            div.innerHTML = `<strong style="color:#2ecc71;">Đáp án:</strong> ${esc(q.correctOrder.join(' '))}`;
+            tz.parentNode.insertBefore(div, btn.parentNode);
+            playWrongSound();
+        }
+        document.getElementById('q-block-' + q.id).style.pointerEvents = 'none';
+        btn.disabled = true;
+        showExplanation(q);
+    }
+    
+    window.confirmSubmit = function() {
+        if (!confirm("Bạn có chắc chắn muốn nộp bài?")) return;
+        window.removeEventListener('beforeunload', preventNav);
+        submitted = true;
+        playSubmitSound();
+        
+        let correctCount = 0;
+        let gradableCount = 0;
+        let wrongHTML = '<h3 style="color:#e74c3c;text-align:left;margin-top:0;">DANH SÁCH CÁC CÂU LÀM SAI / CHƯA LÀM</h3>';
+        let hasWrong = false;
+        
+        questions.forEach((q, index) => {
+            let l = locked[q.id];
+            let isGradable = (q.type !== 'short_answer');
+            if (isGradable) gradableCount++;
+            
+            let isCorrect = false;
+            let hsStr = "(Bạn chưa trả lời)";
+            let rightStr = "";
+            
+            if (!l) {
+                let hasValue = false;
+                if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                    let qBlock = document.getElementById('q-block-' + q.id);
+                    if (qBlock && qBlock.hasAttribute('data-selected-idx')) {
+                        let idx = parseInt(qBlock.getAttribute('data-selected-idx'));
+                        locked[q.id] = { idx };
+                        l = locked[q.id];
+                        hasValue = true;
+                    }
+                } else if (q.type === 'gap_fill_text') {
+                    let ans = {};
+                    let empty = true;
+                    q.blanks.forEach(b => {
+                        let el = document.getElementById(`input-${q.id}-${b.blankId}`);
+                        let val = el ? el.value.trim() : "";
+                        ans[b.blankId] = val;
+                        if (val) empty = false;
+                    });
+                    if (!empty) {
+                        locked[q.id] = { ans };
+                        l = locked[q.id];
+                        hasValue = true;
+                    }
+                } else if (q.type === 'sentence_rewrite') {
+                    let el = document.getElementById(`input-${q.id}`); 
+                    let val = el ? el.value.trim() : "";
+                    if (val) {
+                        locked[q.id] = { val };
+                        l = locked[q.id];
+                        hasValue = true;
+                    }
+                } else if (q.type === 'reordering') {
+                    let tz = document.getElementById(`target-${q.id}`);
+                    if (tz && tz.children.length > 0) {
+                        let order = Array.from(tz.children).map(c => c.getAttribute('data-token'));
+                        locked[q.id] = { order };
+                        l = locked[q.id];
+                        hasValue = true;
+                    }
+                }
+
+                if (!hasValue) {
+                    isCorrect = false;
+                    hsStr = "(Bạn chưa trả lời)";
+                    if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                        let co = q.options.find(o => o.isCorrect);
+                        rightStr = co ? `${co.displayLabel || co.label} (${(co.text || co.html).replace(/<[^>]*>?/gm, '')})` : '';
+                    } else if (q.type === 'gap_fill_text') {
+                        rightStr = q.blanks.map(b => b.correctAnswers[0]).join(', ');
+                    } else if (q.type === 'reordering') {
+                        rightStr = q.correctOrder.map(tok => { let w = (q.words && q.words.find(x => x.tokenId === tok)) || (q.tokens && q.tokens.find(x => x.tokenId === tok)); return w ? w.text : tok; }).join(' ');
+                    } else if (q.type === 'sentence_rewrite') {
+                        rightStr = q.correctAnswers[0];
+                    }
+                }
+            }
+            
+            if (l) {
+                if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                    isCorrect = q.options[l.idx].isCorrect;
+                    hsStr = `${q.options[l.idx].displayLabel || q.options[l.idx].label} (${(q.options[l.idx].text || q.options[l.idx].html).replace(/<[^>]*>?/gm, '')})`;
+                    let co = q.options.find(o => o.isCorrect);
+                    rightStr = co ? `${co.displayLabel || co.label} (${(co.text || co.html).replace(/<[^>]*>?/gm, '')})` : '';
+                } else if (q.type === 'gap_fill_text') {
+                    isCorrect = true;
+                    let hsArr = []; let rightArr = [];
+                    q.blanks.forEach(b => {
+                        let v = l.ans[b.blankId];
+                        hsArr.push(v);
+                        rightArr.push(b.correctAnswers[0]);
+                        let c = false;
+                        b.correctAnswers.forEach(ca => { if(norm(ca) === norm(v)) c = true; });
+                        if (!c) isCorrect = false;
+                    });
+                    hsStr = hsArr.join(', ');
+                    rightStr = rightArr.join(', ');
+                } else if (q.type === 'reordering') {
+                    isCorrect = l.order.join(' ') === q.correctOrder.join(' ');
+                    let mapToken = tok => { let w = (q.words && q.words.find(x => x.tokenId === tok)) || (q.tokens && q.tokens.find(x => x.tokenId === tok)); return w ? w.text : tok; };
+                    hsStr = l.order.map(mapToken).join(' ');
+                    rightStr = q.correctOrder.map(mapToken).join(' ');
+                } else if (q.type === 'sentence_rewrite') {
+                    isCorrect = acceptedSet(q).has(norm(l.val));
+                    hsStr = l.val;
+                    rightStr = q.correctAnswers[0];
+                }
+            }
+            
+            if (isGradable && isCorrect) {
+                correctCount++;
+            } else if (isGradable && !isCorrect) {
+                hasWrong = true;
+                wrongHTML += `<div class="error-item">
+                    <strong>Câu ${index + 1}:</strong> ${q.questionHTML.replace(/\{\{blank:[^\}]+\}\}/g, '___')}<br>
+                    <span style="color:#e74c3c;">Học sinh: <span style="text-decoration:line-through;">${esc(hsStr)}</span></span><br>
+                    <span style="color:#2ecc71; font-weight:bold;">Đáp án đúng: ${esc(rightStr)}</span>
+                    <div style="margin-top:5px;font-size:13.5px;color:#333;">${q.explanationHTML ? (q.explanationHTML.includes('Giải thích:') ? q.explanationHTML : '<em>Giải thích:</em><br>' + q.explanationHTML) : ''}</div>
+                </div>`;
+            }
+        });
+        
+        document.getElementById('testScreen').classList.remove('active');
+        resultScreen.classList.add('active');
+        if (gradableCount > 0) {
+            let scale10 = parseFloat(((correctCount / gradableCount) * 10).toFixed(2));
+            scoreDisplay.innerHTML = `${scale10} <span style="font-size:32px; color:#7f8c8d;">/ 10</span><br><span style="font-size:18px; color:#95a5a6; font-weight:normal;">(Đúng ${correctCount}/${gradableCount} câu)</span>`;
+            if (correctCount === gradableCount) {
+                resultDetails.innerHTML = '<h2 style="color:#2ecc71;text-align:center;">TUYỆT VỜI! ĐÚNG 100%</h2>';
+                playCorrectSound();
+            } else {
+                resultDetails.innerHTML = wrongHTML;
+            }
+        } else {
+            scoreDisplay.textContent = "Không chấm điểm";
+            resultDetails.innerHTML = '<p>Bài này không có câu trắc nghiệm được chấm tự động.</p>';
         }
         
-        let ansHtml = '<div style="margin-top:10px; padding:10px; background:#f8f9fa; border-left:4px solid #2ecc71;"><b>Đáp án đúng:</b><br>' + correctDisplay + '</div>';
-        if(expl) expl.innerHTML = ansHtml + expl.innerHTML;
-    }
-    
-    let globalIndex = quizData.findIndex(x => x.id.toString() === qid.toString()) + 1;
-    if (errorDetails) {
-        errorDetails = errorDetails.replace(new RegExp('Câu\s+' + qid + '\s*', 'i'), 'Câu ' + globalIndex + ': ');
-        errorDetails = errorDetails.replace(new RegExp('Câu ghép từ\s+' + qid + '\s*', 'i'), 'Câu ' + globalIndex + ': ');
-        errorDetails = errorDetails.replace(new RegExp('Câu viết lại\s+' + qid + '\s*', 'i'), 'Câu ' + globalIndex + ': ');
-    }
-    
-    state[qid].isCorrect = isCorrect;
-    state[qid].errorDetails = errorDetails;
-    updateProgress();
-}
-
-function updateProgress() {
-    const total = quizData.length;
-    const checkedCount = Object.values(state).filter(s => s.checked).length;
-    const pct = total > 0 ? (checkedCount / total) * 100 : 0;
-    const fill = document.getElementById('progressFill');
-    if(fill) fill.style.width = pct + '%';
-}
-
-function confirmSubmit() {
-    const total = quizData.length;
-    const checkedCount = Object.values(state).filter(s => s.checked).length;
-    if (checkedCount < total) {
-        if (!confirm(`Bạn mới kiểm tra ${checkedCount}/${total} câu. Hệ thống sẽ tự động chấm điểm các câu chưa làm là Sai. Bạn có chắc chắn muốn nộp bài?`)) {
-            return;
+        
+        try {
+            const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfZCAK2lpNE8O8Ieqwc3SI1ubr6HZDvGZR91AsSpUk8kEBqaA/formResponse';
+            const formData = new FormData();
+            let studentName = document.getElementById('studentName') ? document.getElementById('studentName').value.trim() : 'Unknown';
+            formData.append('entry.1861648410', studentName);
+            let finalScore = gradableCount > 0 ? (correctCount * 10 / gradableCount).toFixed(2) : 0;
+            formData.append('entry.1691800437', finalScore);
+            const plainErrorReport = hasWrong ? wrongHTML.replace(/<[^>]*>?/gm, '') : 'Perfect';
+            formData.append('entry.639295732', plainErrorReport);
+            let pageTitle = document.title || location.pathname.split('/').pop() || 'Unknown';
+            formData.append('entry.370465671', pageTitle);
+            fetch(formUrl, { method: 'POST', mode: 'no-cors', body: formData }).catch(e => console.error(e));
+        } catch (err) {
+            console.error("Form submit error", err);
         }
-    }
-    quizData.forEach(q => {
-        if (state[q.id] && !state[q.id].checked) {
-            checkQuestion(q.id, true);
-        }
-    });
+        
+        document.querySelectorAll('.check-btn').forEach(b => b.disabled = true);
 
-    submitTest();
-}
+    };
 
-function submitTest() {
-    window.submitted = true;
-    const nameEl = document.getElementById('studentName');
-    const studentName = nameEl ? nameEl.value.trim() : "Unknown";
-    const total = quizData.length;
-    const correctCount = Object.values(state).filter(s => s.isCorrect).length;
-    const score = total > 0 ? (correctCount / total) * 10 : 0;
-    
-    const errors = Object.values(state)
-        .filter(s => s.checked && !s.isCorrect && s.errorDetails)
-        .map(s => s.errorDetails);
-    const errorReport = errors.length > 0 ? errors.join('\n') : "Không có lỗi sai";
-    
-    const ts = document.getElementById('testScreen');
-    const rs = document.getElementById('resultScreen');
-    if(ts) ts.classList.remove('active');
-    if(rs) rs.classList.add('active');
-    
-    const scoreDisp = document.getElementById('scoreDisplay');
-    if(scoreDisp) scoreDisp.innerText = score.toFixed(2) + ' / 10';
-    
-    let feedback = '';
-    if (score >= 9) feedback = 'Xuất sắc! Bạn nắm bài rất vững.';
-    else if (score >= 7) feedback = 'Khá tốt! Hãy cố gắng hơn một chút nhé.';
-    else if (score >= 5) feedback = 'Đạt yêu cầu. Bạn cần ôn tập thêm.';
-    else feedback = 'Chưa đạt. Bạn cần xem lại kỹ bài học!';
-    const fbTxt = document.getElementById('feedbackText');
-    if(fbTxt) fbTxt.innerText = feedback;
-    
-    const detailsDiv = document.getElementById('resultDetails');
-    if (detailsDiv) {
-        if (errors.length > 0) {
-            detailsDiv.innerHTML = '<h3>Chi tiết các câu sai:</h3>' + 
-                errors.map(e => '<div class="error-item">' + e + '</div>').join('');
-        } else {
-            detailsDiv.innerHTML = '<h3 style="color:#2ecc71;">Chúc mừng bạn đã trả lời đúng tất cả các câu hỏi!</h3>';
-        }
-    }
-    
-    const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfZCAK2lpNE8O8Ieqwc3SI1ubr6HZDvGZR91AsSpUk8kEBqaA/formResponse';
-    const formData = new FormData();
-    formData.append('entry.1861648410', studentName);
-    formData.append('entry.1691800437', score.toFixed(2));
-    const plainErrorReport = errorReport.replace(/<[^>]*>?/gm, '');
-    formData.append('entry.639295732', plainErrorReport);
-    formData.append('entry.370465671', typeof testName !== 'undefined' ? testName : 'Unknown Test');
-    
-    fetch(formUrl, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: formData
-    }).then(() => {
-        window.scrollTo(0, 0);
-    }).catch(err => {
-        console.error(err);
-    });
-}
+    window.onload = init;
+})();
 
-function startTest() {
-    const nameInput = document.getElementById('studentName');
-    const nameVal = nameInput ? nameInput.value.trim() : "";
-    if (!nameVal) {
-        alert('Vui lòng nhập họ và tên của bạn!');
-        return;
-    }
-    const ss = document.getElementById('startScreen');
-    const ts = document.getElementById('testScreen');
-    if(ss) ss.classList.remove('active');
-    if(ts) ts.classList.add('active');
-    init();
-}
-</script>
+    </script>
 </body>
 </html>
